@@ -1,56 +1,66 @@
 % =========================================================================
-%  Figura: influencia total. Tubo de líneas de campo entre el conductor j
-%  (phi_j = 1) y el conductor i (a tierra). La superficie gaussiana cerrada
-%  S = S_lat ∪ B_1 ∪ B_2 se dibuja a trazos: la pared lateral S_lat está
-%  formada por líneas de campo (E tangente, E ⊥ dS) y las tapas B_1 y B_2 están
-%  dentro de los conductores (E = 0). Se indican E y dS en un punto de S_lat.
+%  Figura: influencia total. Un tubo delgado de líneas de campo une el
+%  conductor j (phi_j = 1) con el conductor i (a tierra). La superficie
+%  gaussiana cerrada S = S_lat ∪ B_1 ∪ B_2 (a trazos) está formada por la
+%  pared del tubo (E tangente, E ⊥ dS) y por dos tapas dentro de los
+%  conductores (E = 0). Estilo minimalista: bordes marcados e interiores con
+%  un velo radial sutil (estilo «conductorfino»).
 % =========================================================================
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[font=\small, x=1cm, y=1cm]
-  % --- conductor i (izquierda, a tierra) -----------------------------------
-  \fill[top color=azulvelo!80!white, bottom color=metal, draw=azulprof, line width=0.6pt]
+  % --- conductores --------------------------------------------------------------
+  \path[conductorfino]
     (-3.7,1.35) .. controls (-2.6,1.65) and (-1.6,1.2) .. (-1.55,0.3)
     .. controls (-1.5,-0.6) and (-2.4,-1.45) .. (-3.5,-1.25) .. controls (-4.35,-1.05) and (-4.45,1.05) .. cycle;
-  \node[font=\footnotesize] at (-3.25,0.75) {$i$};
-  \draw[azulprof, line width=0.6pt] (-3.3,-1.27) -- (-3.3,-1.6);
-  \pic at (-3.3,-1.6) {tierra};
-  \node[font=\footnotesize, anchor=west] at (-3.0,-1.82) {$\phi_i=0$};
-  % --- conductor j (derecha) ------------------------------------------------
-  \fill[top color=azulvelo!80!white, bottom color=metal, draw=azulprof, line width=0.6pt]
+  \path[conductorfino]
     (2.0,0.95) .. controls (2.6,1.55) and (3.85,1.25) .. (3.95,0.2)
     .. controls (4.05,-0.85) and (3.0,-1.35) .. (2.2,-0.95) .. controls (1.6,-0.65) and (1.6,0.5) .. cycle;
-  \node[font=\footnotesize] at (3.35,0.75) {$j$};
-  \node[font=\footnotesize, anchor=west] at (3.3,1.5) {$\phi_j=1$};
-  % --- interior del tubo (sombreado tenue) -----------------------------------
-  \fill[azulvelo, opacity=0.45]
-    (1.71,0.6) .. controls (0.6,1.3) and (-0.5,1.3) .. (-1.57,0.6)
-    -- (-1.57,-0.6) .. controls (-0.5,-1.3) and (0.6,-1.3) .. (1.71,-0.6) -- cycle;
-  % --- líneas de campo dentro del tubo (de j a i) ----------------------------
-  \foreach \h in {-0.3,0,0.3}{
-    \draw[lcampo] (1.66,\h) .. controls (0.6,{1.7*\h}) and (-0.5,{1.7*\h}) .. (-1.54,\h);}
-  % --- superficie gaussiana cerrada -------------------------------------------
-  \draw[gauss] (-2.05,0.62) -- (-1.57,0.6) .. controls (-0.5,1.3) and (0.6,1.3) .. (1.71,0.6) -- (2.15,0.62);
-  \draw[gauss] (-2.05,-0.62) -- (-1.57,-0.6) .. controls (-0.5,-1.3) and (0.6,-1.3) .. (1.71,-0.6) -- (2.15,-0.62);
-  \draw[gauss] (-2.05,0) ellipse (0.14 and 0.62);
-  \draw[gauss] (2.15,0) ellipse (0.14 and 0.62);
-  \node[fondo, font=\footnotesize, text=cargapos!85!black] at (-2.6,0.0) {$B_1$};
-  \node[fondo, font=\footnotesize, text=cargapos!85!black] at (2.68,0.0) {$B_2$};
-  \node[font=\scriptsize, text=azulprof] at (-2.85,-0.4) {$\vE=\vc{0}$};
-  \node[font=\scriptsize, text=azulprof] at (3.2,-0.4) {$\vE=\vc{0}$};
-  % --- cargas en los extremos del tubo ----------------------------------------
-  \foreach \h in {-0.45,-0.15,0.15,0.45}{\node[signoneg, font=\tiny\bfseries] at (-1.72,\h) {$-$};
-                                          \node[signopos, font=\tiny\bfseries] at (1.88,\h) {$+$};}
-  % --- E y dS en un punto de la pared lateral --------------------------------
-  \coordinate (P) at (0.07,1.13);
-  \draw[-{Stealth[length=4pt]}, verdeazul, line width=0.8pt] (P) -- ++(0,0.6);
-  \node[fondo, font=\footnotesize, text=verdeazul, anchor=west] at ($(P)+(0.05,0.5)$) {$\dS$};
-  \draw[-{Stealth[length=4pt]}, azulprof, line width=0.8pt] (P) -- ++(-0.65,0);
-  \node[fondo, font=\footnotesize, text=azulprof, anchor=south] at ($(P)+(-0.45,0.04)$) {$\vE$};
-  \fill[azulprof] (P) circle (1.1pt);
-  \node[fondo, font=\footnotesize, text=cargapos!85!black, anchor=west] at (0.85,1.32) {$S_{\mathrm{lat}}$};
-  % --- leyenda -------------------------------------------------------------
-  \draw[gauss] (-1.3,-1.95) -- (-0.7,-1.95);
+  \node[font=\footnotesize] at (-3.2,0.75) {$i$};
+  \node[font=\footnotesize] at (3.3,0.75) {$j$};
+  \node[font=\footnotesize, anchor=west] at (3.35,1.45) {$\phi_j=1$};
+  \draw[azulacero, line width=0.6pt] (-3.3,-1.27) -- (-3.3,-1.6);
+  \pic at (-3.3,-1.6) {tierra};
+  \node[font=\footnotesize, anchor=west] at (-3.0,-1.82) {$\phi_i=0$};
+  % --- tubo: interior con degradado tenue ---------------------------------------
+  \fill[top color=azulvelo!55, bottom color=azulvelo!55, middle color=white]
+    (-1.86,0.28) .. controls (-0.6,0.36) and (0.7,0.36) .. (2.0,0.28)
+    -- (2.0,-0.28) .. controls (0.7,-0.36) and (-0.6,-0.36) .. (-1.86,-0.28) -- cycle;
+  % líneas de campo (de j a i)
+  \draw[lcampo] (1.64,0) -- (-1.53,0);
+  \draw[azulacero!70, line width=0.4pt] (1.64,0.16) .. controls (0.6,0.2) and (-0.5,0.2) .. (-1.53,0.16);
+  \draw[azulacero!70, line width=0.4pt] (1.64,-0.16) .. controls (0.6,-0.2) and (-0.5,-0.2) .. (-1.53,-0.16);
+  % --- superficie gaussiana: pared lateral y tapas --------------------------------
+  \draw[gauss, line width=0.6pt] (-1.86,0.28) .. controls (-0.6,0.36) and (0.7,0.36) .. (2.0,0.28);
+  \draw[gauss, line width=0.6pt] (-1.86,-0.28) .. controls (-0.6,-0.36) and (0.7,-0.36) .. (2.0,-0.28);
+  \draw[gauss, line width=0.6pt] (-1.86,0) ellipse (0.07 and 0.28);
+  \draw[gauss, line width=0.6pt] (2.0,0) ellipse (0.07 and 0.28);
+  % sección transversal del tubo (da la sensación de cilindro)
+  \draw[cargapos!60, line width=0.4pt] (0.05,0.34) arc (90:270:0.07 and 0.34);
+  \draw[cargapos!60, line width=0.4pt, densely dotted] (0.05,-0.34) arc (-90:90:0.07 and 0.34);
+  % --- cargas en los extremos -------------------------------------------------
+  \node[signoneg, font=\tiny\bfseries] at (-1.68,0.12) {$-$};
+  \node[signoneg, font=\tiny\bfseries] at (-1.68,-0.12) {$-$};
+  \node[signopos, font=\tiny\bfseries] at (1.8,0.12) {$+$};
+  \node[signopos, font=\tiny\bfseries] at (1.8,-0.12) {$+$};
+  % --- rótulos de la superficie --------------------------------------------------
+  \draw[grismedio, line width=0.35pt] (-1.86,-0.3) -- (-2.25,-0.75);
+  \node[fondo, font=\footnotesize, text=cargapos!85!black] at (-2.4,-0.88) {$B_1$};
+  \draw[grismedio, line width=0.35pt] (2.0,-0.3) -- (2.4,-0.75);
+  \node[fondo, font=\footnotesize, text=cargapos!85!black] at (2.55,-0.88) {$B_2$};
+  \draw[grismedio, line width=0.35pt] (0.9,-0.33) -- (1.15,-0.75);
+  \node[fondo, font=\footnotesize, text=cargapos!85!black] at (1.25,-0.9) {$S_{\mathrm{lat}}$};
+  \node[font=\scriptsize, text=azulprof] at (-2.75,0.15) {$\vE=\vc{0}$};
+  \node[font=\scriptsize, text=azulprof] at (3.05,0.15) {$\vE=\vc{0}$};
+  % --- E y dS en un punto de la pared --------------------------------------------
+  \coordinate (P) at (-0.5,0.34);
+  \draw[-{Stealth[length=3.5pt]}, verdeazul, line width=0.7pt] (P) -- ++(0,0.55);
+  \node[fondo, font=\footnotesize, text=verdeazul, anchor=west] at ($(P)+(0.04,0.45)$) {$\dS$};
+  \draw[-{Stealth[length=3.5pt]}, azulprof, line width=0.7pt] (P) -- ++(-0.55,0);
+  \node[fondo, font=\footnotesize, text=azulprof, anchor=south] at ($(P)+(-0.42,0.04)$) {$\vE$};
+  \fill[azulprof] (P) circle (0.9pt);
+  % --- leyenda --------------------------------------------------------------------
+  \draw[gauss, line width=0.6pt] (-1.3,-1.95) -- (-0.7,-1.95);
   \node[font=\scriptsize, anchor=west] at (-0.6,-1.95) {superficie gaussiana $S=S_{\mathrm{lat}}\cup B_1\cup B_2$};
 \end{tikzpicture}
 \caption{Influencia total. La superficie cerrada $S$ formada por un tubo de líneas de campo (pared lateral $S_{\mathrm{lat}}$, donde $\vE\perp\dS$) y por

@@ -13,19 +13,19 @@
   \draw[eje] (0,0) -- (-0.7,-0.56) node[below left=-2pt, font=\footnotesize] {$x$};
   \node[below=2pt, font=\footnotesize] at (0.05,0) {$O$};
   % conductor j
-  \fill[top color=azulvelo!80!white, bottom color=metal, draw=azulprof, line width=0.6pt]
+  \path[conductorfino]
     (1.05,2.05) .. controls (0.85,2.95) and (1.95,3.55) .. (2.55,2.95)
     .. controls (3.15,2.45) and (2.65,1.45) .. (1.95,1.4) .. controls (1.45,1.35) and (1.15,1.55) .. cycle;
   \node[font=\footnotesize, text=azulprof] at (0.85,3.25) {$S_j'$};
   \node[font=\footnotesize] at (2.0,2.6) {$Q_j$};
   % conductor i
-  \fill[top color=azulvelo!80!white, bottom color=metal, draw=azulprof, line width=0.6pt]
+  \path[conductorfino]
     (6.4,0.0) .. controls (6.0,0.7) and (6.9,1.2) .. (7.6,0.8)
     .. controls (8.2,0.4) and (7.9,-0.9) .. (7.3,-1.1) .. controls (6.8,-1.25) and (6.7,-0.6) .. cycle;
   \node[font=\footnotesize, text=azulprof] at (8.25,0.85) {$S_i'$};
   \node[font=\footnotesize] at (7.3,-0.5) {$Q_i$};
   % tercer conductor
-  \fill[top color=azulvelo!80!white, bottom color=metal, draw=azulprof, line width=0.6pt]
+  \path[conductorfino]
     (7.5,3.0) .. controls (7.3,3.6) and (8.1,3.9) .. (8.5,3.5) .. controls (8.9,3.1) and (8.4,2.5) .. (8.0,2.6) .. controls (7.7,2.65) .. cycle;
   \node[font=\footnotesize] at (8.05,3.15) {$Q_N$};
   % puntos
@@ -33,17 +33,17 @@
   \coordinate (ri) at (6.52,0.2);
   \coordinate (r) at (5.2,2.75);
   % vectores de posición
-  \draw[vect, azulacero] (0,0) -- (rpj);
-  \draw[vect, azulacero] (0,0) -- (ri);
-  \draw[vect, azulacero] (0,0) -- (r);
+  \draw[-{Stealth[length=4.5pt]}, azulmedio, line width=0.75pt] (0,0) -- (rpj);
+  \draw[-{Stealth[length=4.5pt]}, azulmedio, line width=0.75pt] (0,0) -- (ri);
+  \draw[-{Stealth[length=4.5pt]}, azulmedio, line width=0.75pt] (0,0) -- (r);
   % vectores relativos
-  \draw[vectrojo] (rpj) -- (r);
-  \draw[vectrojo] (rpj) -- (ri);
-  \fill[azulprof] (rpj) circle (1.4pt) (ri) circle (1.4pt) (r) circle (1.4pt);
+  \draw[-{Stealth[length=4.5pt]}, cargapos, line width=0.75pt] (rpj) -- (r);
+  \draw[-{Stealth[length=4.5pt]}, cargapos, line width=0.75pt] (rpj) -- (ri);
+  \fill[azulprof] (rpj) circle (1.2pt) (ri) circle (1.2pt) (r) circle (1.2pt);
   % rótulos (con fondo)
-  \node[fondo, font=\footnotesize, text=azulacero] at (0.72,0.98) {$\rp_j$};
-  \node[fondo, font=\footnotesize, text=azulacero] at (3.6,-0.32) {$\vc{r}_i$};
-  \node[fondo, font=\footnotesize, text=azulacero] at (3.9,1.62) {$\vc{r}$};
+  \node[fondo, font=\footnotesize, text=azulmedio] at (0.72,0.98) {$\rp_j$};
+  \node[fondo, font=\footnotesize, text=azulmedio] at (3.6,-0.32) {$\vc{r}_i$};
+  \node[fondo, font=\footnotesize, text=azulmedio] at (3.9,1.62) {$\vc{r}$};
   \node[fondo, font=\footnotesize, text=cargapos] at (3.75,2.45) {$\vc{R}_j$};
   \node[fondo, font=\footnotesize, text=cargapos] at (4.4,1.12) {$\vc{R}_{ij}$};
   \node[fondo, font=\footnotesize, text=cargapos] at (3.35,3.25) {$\sigma_j(\rp_j)$};
