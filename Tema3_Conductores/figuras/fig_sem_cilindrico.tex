@@ -12,19 +12,33 @@
     \foreach \a in {0,30,...,330}{
       \draw[azulacero, line width=0.55pt, -{Stealth[length=3.5pt]}] (\a:0.78) -- (\a:1.35);
       \draw[azulacero, line width=0.55pt] (\a:1.35) -- (\a:1.85);}
-    \draw[azulprof, line width=1.1pt] (0,0) circle (1.95);
-    \shade[ball color=azulvelo] (0,0) circle (0.7);
+    % caras de corte (convención de sección: relleno plano y rayado)
+    \fill[azulvelo!70, even odd rule] (0,0) circle (2.1) (0,0) circle (1.95);
+    \fill[pattern=north east lines, pattern color=azulacero!70, even odd rule] (0,0) circle (2.1) (0,0) circle (1.95);
+    \draw[azulprof, line width=0.6pt] (0,0) circle (2.1) (0,0) circle (1.95);
+    \fill[azulvelo!70] (0,0) circle (0.7);
+    \fill[pattern=north east lines, pattern color=azulacero!70] (0,0) circle (0.7);
     \draw[azulprof, line width=0.6pt] (0,0) circle (0.7);
     \draw[gauss] (0,0) circle (1.3);
     \foreach \a in {0,45,...,315}{\node[signopos, font=\tiny\bfseries] at (\a:0.55) {$+$};
                                  \node[signoneg, font=\tiny\bfseries] at (\a+22.5:1.82) {$-$};}
     \node[fondo, font=\scriptsize, text=cargapos] at (0,0.05) {$+\lambda$};
-    \node[font=\scriptsize, text=carganeg] at (1.9,1.9) {$-\lambda$};
+    \node[font=\scriptsize, text=carganeg] at (2.05,2.05) {$-\lambda$};
     \draw[-{Stealth[length=3.5pt]}, azulprof, line width=0.5pt] (0,0) -- (-125:0.7);
     \node[fondo, font=\scriptsize] at (-0.25,-0.5) {$a$};
     \draw[-{Stealth[length=3.5pt]}, azulprof, line width=0.5pt] (0,0) -- (-55:1.95);
     \node[fondo, font=\scriptsize] at (1.3,-1.25) {$b$};
     \node[fondo, font=\scriptsize, text=cargapos!85] at (-1.1,0.68) {$r$};
+    % esquema en perspectiva: cilindros coaxiales y plano de corte
+    \begin{scope}[shift={(-2.95,1.3)}, scale=0.42]
+      \draw[azulprof, line width=0.4pt] (-0.9,-1.2) -- (-0.9,1.2) (0.9,-1.2) -- (0.9,1.2);
+      \draw[azulprof, line width=0.4pt] (0,-1.2) ellipse (0.9 and 0.28);
+      \draw[azulacero, line width=0.4pt] (-0.35,-1.2) -- (-0.35,1.2) (0.35,-1.2) -- (0.35,1.2);
+      \fill[azulvelo!70, draw=cargapos, line width=0.5pt, fill opacity=0.9] (0,0) ellipse (0.9 and 0.28);
+      \draw[azulprof, line width=0.4pt] (0,0) ellipse (0.35 and 0.11);
+      \draw[azulprof, line width=0.4pt] (0,1.2) ellipse (0.9 and 0.28);
+      \node[font=\tiny, text=cargapos, anchor=north] at (0,-1.55) {corte};
+    \end{scope}
     \node at (0,-2.6) {(a)};
   \end{scope}
   % ---------------------------------------------------------------- (b)
@@ -40,10 +54,10 @@
       \node[font=\scriptsize, anchor=south west, text=grispizarra] at (axis cs:3.05,0.05) {referencia $\phi(r_0)=0$};
       \node[font=\scriptsize, anchor=west, text=grispizarra] at (axis cs:1.15,1.12) {$\ln(r_0/R)$};
     \end{axis}
-    \node at (3.2,-1.35) {(b)};
+    \node at (3.2,-0.95) {(b)};
   \end{scope}
 \end{tikzpicture}
-\caption{Problema 3.4. (a) Sección transversal del condensador cilíndrico (longitud $\ell$): la gaussiana coaxial de radio $a<r<b$ solo encierra la carga de la
+\caption{Problema 3.4. (a) Sección transversal del condensador cilíndrico (longitud $\ell$), con las caras de corte rayadas; el esquema en perspectiva indica el plano de corte. La gaussiana coaxial de radio $a<r<b$ solo encierra la carga de la
 armadura interior. (b) Potencial de un cilindro cargado de radio $R$: como diverge en el infinito, se refiere a una distancia arbitraria $r_0$; las diferencias
 de potencial, y por tanto la capacidad, no dependen de esa elección.}
 \label{fig:sem-cilindrico}
