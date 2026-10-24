@@ -18,16 +18,16 @@
     \draw[azulprof, line width=0.6pt] (2.25,-0.47) -- (2.45,-0.47);
     \draw[azulprof, line width=0.6pt] (2.35,-0.47) -- (2.35,-1.0) -- (1.42,-1.0);
     \node[font=\footnotesize, anchor=west] at (2.6,-0.42) {$V_0$};
-    \node[font=\scriptsize, anchor=west, text=cargapos] at (2.6,0.0) {$+$};
+    \node[font=\scriptsize, anchor=west, text=cargapos] at (2.58,-0.2) {$+$};
     \foreach \a in {60,180,240,300}{\node[signopos, font=\tiny\bfseries] at (\a:0.3) {$+$};}
     \foreach \a in {70,200,250}{\node[signoneg, font=\tiny\bfseries] at (\a:1.65) {$-$};}
-    \node[font=\footnotesize, text=cargapos] at (0,0.0) {$Q_1$};
+    \node[fondo, font=\scriptsize, text=cargapos] at (0,-0.62) {$Q_1$};
     \node[font=\footnotesize, text=carganeg] at (-1.62,-1.62) {$-Q_1$};
     \node at (0,-2.5) {(a)};
   \end{scope}
   % ---------------------------------------------------------------- (b)
-  \begin{scope}[xshift=4.4cm, yshift=-2.1cm]
-    \begin{axis}[tema, width=8.4cm, height=4.9cm, xmin=0, xmax=5.2, ymin=0, ymax=1.15,
+  \begin{scope}[xshift=4.9cm, yshift=-2.1cm]
+    \begin{axis}[tema, width=8.0cm, height=4.9cm, xmin=0, xmax=5.2, ymin=0, ymax=1.15,
         xlabel={$r$ (con $R_i=i$)}, ylabel={$\phi/V_0$}, xtick={0,1,2,3,4,5},
         xticklabels={$0$,$R_1$,$R_2$,$R_3$,$R_4$,}, ytick={0,0.111,0.333,1}, yticklabels={$0$,$\frac19$,$\frac13$,$1$}]
       \addplot[azulprof, line width=1.2pt] coordinates {(0,1) (1,1)};

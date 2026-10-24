@@ -42,14 +42,13 @@ $\sigma$, cuyo campo es $\sigma/(2\eo)$, perpendicular al plano y dirigido hacia
   \vE_{\mathrm{disco},1}=+\frac{\sigma}{2\eo}\,\un,\qquad\vE_{\mathrm{disco},2}=-\frac{\sigma}{2\eo}\,\un .
 \]
 Por tanto, usando \cref{eq:campo-superficie} y \cref{eq:campo-nulo},
+\begin{alignat*}{2}
+  \vE_1&=\Erest+\frac{\sigma}{2\eo}\,\un=\frac{\sigma}{\eo}\,\un &\qquad&\text{(punto 1, fuera)},\\
+  \vE_2&=\Erest-\frac{\sigma}{2\eo}\,\un=\vc{0} &&\text{(punto 2, dentro)}.
+\end{alignat*}
+Sumando miembro a miembro ambas igualdades, $\vE_1+\vE_2=2\,\Erest$, de donde
 \[
-  \left.\begin{aligned}
-    \vE_1&=\Erest+\frac{\sigma}{2\eo}\,\un=\frac{\sigma}{\eo}\,\un\\[2pt]
-    \vE_2&=\Erest-\frac{\sigma}{2\eo}\,\un=\vc{0}
-  \end{aligned}\right\}
-  \quad\xRightarrow{\ \text{sumando}\ }\quad
-  \frac{\sigma}{\eo}\,\un+\vc{0}=2\,\Erest
-  \quad\Longrightarrow\quad\Erest=\frac{\sigma}{2\eo}\,\un=\frac12\bigl(\vE_1+\vE_2\bigr).
+  \Erest=\frac12\bigl(\vE_1+\vE_2\bigr)=\frac12\Bigl(\frac{\sigma}{\eo}\,\un+\vc{0}\Bigr)=\frac{\sigma}{2\eo}\,\un .
 \]
 \end{proof}
 
@@ -92,10 +91,11 @@ Una esfera conductora de radio $R$ tiene carga $Q$. ¿Con qué fuerza se repelen
 
 \emph{Resolución.} La carga se reparte uniformemente, $\sigma=Q/(4\pi R^{2})$, y la presión $\Pel=\sigma^{2}/(2\eo)$ es la misma en toda la superficie. Por
 simetría, la fuerza sobre el hemisferio norte apunta según $\uz$, y solo contribuye la componente $\un\cdot\uz=\cos\theta$:
-\[
-  F_z=\iint_{\text{hemisferio}}\Pel\cos\theta\,\dsc=\frac{\sigma^{2}}{2\eo}\int_{0}^{2\pi}\!\!\int_{0}^{\pi/2}\cos\theta\,R^{2}\sen\theta\,\dif\theta\,\dif\varphi
-  =\frac{\sigma^{2}}{2\eo}\,2\pi R^{2}\,\frac12=\frac{\sigma^{2}\pi R^{2}}{2\eo}=\frac{Q^{2}}{32\pi\eo R^{2}} .
-\]
+\begin{align*}
+  F_z&=\iint_{\text{hemisferio}}\Pel\cos\theta\,\dsc
+     =\frac{\sigma^{2}}{2\eo}\int_{0}^{2\pi}\!\!\int_{0}^{\pi/2}\cos\theta\,R^{2}\sen\theta\,\dif\theta\,\dif\varphi\\
+     &=\frac{\sigma^{2}}{2\eo}\,2\pi R^{2}\,\frac12=\frac{\sigma^{2}\pi R^{2}}{2\eo}=\frac{Q^{2}}{32\pi\eo R^{2}} .
+\end{align*}
 El resultado tiene una lectura geométrica: es la presión por el área de la \emph{proyección} del hemisferio sobre el plano ecuatorial, $\pi R^{2}$.
 \end{ejemplo}
 

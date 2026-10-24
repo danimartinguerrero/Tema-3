@@ -18,18 +18,18 @@
     \draw[gauss] (0,0) circle (1.3);
     \foreach \a in {0,45,...,315}{\node[signopos, font=\tiny\bfseries] at (\a:0.55) {$+$};
                                  \node[signoneg, font=\tiny\bfseries] at (\a+22.5:1.82) {$-$};}
-    \node[font=\scriptsize, text=cargapos] at (0,0) {$+\lambda$};
+    \node[fondo, font=\scriptsize, text=cargapos] at (0,0.05) {$+\lambda$};
     \node[font=\scriptsize, text=carganeg] at (1.9,1.9) {$-\lambda$};
     \draw[-{Stealth[length=3.5pt]}, azulprof, line width=0.5pt] (0,0) -- (-125:0.7);
-    \node[font=\scriptsize] at (-0.55,-0.25) {$a$};
+    \node[fondo, font=\scriptsize] at (-0.25,-0.5) {$a$};
     \draw[-{Stealth[length=3.5pt]}, azulprof, line width=0.5pt] (0,0) -- (-55:1.95);
-    \node[font=\scriptsize] at (1.0,-1.25) {$b$};
-    \node[font=\scriptsize, text=cargapos!85] at (-1.05,1.15) {$r$};
+    \node[fondo, font=\scriptsize] at (1.3,-1.25) {$b$};
+    \node[fondo, font=\scriptsize, text=cargapos!85] at (-1.1,0.68) {$r$};
     \node at (0,-2.6) {(a)};
   \end{scope}
   % ---------------------------------------------------------------- (b)
-  \begin{scope}[xshift=3.95cm, yshift=-2.15cm]
-    \begin{axis}[tema, width=8.0cm, height=4.9cm, xmin=0, xmax=6.2, ymin=-0.75, ymax=1.35,
+  \begin{scope}[xshift=4.4cm, yshift=-2.15cm]
+    \begin{axis}[tema, width=7.6cm, height=4.9cm, xmin=0, xmax=6.2, ymin=-0.75, ymax=1.35,
         axis x line=middle, axis y line=left,
         xlabel={$r$}, ylabel={$\phi\,/\,\frac{Q}{2\pi\eo\ell}$}, xtick={1,3}, xticklabels={$R$,$r_0$}, ytick={-0.5,0,0.5,1},
         xlabel style={anchor=west}]

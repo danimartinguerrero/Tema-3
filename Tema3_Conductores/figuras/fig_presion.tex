@@ -10,35 +10,48 @@
 \begin{tikzpicture}[font=\small]
   % ---------------------------------------------------------------- (a)
   \begin{scope}
-    % superficie curvada del conductor (vista en perspectiva)
+    % superficie del conductor en perspectiva
     \fill[top color=azulvelo!70!white, bottom color=metal!80!white, draw=azulprof, line width=0.6pt]
-      (-3.0,-0.3) .. controls (-1.6,0.55) and (0.9,0.65) .. (3.0,0.05)
-      -- (2.25,-1.05) .. controls (0.3,-0.55) and (-1.9,-0.75) .. (-3.6,-1.2) -- cycle;
-    \node[font=\footnotesize, text=azulprof] at (-2.55,-0.95) {$S'$};
-    % disco DeltaS
-    \fill[cargapos!25] (0,-0.12) ellipse (0.62 and 0.17);
-    \draw[cargapos, line width=0.6pt] (0,-0.12) ellipse (0.62 and 0.17);
-    \node[font=\footnotesize] at (0.92,-0.32) {$\Delta S$};
-    % campo del disco (a ambos lados) y del resto
-    \draw[-{Stealth[length=4pt]}, verdeazul, line width=0.9pt] (0.12,-0.05) -- (0.12,1.15);
-    \draw[-{Stealth[length=4pt]}, verdeazul, line width=0.9pt, densely dashed] (0.12,-0.2) -- (0.12,-1.4);
-    \node[font=\footnotesize, text=verdeazul] at (0.72,0.95) {$\Edisc$};
-    \draw[-{Stealth[length=4pt]}, cargapos, line width=0.9pt] (-0.22,-0.9) -- (-0.22,1.55);
-    \node[font=\footnotesize, text=cargapos] at (-0.78,1.42) {$\Erest$};
-    \draw[-{Stealth[length=3.5pt]}, azulprof, line width=0.6pt] (1.75,0.35) -- (1.75,0.95) node[right, font=\footnotesize] {$\un$};
-    % puntos 1 y 2
-    \begin{scope}[shift={(2.85,-1.95)}]
-      \draw[azulacero, line width=1.3pt] (-0.55,0) -- (0.55,0);
-      \fill[azulprof] (0,0.22) circle (1.4pt) node[right=3pt, font=\footnotesize] {1 (fuera)};
-      \fill[azulprof] (0,-0.22) circle (1.4pt) node[right=3pt, font=\footnotesize] {2 (dentro)};
-      \node[font=\footnotesize, anchor=east] at (-0.6,0) {$\Delta S$};
+      (-2.45,-0.25) .. controls (-1.3,0.5) and (0.6,0.58) .. (1.95,0.08)
+      -- (1.55,-0.95) .. controls (0.2,-0.5) and (-1.35,-0.68) .. (-2.85,-1.1) -- cycle;
+    \node[font=\footnotesize, text=azulprof] at (-2.15,-0.82) {$S'$};
+    % disco Delta S
+    \fill[cargapos!22] (-0.2,-0.1) ellipse (0.55 and 0.15);
+    \draw[cargapos, line width=0.6pt] (-0.2,-0.1) ellipse (0.55 and 0.15);
+    \node[fondo, font=\footnotesize] at (-1.0,-0.33) {$\Delta S$};
+    % campo del resto (continuo) y campo del disco (discontinuo)
+    \draw[-{Stealth[length=4pt]}, cargapos, line width=0.9pt] (-0.42,-0.95) -- (-0.42,1.45);
+    \node[fondo, font=\footnotesize, text=cargapos, anchor=east] at (-0.5,1.3) {$\Erest$};
+    \draw[-{Stealth[length=4pt]}, verdeazul, line width=0.9pt] (0.02,-0.03) -- (0.02,1.1);
+    \draw[-{Stealth[length=4pt]}, verdeazul, line width=0.9pt, densely dashed] (0.02,-0.17) -- (0.02,-1.3);
+    \node[fondo, font=\footnotesize, text=verdeazul, anchor=west] at (0.1,0.95) {$\Edisc$};
+    \draw[-{Stealth[length=3.5pt]}, azulprof, line width=0.6pt] (1.35,0.32) -- (1.35,0.88);
+    \node[fondo, font=\footnotesize, anchor=west] at (1.4,0.78) {$\un$};
+    % conector horizontal al detalle ampliado
+    \draw[grismedio, line width=0.45pt] (0.35,-0.1) -- (2.55,-0.1);
+    \fill[grismedio] (0.35,-0.1) circle (0.9pt);
+    % detalle ampliado: el disco visto de canto
+    \begin{scope}[shift={(3.35,-0.1)}]
+      \begin{scope}
+        \clip (0,0) circle (0.8);
+        \fill[white] (-0.8,0) rectangle (0.8,0.8);
+        \fill[top color=azulvelo!80!white, bottom color=metal] (-0.8,-0.8) rectangle (0.8,0);
+      \end{scope}
+      \draw[cargapos, line width=1.6pt] (-0.42,0) -- (0.42,0);
+      \fill[azulprof] (0,0.27) circle (1.3pt);
+      \fill[azulprof] (0,-0.27) circle (1.3pt);
+      \node[font=\scriptsize, anchor=west] at (0.06,0.3) {$1$};
+      \node[font=\scriptsize, anchor=west] at (0.06,-0.3) {$2$};
+      \node[font=\tiny, text=grispizarra] at (0,0.58) {fuera};
+      \node[font=\tiny, text=azulprof] at (0,-0.58) {dentro};
+      \draw[azulprof, line width=0.6pt] (0,0) circle (0.8);
+      \node[font=\footnotesize, anchor=north] at (0,-0.85) {$\Delta S$ de canto};
     \end{scope}
-    \draw[->, grismedio, line width=0.4pt] (0.65,-0.18) .. controls (1.6,-0.7) .. (2.25,-1.85);
-    \node at (0,-2.95) {(a)};
+    \node at (0.6,-3.35) {(a)};
   \end{scope}
   % ---------------------------------------------------------------- (b)
-  \begin{scope}[xshift=6.3cm, yshift=-2.1cm]
-    \begin{axis}[tema, width=7.0cm, height=5.4cm, axis lines=left,
+  \begin{scope}[xshift=6.2cm, yshift=-2.1cm]
+    \begin{axis}[tema, width=6.5cm, height=5.4cm, axis lines=left,
         xlabel={$\xi$ (normal a la superficie)}, ylabel={$E_n$}, xmin=-2.1, xmax=2.1, ymin=-0.75, ymax=1.25,
         xtick={0}, xticklabels={$0$}, ytick={-0.5,0,0.5,1},
         yticklabels={$-\frac{\sigma}{2\eo}$,$0$,$\frac{\sigma}{2\eo}$,$\frac{\sigma}{\eo}$},
@@ -54,10 +67,10 @@
       \node[font=\scriptsize, text=grispizarra] at (axis cs:-1.05,-0.63) {conductor};
       \node[font=\scriptsize, text=grispizarra] at (axis cs:1.05,-0.63) {vacío};
     \end{axis}
-    \node at (2.6,-1.25) {(b)};
+    \node at (2.4,-1.25) {(b)};
   \end{scope}
 \end{tikzpicture}
-\caption{Presión electrostática. (a) El campo en un elemento $\Delta S$ de la superficie es la suma del campo del propio disco, discontinuo
+\caption{Presión electrostática. (a) El campo en un elemento $\Delta S$ de la superficie (a la derecha, ampliado y visto de canto, con los puntos 1 y 2) es la suma del campo del propio disco, discontinuo
 ($\pm\sigma/2\eo$ a cada lado), y del campo $\Erest$ del resto de la carga, continuo. (b) Componente normal de cada contribución frente a la
 coordenada $\xi$ perpendicular a la superficie: $\Erest$ duplica el campo fuera y lo anula dentro, y es el único que actúa sobre la carga de
 $\Delta S$.}

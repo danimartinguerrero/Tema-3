@@ -31,6 +31,8 @@
   punteado/.style={densely dotted, line width=0.5pt, grispizarra},
   etiq/.style={font=\small, text=black!85},
   cuadro/.style={draw=azulclaro, line width=0.4pt, fill=white, inner sep=2pt},
+  % rótulo con fondo blanco semitransparente: evita que el texto se confunda con trazos
+  fondo/.style={fill=white, fill opacity=0.85, text opacity=1, inner sep=1.2pt, rounded corners=1pt},
   orienta/.style={decoration={markings, mark=at position 0.55 with {\arrow{Stealth[length=5pt]}}}, postaction={decorate}},
   % conductores: relleno metálico en degradado y contorno en azul tinta
   conductor/.style={draw=azulprof, line width=0.6pt, top color=azulvelo!80!white,
