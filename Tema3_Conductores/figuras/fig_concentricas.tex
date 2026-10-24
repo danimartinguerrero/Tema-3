@@ -1,0 +1,52 @@
+% =========================================================================
+%  Figura: esfera (R1) y cáscara (R2 = 2 R1) concéntricas. Potencial de los
+%  dos estados elementales, normalizado a kQ/R1:
+%  (a) Q1 = Q, Q2 = 0:  phi = 1 (r <= 1),  1/r (r >= 1)   (r en unidades de R1)
+%  (b) Q2 = Q, Q1 = 0:  phi = 1/2 (r <= 2), 1/r (r >= 2)
+% =========================================================================
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[font=\small]
+  % esquema
+  \begin{scope}[x=0.75cm, y=0.75cm]
+    \draw[azulprof, line width=0.9pt, fill=azulfondo] (0,0) circle (2);
+    \shade[ball color=azulvelo] (0,0) circle (1);
+    \draw[azulprof, line width=0.6pt] (0,0) circle (1);
+    \draw[-{Stealth[length=4pt]}, azulprof, line width=0.5pt] (0,0) -- (-0.71,0.71) node[pos=0.55, below left=-2pt, font=\footnotesize] {$R_1$};
+    \draw[-{Stealth[length=4pt]}, azulprof, line width=0.5pt] (0,0) -- (1.73,-1.0) node[pos=0.7, above right=-2pt, font=\footnotesize] {$R_2$};
+    \node[font=\footnotesize] at (0.25,0.3) {$1$};
+    \node[font=\footnotesize] at (1.55,1.55) {$2$};
+    \node at (0,-4.5) {(a)};
+  \end{scope}
+  % estado Q1
+  \begin{scope}[xshift=2.3cm, yshift=-2.05cm]
+    \begin{axis}[tema, width=6.0cm, height=4.6cm, xmin=0, xmax=4.2, ymin=0, ymax=1.15,
+        xlabel={$r/R_1$}, ylabel={$\phi\,/\,(\kc Q/R_1)$}, xtick={0,1,2,3,4}, ytick={0,0.5,1},
+        title={\footnotesize $Q_1=Q,\ Q_2=0$}, title style={yshift=-4pt}]
+      \addplot[azulprof, line width=1.1pt, domain=0:1] {1};
+      \addplot[azulprof, line width=1.1pt, domain=1:4.2, samples=60] {1/x};
+      \draw[punteado] (axis cs:1,0) -- (axis cs:1,1.15) (axis cs:2,0) -- (axis cs:2,1.15);
+      \fill[cargapos] (axis cs:1,1) circle (1.6pt) node[above right=-1pt, font=\scriptsize] {$p_{11}$};
+      \fill[cargapos] (axis cs:2,0.5) circle (1.6pt) node[above right=-1pt, font=\scriptsize] {$p_{21}$};
+    \end{axis}
+    \node at (2.3,-1.35) {(b)};
+  \end{scope}
+  % estado Q2
+  \begin{scope}[xshift=8.7cm, yshift=-2.05cm]
+    \begin{axis}[tema, width=6.0cm, height=4.6cm, xmin=0, xmax=4.2, ymin=0, ymax=1.15,
+        xlabel={$r/R_1$}, ylabel={$\phi\,/\,(\kc Q/R_1)$}, xtick={0,1,2,3,4}, ytick={0,0.5,1},
+        title={\footnotesize $Q_1=0,\ Q_2=Q$}, title style={yshift=-4pt}]
+      \addplot[azulacero, line width=1.1pt, domain=0:2] {0.5};
+      \addplot[azulacero, line width=1.1pt, domain=2:4.2, samples=60] {1/x};
+      \draw[punteado] (axis cs:1,0) -- (axis cs:1,1.15) (axis cs:2,0) -- (axis cs:2,1.15);
+      \fill[cargapos] (axis cs:1,0.5) circle (1.6pt) node[above=1pt, font=\scriptsize] {$p_{12}$};
+      \fill[cargapos] (axis cs:2,0.5) circle (1.6pt) node[above right=-1pt, font=\scriptsize] {$p_{22}$};
+    \end{axis}
+    \node at (2.3,-1.35) {(c)};
+  \end{scope}
+\end{tikzpicture}
+\caption{Coeficientes de potencial de una esfera y una cáscara concéntricas ($R_2=2R_1$). (a) Geometría. (b) Con la esfera cargada y la cáscara
+neutra, el potencial decae como $1/r$ desde $R_1$. (c) Con la cáscara cargada, el interior queda a potencial constante, $\kc Q/R_2$, de modo que
+$p_{12}=p_{22}$.}
+\label{fig:concentricas}
+\end{figure}

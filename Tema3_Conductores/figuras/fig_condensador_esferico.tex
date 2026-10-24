@@ -1,0 +1,63 @@
+% =========================================================================
+%  Figura: condensador esférico (b = 2a).
+%  (a) Sección: +Q en la esfera, -Q en la cara interior de la cáscara, campo
+%      radial entre armaduras y gaussiana a < r < b.
+%  (b) E/E0 frente a r/a, con E0 = kQ/a^2: el área sombreada es DeltaV/phi0.
+%  (c) phi/phi0 con la armadura exterior a tierra, phi0 = kQ/a.
+% =========================================================================
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[font=\small]
+  % ---------------------------------------------------------------- (a)
+  \begin{scope}[x=0.85cm, y=0.85cm]
+    \foreach \a in {15,45,...,345}{
+      \draw[azulacero, line width=0.55pt, -{Stealth[length=3.5pt]}] (\a:1.08) -- (\a:1.6);
+      \draw[azulacero, line width=0.55pt] (\a:1.6) -- (\a:1.9);}
+    \draw[azulprof, line width=1pt] (0,0) circle (2);
+    \shade[ball color=azulvelo] (0,0) circle (1);
+    \draw[azulprof, line width=0.6pt] (0,0) circle (1);
+    \foreach \a in {0,45,...,315}{\node[signopos, font=\tiny\bfseries] at (\a:0.82) {$+$};
+                                 \node[signoneg, font=\tiny\bfseries] at (\a+22.5:1.86) {$-$};}
+    \draw[gauss] (0,0) circle (1.45);
+    \node[font=\footnotesize, text=cargapos] at (0,0.3) {$+Q$};
+    \node[font=\footnotesize] at (0,-0.25) {$a$};
+    \node[font=\footnotesize, text=carganeg] at (2.25,1.55) {$-Q$};
+    \node[font=\footnotesize] at (2.05,-1.5) {$b$};
+    \node[font=\footnotesize, text=grispizarra, align=center] at (0,-2.55) {$\vE=\vc{0}$ fuera de $b$};
+    \node at (0,-3.45) {(a)};
+  \end{scope}
+  % ---------------------------------------------------------------- (b)
+  \begin{scope}[xshift=3.1cm, yshift=-2.1cm]
+    \begin{axis}[tema, width=5.6cm, height=4.6cm, xmin=0, xmax=3.2, ymin=0, ymax=1.15,
+        xlabel={$r/a$}, ylabel={$E/E_0$}, xtick={0,1,2,3}, ytick={0,0.25,0.5,1}]
+      \addplot[draw=none, fill=azulvelo, domain=1:2, samples=40] {1/x^2} \closedcycle;
+      \addplot[azulprof, line width=1.1pt, domain=1:2, samples=40] {1/x^2};
+      \addplot[azulprof, line width=1.1pt] coordinates {(0,0) (1,0)};
+      \addplot[azulprof, line width=1.1pt] coordinates {(2,0) (3.2,0)};
+      \draw[punteado] (axis cs:1,0) -- (axis cs:1,1) (axis cs:2,0) -- (axis cs:2,0.25);
+      \node[font=\scriptsize] at (axis cs:1.45,0.18) {$\DV$};
+      \node[font=\scriptsize, text=grispizarra] at (axis cs:0.5,0.12) {$E=0$};
+      \node[font=\scriptsize, text=grispizarra] at (axis cs:2.6,0.12) {$E=0$};
+    \end{axis}
+    \node at (2.15,-1.35) {(b)};
+  \end{scope}
+  % ---------------------------------------------------------------- (c)
+  \begin{scope}[xshift=8.75cm, yshift=-2.1cm]
+    \begin{axis}[tema, width=5.6cm, height=4.6cm, xmin=0, xmax=3.2, ymin=0, ymax=0.62,
+        xlabel={$r/a$}, ylabel={$\phi/\phi_0$}, xtick={0,1,2,3}, ytick={0,0.25,0.5}]
+      \addplot[azulacero, line width=1.1pt] coordinates {(0,0.5) (1,0.5)};
+      \addplot[azulacero, line width=1.1pt, domain=1:2, samples=40] {1/x-0.5};
+      \addplot[azulacero, line width=1.1pt] coordinates {(2,0) (3.2,0)};
+      \draw[punteado] (axis cs:1,0) -- (axis cs:1,0.5) (axis cs:2,0) -- (axis cs:2,0.6);
+      \draw[{Stealth[length=3pt]}-{Stealth[length=3pt]}, cargapos] (axis cs:2.35,0) -- (axis cs:2.35,0.5);
+      \draw[punteado] (axis cs:1,0.5) -- (axis cs:2.45,0.5);
+      \node[font=\scriptsize, text=cargapos, anchor=west] at (axis cs:2.4,0.27) {$\DV$};
+    \end{axis}
+    \node at (2.15,-1.35) {(c)};
+  \end{scope}
+\end{tikzpicture}
+\caption{Condensador esférico con $b=2a$. (a) Sección: toda la carga $-Q$ de la armadura exterior está en su cara interior, y la gaussiana entre armaduras
+solo encierra $+Q$. (b) Campo, con $E_0=\kc Q/a^{2}$: es nulo dentro de la esfera y fuera de la cáscara, y el área bajo la curva entre $a$ y $b$ es
+$\DV/\phi_0$. (c) Potencial con la armadura exterior a tierra, $\phi_0=\kc Q/a$: constante en la esfera y nulo desde la cáscara hacia fuera.}
+\label{fig:condensador-esferico}
+\end{figure}

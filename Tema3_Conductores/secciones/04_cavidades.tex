@@ -1,0 +1,192 @@
+% =========================================================================
+\section{Ecuación de Laplace, cavidades y capacidad}\label{sec:cavidades}
+% =========================================================================
+Las propiedades anteriores son locales. Para tratar conductores con cavidades, o sistemas de varios conductores, necesitamos una herramienta
+global: la formulación del problema electrostático como un problema de contorno para el potencial, y los teoremas que garantizan que su
+solución es única.
+
+% -------------------------------------------------------------------------
+\subsection{Ecuaciones de Poisson y Laplace}\label{sec:poisson}
+% -------------------------------------------------------------------------
+\begin{proposicion}[Ecuaciones de Poisson y Laplace]\label{prop:poisson}
+En electrostática, el potencial satisface la \emph{ecuación de Poisson}
+\begin{equation}\label{eq:poisson}
+  \resalta{\Lap\phi=-\frac{\rho}{\eo},}
+\end{equation}
+y, en las regiones sin carga ($\rho=0$), la \emph{ecuación de Laplace}, $\Lap\phi=0$. Las funciones de clase $C^{2}$ que satisfacen la ecuación de
+Laplace en un abierto se llaman \emph{armónicas}.
+\end{proposicion}
+\begin{proof}
+Basta sustituir $\vE=-\nab\phi$ en la ley de Gauss diferencial, $\nab\cdot\vE=\rho/\eo$:
+$\nab\cdot(-\nab\phi)=-\Lap\phi=\rho/\eo$~\cite{TEMA0,TEMA1}.
+\end{proof}
+
+En presencia de conductores, el espacio vacío $\Omega=\R^{3}\setminus\bigcup_i\Vc_i$ es una región en la que (si no hay cargas libres en el vacío)
+$\phi$ es armónica, y sobre cuya frontera, las superficies $\Sc_i$ de los conductores, el potencial es constante. El problema electrostático se
+convierte en un \emph{problema de contorno}. Dos propiedades de las funciones armónicas son las que hacen tratable este problema.
+
+\begin{lema}[Principio del máximo]\label{lem:maximo}
+Sea $\phi$ armónica en una región acotada $\Omega$ y continua en su cierre. Entonces $\phi$ alcanza su máximo y su mínimo sobre la frontera
+$\partial\Omega$, y no tiene extremos locales en el interior salvo que sea constante. Si $\Omega$ es exterior a unos conductores, el resultado se
+mantiene contando el infinito como parte de la frontera.
+\end{lema}
+\begin{proof}
+Las funciones armónicas cumplen la \emph{propiedad del valor medio}: $\phi(\vc{r}_0)$ es igual al promedio de $\phi$ sobre cualquier esfera centrada
+en $\vc{r}_0$ y contenida en $\Omega$~\cite{GRIFFITHS,KELLOGG}. Si $\phi$ tuviese un máximo local estricto en $\vc{r}_0$, en una esfera pequeña alrededor de
+$\vc{r}_0$ todos los valores serían menores que $\phi(\vc{r}_0)$ y su promedio también, lo que es absurdo. El caso de un máximo no estricto se reduce
+al anterior por un argumento de conexión~\cite{KELLOGG}.
+\end{proof}
+
+\begin{teorema}[Teoremas de unicidad]\label{teo:unicidad}
+Sea $\Omega$ la región exterior a un conjunto de conductores $\Vc_1,\dots,\Vc_N$, con una densidad de carga $\rho$ dada en $\Omega$ y la condición
+$\phi\to0$ en el infinito. La solución de la ecuación de Poisson en $\Omega$ es única si se conoce, para cada conductor:
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item su potencial $\phi_i$ (\emph{primer teorema de unicidad}, problema de Dirichlet), o bien
+  \item su carga total $Q_i$ (\emph{segundo teorema de unicidad}),
+\end{enumerate}
+o una combinación de ambos datos (el potencial para unos conductores y la carga para los demás).
+\end{teorema}
+\begin{proof}
+Sean $\phi_a$ y $\phi_b$ dos soluciones y $\psi=\phi_a-\phi_b$. Entonces $\Lap\psi=0$ en $\Omega$, $\psi\to0$ en el infinito y $\psi$ es constante, de
+valor $\psi_i$, sobre cada $\Sc_i$. Aplicamos el teorema de la divergencia al campo $\psi\nab\psi$, cuya divergencia es
+$\nab\cdot(\psi\nab\psi)=\norm{\nab\psi}^{2}+\psi\Lap\psi=\norm{\nab\psi}^{2}$, en la región comprendida entre los conductores y una esfera de radio
+$R\to\infty$ (en la que el integrando decae como $R^{-3}$ y su contribución se anula):
+\[
+  \iiint_{\Omega}\norm{\nab\psi}^{2}\dV=-\sum_{i=1}^{N}\oiint_{\Sc_i}\psi\,\nab\psi\cdot\un\,\dsc
+  =-\sum_{i=1}^{N}\psi_i\oiint_{\Sc_i}\nab\psi\cdot\un\,\dsc ,
+\]
+donde $\un$ es la normal exterior a cada conductor; el signo menos aparece porque la normal exterior a la región $\Omega$ sobre $\Sc_i$ es
+$-\un$. Ahora bien: (a) si los potenciales coinciden, $\psi_i=0$; (b) si las cargas coinciden, como $Q_i=\eo\oiint_{\Sc_i}\vE\cdot\un\,\dsc
+=-\eo\oiint_{\Sc_i}\nab\phi\cdot\un\,\dsc$ por \cref{eq:campo-superficie}, se tiene
+$\oiint_{\Sc_i}\nab\psi\cdot\un\,\dsc=-\frac{1}{\eo}\bigl(Q_i^{(a)}-Q_i^{(b)}\bigr)=0$. En cualquiera de los dos casos, y en las combinaciones, cada sumando se
+anula, de modo que $\int_{\Omega}\norm{\nab\psi}^{2}=0$, $\nab\psi=\vc{0}$ y $\psi$ es constante; como $\psi\to0$ en el infinito, $\psi\equiv0$.
+\end{proof}
+
+\begin{observacion}[El significado práctico de la unicidad]\label{obs:unicidad}
+La unicidad legitima el método de «adivinar y comprobar»: cualquier función que cumpla la ecuación y las condiciones de contorno es \emph{la}
+solución. Es la base del método de las imágenes, que usaremos en la \cref{fig:corteza}, y del principio de superposición para conductores,
+que da lugar a los coeficientes de potencial (\cref{sec:sistemas}).
+\end{observacion}
+
+% -------------------------------------------------------------------------
+\subsection{Conductores con cavidades}\label{sec:cavidades-casos}
+% -------------------------------------------------------------------------
+Consideramos un conductor con una cavidad interior (una región vacía completamente rodeada de metal). Su superficie tiene dos partes: la
+\emph{cara exterior} y la \emph{cara interior}, que limita la cavidad.
+
+\begin{teorema}[Cavidad vacía: jaula de Faraday]\label{teo:faraday}
+Si una cavidad de un conductor en equilibrio no contiene carga, el campo en su interior es nulo y la cara interior no tiene carga en ningún
+punto, cualesquiera que sean las cargas exteriores y la carga del conductor:
+\begin{equation}\label{eq:faraday}
+  \resalta{\Ecav=\vc{0},\qquad\sigma\big|_{\text{cara interior}}=0 .}
+\end{equation}
+\end{teorema}
+\begin{proof}
+En la cavidad $\phi$ es armónica, y en su frontera (la cara interior) vale la constante $\phi_{\Vc}$, el potencial del conductor. La función
+constante $\phi\equiv\phi_{\Vc}$ cumple la ecuación y la condición de contorno; por el primer teorema de unicidad (o, directamente, por el principio
+del máximo: el máximo y el mínimo en la cavidad se alcanzan en la frontera, donde valen lo mismo) es la única solución. Por tanto
+$\Ecav=-\nab\phi=\vc{0}$, y por \cref{eq:campo-superficie} $\sigma=\eo\,\vE\cdot\un=0$ en la cara interior.
+
+\emph{Argumento alternativo con líneas de campo.} Si hubiese campo en la cavidad, sus líneas tendrían que nacer y morir en la cara interior
+(no hay cargas dentro de la cavidad), es decir, saldrían del conductor y volverían a él, lo que prohíbe el \cref{cor:lineas}.
+\end{proof}
+
+\begin{proposicion}[Regla de las caras]\label{prop:caras}
+Sea un conductor de carga total $Q$ con una cavidad que contiene una carga total $q$. Entonces, en el equilibrio,
+\begin{equation}\label{eq:caras}
+  \resalta{\Qint=-q,\qquad\Qext=Q+q .}
+\end{equation}
+\end{proposicion}
+\begin{proof}
+Tomamos una superficie gaussiana $S_G$ contenida por completo en el metal y que rodee la cavidad (curvas a trazos de la \cref{fig:cavidades}).
+Sobre ella $\vE=\vc{0}$, luego $\Qenc=\eo\oiint_{S_G}\vE\cdot\dS=0$. La carga encerrada es la de la cavidad más la de la cara interior, $q+\Qint=0$, de donde
+$\Qint=-q$. Como el metal no tiene carga en volumen (\cref{teo:propiedades}), la carga del conductor se reparte entre sus dos caras,
+$Q=\Qint+\Qext$, y $\Qext=Q-\Qint=Q+q$.
+\end{proof}
+
+\input{figuras/fig_cavidades}
+
+La \cref{tab:cavidades} resume los cuatro casos posibles, que la \cref{fig:cavidades} representa.
+
+\begin{table}[ht]
+\centering
+\caption{Carga de cada cara y campo en la cavidad y en el exterior de un conductor hueco aislado, sin más cargas que las indicadas.}
+\label{tab:cavidades}
+\begin{tabular}{@{}lcccc@{}}
+  \toprule
+  Situación & Cara interior & Cara exterior & $\Ecav$ & $\Eext$\\
+  \midrule
+  Neutro, cavidad vacía                 & $0$  & $0$    & $\vc{0}$        & $\vc{0}$\\
+  Carga $Q$, cavidad vacía              & $0$  & $Q$    & $\vc{0}$        & $\neq\vc{0}$\\
+  Neutro, carga $q$ en la cavidad       & $-q$ & $+q$   & $\neq\vc{0}$    & $\neq\vc{0}$\\
+  Carga $Q$, carga $q$ en la cavidad    & $-q$ & $Q+q$  & $\neq\vc{0}$    & $\neq\vc{0}$\\
+  \bottomrule
+\end{tabular}
+\end{table}
+
+\begin{teorema}[Apantallamiento en los dos sentidos]\label{teo:apantallamiento}
+Sea un conductor hueco cerrado, con cargas en su cavidad y en el exterior.
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item El campo en la cavidad depende solo de las cargas de la cavidad y de la forma de la cara interior: no se ve afectado por las cargas
+        exteriores (salvo por una constante aditiva en el potencial).
+  \item El campo exterior depende solo de las cargas exteriores, de la forma de la cara exterior y de la carga total $\Qext=Q+q$ de esta cara: no
+        depende de cómo estén colocadas las cargas dentro de la cavidad.
+\end{enumerate}
+\end{teorema}
+\begin{proof}
+(a) En la cavidad, $\phi-\phi_{\Vc}$ cumple la ecuación de Poisson con las cargas de la cavidad y se anula sobre la cara interior: por el primer
+teorema de unicidad está determinada sin referencia alguna al exterior. (b) En el exterior, $\phi$ cumple la ecuación de Poisson con las cargas
+exteriores, tiende a cero en el infinito, es constante sobre la cara exterior y la carga de esa cara es $\Qext=Q+q$ (\cref{prop:caras}): por el segundo
+teorema de unicidad el problema exterior queda determinado, y en sus datos solo interviene el valor $q$, no la posición de la carga.
+\end{proof}
+
+La \cref{fig:corteza} ilustra el teorema con una corteza esférica gruesa, que puede resolverse exactamente por el método de las imágenes~\cite{JACKSON}.
+Con una carga $q$ en el centro (a) todo tiene simetría esférica. Al desplazar la carga (b), las líneas de la cavidad se deforman, pero fuera de la
+corteza el campo sigue siendo exactamente el de una carga $q$ en el centro: la cara exterior «no se entera». Al añadir una carga exterior (c), el
+campo exterior se deforma, pero el de la cavidad es idéntico al de (b). Por último, sin carga en la cavidad (d), el interior queda completamente
+apantallado: es la jaula de Faraday.
+
+\input{figuras/fig_corteza}
+
+\begin{observacion}[Aplicaciones del apantallamiento]\label{obs:jaula}
+Una caja metálica cerrada protege su interior de cualquier campo electrostático exterior: es el principio de las jaulas de Faraday, de los cables
+coaxiales con malla exterior y de la protección de los ocupantes de un coche o un avión alcanzado por un rayo. En la práctica, una malla con aberturas
+pequeñas frente a la escala de variación del campo funciona casi igual que una superficie continua. Recíprocamente, conectando el conductor a tierra
+($\phi_{\Vc}=0$, $\Qext=0$) también se impide que las cargas de la cavidad creen campo fuera.
+\end{observacion}
+
+% -------------------------------------------------------------------------
+\subsection{Capacidad de un conductor aislado}\label{sec:capacidad}
+% -------------------------------------------------------------------------
+Sea un conductor aislado, cargado con carga $Q$, en equilibrio. El potencial que crea en un punto exterior es, por la ley de Coulomb para
+distribuciones superficiales~\cite{TEMA1},
+\begin{equation}\label{eq:pot-conductor}
+  \phi(\vc{r})=\frac{1}{4\pi\eo}\oiint_{\Sc}\frac{\sigma(\rp)}{\norm{\vc{r}-\rp}}\,\dSp ,
+\end{equation}
+y, si $\vc{r}\in\Sc$, se obtiene el potencial del propio conductor, $\phi_{\Vc}$.
+
+\begin{teorema}[Capacidad]\label{teo:capacidad}
+Para un conductor aislado, el cociente entre su carga y su potencial no depende de $Q$:
+\begin{equation}\label{eq:capacidad}
+  \resalta{C=\frac{Q}{\phi_{\Vc}}=\frac{Q'}{\phi'_{\Vc}}=\mathrm{cte},}
+\end{equation}
+y solo depende de la geometría del conductor (y del medio). Se llama \emph{capacidad} del conductor; su unidad en el SI es el
+\emph{faradio}, $1\,\mathrm{F}=1\,\mathrm{C/V}$.
+\end{teorema}
+\begin{proof}
+Sea $\sigma$ la densidad de equilibrio cuando la carga es $Q$, con potencial $\phi_{\Vc}$. Si la carga pasa a ser $Q'=\lambda Q$, la densidad
+$\lambda\sigma$ tiene carga total $\lambda Q$ y, por la linealidad de \cref{eq:pot-conductor}, crea un potencial $\lambda\phi$, que es constante
+($\lambda\phi_{\Vc}$) sobre el conductor y nulo en el infinito. Por el segundo teorema de unicidad es la solución de equilibrio: la geometría no cambia,
+luego la forma en que se distribuye la carga tampoco, y solo se reescala. Así $\phi'_{\Vc}=\lambda\phi_{\Vc}$ y $Q'/\phi'_{\Vc}=Q/\phi_{\Vc}$.
+\end{proof}
+
+\begin{ejemplo}[Esfera conductora aislada]\label{ej:esfera}
+Para una esfera de radio $R$, la carga se reparte uniformemente y el potencial es el de una carga puntual en el centro evaluado en $r=R$,
+$\phi=\kc Q/R$. Así
+\begin{equation}\label{eq:cap-esfera}
+  C_{\text{esfera}}=4\pi\eo R .
+\end{equation}
+El faradio es una unidad enorme: la propia Tierra, tratada como una esfera conductora de radio $6{,}37\cdot10^{6}\,\mathrm{m}$, tiene una capacidad de solo
+$C\simeq7{,}1\cdot10^{-4}\,\mathrm{F}\simeq709\,\mu\mathrm{F}$. En la práctica se usan sus submúltiplos: $1\,\mu\mathrm{F}=10^{-6}\,\mathrm{F}$,
+$1\,\mathrm{nF}=10^{-9}\,\mathrm{F}$ y $1\,\mathrm{pF}=10^{-12}\,\mathrm{F}$.
+\end{ejemplo}

@@ -1,0 +1,49 @@
+% =========================================================================
+%  Figura: esfera (a) y corteza gruesa (b, c), con a = 1, b = 2, c = 2,5.
+%  Potencial normalizado a kQ/a en los dos estados elementales:
+%  Caso A (Q1 = Q, Q2 = 0): 1/x (x >= c); 1/c (b <= x <= c);
+%                           1/c + 1/x - 1/b (a <= x <= b); 1/c + 1/a - 1/b (x <= a)
+%  Caso B (Q1 = 0, Q2 = Q): 1/x (x >= c); 1/c (x <= c)
+% =========================================================================
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[font=\small]
+  % ---------------------------------------------------------------- (a)
+  \begin{scope}[x=0.72cm, y=0.72cm]
+    \fill[metal!65!white, even odd rule] (0,0) circle (2.5) (0,0) circle (2);
+    \fill[pattern=north east lines, pattern color=azulcielo!70, even odd rule] (0,0) circle (2.5) (0,0) circle (2);
+    \draw[azulprof, line width=0.6pt] (0,0) circle (2.5) (0,0) circle (2);
+    \shade[ball color=azulvelo] (0,0) circle (1);
+    \draw[azulprof, line width=0.6pt] (0,0) circle (1);
+    \draw[-{Stealth[length=3.5pt]}, azulprof, line width=0.5pt] (0,0) -- (90:1) node[pos=0.5, right=-1pt, font=\scriptsize] {$a$};
+    \draw[-{Stealth[length=3.5pt]}, azulprof, line width=0.5pt] (0,0) -- (210:2) node[pos=0.6, above left=-2pt, font=\scriptsize] {$b$};
+    \draw[-{Stealth[length=3.5pt]}, azulprof, line width=0.5pt] (0,0) -- (-30:2.5) node[pos=0.8, above right=-2pt, font=\scriptsize] {$c$};
+    \node[font=\footnotesize] at (0,-0.35) {$1$};
+    \node[font=\footnotesize, fill=white, inner sep=1pt] at (0,2.25) {$2$};
+    \node at (0,-3.45) {(a)};
+  \end{scope}
+  % ---------------------------------------------------------------- (b)
+  \begin{scope}[xshift=3.15cm, yshift=-2.1cm]
+    \begin{axis}[tema, width=6.4cm, height=4.6cm, xmin=0, xmax=4.5, ymin=0, ymax=1.02,
+        xlabel={$r/a$}, ylabel={$\phi\,/\,(\kc Q/a)$}, xtick={0,1,2,2.5,4}, xticklabels={$0$,$1$,$2$,$2{,}5$,$4$},
+        ytick={0,0.4,0.9}, legend style={at={(0.98,0.97)}, anchor=north east}]
+      \fill[metal!45!white] (axis cs:2,0) rectangle (axis cs:2.5,1.02);
+      \addplot[azulprof, line width=1.1pt] coordinates {(0,0.9) (1,0.9)};
+      \addlegendentry{caso A: $Q_1=Q$}
+      \addplot[azulprof, line width=1.1pt, domain=1:2, samples=40, forget plot] {0.4+1/x-0.5};
+      \addplot[azulprof, line width=1.1pt, forget plot] coordinates {(2,0.4) (2.5,0.4)};
+      \addplot[azulprof, line width=1.1pt, domain=2.5:4.5, samples=40, forget plot] {1/x};
+      \addplot[azulcielo, line width=1.1pt, densely dashed] coordinates {(0,0.4) (2.5,0.4)};
+      \addlegendentry{caso B: $Q_2=Q$}
+      \addplot[azulcielo, line width=1.1pt, densely dashed, domain=2.5:4.5, samples=40, forget plot] {1/x};
+      \draw[{Stealth[length=3pt]}-{Stealth[length=3pt]}, cargapos] (axis cs:0.5,0.4) -- (axis cs:0.5,0.9)
+        node[midway, right, font=\scriptsize] {$\phi_1-\phi_2$};
+    \end{axis}
+    \node at (2.45,-1.35) {(b)};
+  \end{scope}
+\end{tikzpicture}
+\caption{Condensador esférico con armadura exterior gruesa ($a=1$, $b=2$, $c=2{,}5$). (a) Geometría: la corteza, entre $b$ y $c$, es un volumen
+equipotencial. (b) Potencial en los dos estados que definen los coeficientes de potencial: con la esfera cargada (caso A) el potencial cae entre $a$ y $b$, y
+la diferencia $\phi_1-\phi_2$ solo depende de $a$ y $b$; con la corteza cargada (caso B) el interior queda a potencial constante $\kc Q/c$.}
+\label{fig:corteza-gruesa}
+\end{figure}

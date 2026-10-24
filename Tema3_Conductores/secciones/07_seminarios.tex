@@ -1,0 +1,499 @@
+% =========================================================================
+\section{Seminarios prácticos}\label{sec:seminarios}
+% =========================================================================
+Esta sección resuelve, con todo detalle, los siete problemas de la relación del tema~\cite{PROBLEMAS-T3}, más un ejemplo modelo del método de los
+coeficientes de potencial~\cite{GUIA-T3}. Cada problema sigue la misma estructura que en los temas anteriores: el \emph{enunciado}, la \emph{idea} que guía
+la resolución, la \emph{resolución} paso a paso y un comentario sobre la \emph{interpretación} del resultado y sus comprobaciones. Salvo que se diga lo
+contrario, $\phi(\infty)=0$ y $\kc=1/(4\pi\eo)$.
+
+% -------------------------------------------------------------------------
+\subsection{Cómo plantear un problema de conductores}\label{sem:metodo}
+% -------------------------------------------------------------------------
+Todo problema de conductores se reduce a un sistema lineal: \emph{cada conductor aporta una ecuación y una incógnita}, porque de cada uno se conoce o su
+carga o su potencial. La primera tarea es, pues, traducir el enunciado (\cref{tab:traduccion}); la segunda, escoger el método (\cref{tab:mapa}).
+
+\begin{table}[ht]
+\centering
+\caption{Traducción de la situación física a ecuaciones.}
+\label{tab:traduccion}
+\small
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{4.1cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{4.3cm}@{}}
+  \toprule
+  Situación & Dato & Incógnita\\
+  \midrule
+  Aislado & $Q_i$ conocida (se conserva) & $\phi_i$\\
+  Conectado a tierra & $\phi_i=0$ & $Q_i$ (fluye carga desde o hacia tierra)\\
+  Unido a $j$ por un hilo fino & $\phi_i=\phi_j$ y $Q_i+Q_j$ conservada & el reparto $Q_i$, $Q_j$\\
+  Batería $V_0$ entre $i$ y $j$ & $\phi_i-\phi_j=V_0$ y $Q_i+Q_j$ conservada & $Q_i$ (y $Q_j=-Q_i$ si eran neutros)\\
+  Se conecta y se desconecta & tras desconectar, la carga queda congelada & la carga de cada etapa\\
+  \bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Mapa de decisión: qué método conviene según lo que pide el enunciado.}
+\label{tab:mapa}
+\small
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{5.6cm}c@{}}
+  \toprule
+  Lo que pide el enunciado & Método & Problemas\\
+  \midrule
+  Potencial o campo de un conductor aislado; ruptura dieléctrica; efecto punta & M1. Conductor aislado & 3.1\\
+  Esferas o cilindros concéntricos con cargas, tierras o baterías & M2. Cadena de Gauss y potenciales & 3.2, 3.4\\
+  «Calcula los coeficientes de capacidad e influencia» & M3. Coeficientes (caminos A y B) & 3.3\\
+  Placas planas paralelas; cargas en cada cara & M4. Superposición de planos & 3.5\\
+  Esferas pequeñas y lejanas ($d\gg R$); tierras sucesivas & M5. Esferas lejanas con $p_{ij}$ aproximados & 3.6, 3.7\\
+  \bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{receta}[Los cinco métodos]
+\begin{enumerate}[label=\textbf{M\arabic*.}, leftmargin=2.2em]
+  \item \emph{Conductor aislado.} $\phi=\kc Q/R$, $E_{\mathrm{sup}}=\sigma/\eo=\phi/R$ (esfera).
+  \item \emph{Concéntricos.} (1) Cargas en cada cara con la regla de las caras (\cref{prop:caras}); (2) Gauss en cada hueco: $E=\kc\Qenc/r^{2}$ (o
+        $\lambda_{\mathrm{enc}}/2\pi\eo r$), con $\Qenc$ la suma de las cargas netas interiores, y $\vE=\vc{0}$ dentro del metal; (3) potencial del más
+        externo, $\phi_N=\kc Q_{\mathrm{total}}/R_N$; (4) cadena hacia dentro, $\phi_k-\phi_{k+1}=\kc\Qenc\bigl(\frac{1}{R_k}-\frac{1}{R_{k+1}}\bigr)$;
+        (5) imponer tierras, baterías y aislamientos.
+  \item \emph{Coeficientes.} Camino A (directo): $\phi_j=1$, los demás a tierra; las cargas obtenidas son la columna $j$ de $\Cm$. Camino B: $Q_j=1$,
+        los demás descargados; los potenciales son la columna $j$ de $\Pm$; luego se invierte.
+  \item \emph{Placas paralelas.} Cada cara es un plano que crea $\pm\sigma/2\eo$; se impone conservación de carga y $\vE=\vc{0}$ dentro de cada placa.
+  \item \emph{Esferas lejanas.} $p_{ii}\simeq\kc/R_i$, $p_{ij}\simeq\kc/d_{ij}$; en procesos por etapas, solo cambia la carga de la esfera conectada.
+\end{enumerate}
+\end{receta}
+
+% =========================================================================
+\subsection{Problema 3.1. Globo conductor y campo de ruptura}\label{sem:globo}
+% =========================================================================
+\begin{problema}[Potencial máximo de un globo]\label{prob:globo}
+Supongamos un globo esférico de radio $5\,\mathrm{cm}$ recubierto por una fina película conductora. Si el campo electrostático de ruptura en la atmósfera
+es de $3\cdot10^{6}\,\mathrm{V/m}$, calcula el máximo potencial al que puede conectarse el globo.
+\end{problema}
+
+\begin{resolucion}
+\paso{Idea.} La \emph{ruptura dieléctrica} es el fenómeno por el que un aislante (aquí el aire) se ioniza y se convierte en un medio conductor cuando el
+campo supera un valor crítico $\Erup$: el globo empezaría a descargarse a través del aire. Como el campo es máximo justo en la superficie del conductor, la
+condición de ruptura hay que imponerla allí. Es el método M1.
+
+\paso{Paso 1: campo y potencial del globo.} La película conductora es una esfera conductora de radio $R$. Con carga $Q$, la carga se reparte
+uniformemente y, por Gauss, el campo exterior es el de una carga puntual en el centro:
+\[
+  \vE(\vc{r})=\frac{1}{4\pi\eo}\,\frac{Q}{r^{2}}\,\ur\quad(r>R),\qquad E(R)=\frac{1}{4\pi\eo}\,\frac{Q}{R^{2}},\qquad
+  \phi=\frac{1}{4\pi\eo}\,\frac{Q}{R} .
+\]
+\paso{Paso 2: relación entre campo superficial y potencial.} Dividiendo $E(R)$ entre $\phi$ desaparecen la carga y la constante:
+\[
+  \frac{E(R)}{\phi}=\frac{\kc Q/R^{2}}{\kc Q/R}=\frac{R}{R^{2}}=\frac1R\quad\Longrightarrow\quad\resalta{\phi=E(R)\,R .}
+\]
+\paso{Paso 3: condición de ruptura.} Como $E(r)$ decrece fuera del globo, el campo más intenso está en la superficie. Si $E(R)$ supera $\Erup$, el aire se
+ioniza y el globo se descarga. Por tanto,
+\[
+  \phi_{\max}=\Erup\,R=3\cdot10^{6}\,\frac{\mathrm{V}}{\mathrm{m}}\cdot5\cdot10^{-2}\,\mathrm{m}=1{,}5\cdot10^{5}\,\mathrm{V}
+  \qquad\Longrightarrow\qquad\boxed{\;\phi_{\max}=150\,\mathrm{kV}\;}
+\]
+\end{resolucion}
+
+\input{figuras/fig_sem_globo}
+
+\begin{observacion}[Interpretación y órdenes de magnitud]\label{obs:sem-globo}
+La carga máxima es $Q_{\max}=4\pi\eo R^{2}\Erup=\frac{(5\cdot10^{-2})^{2}\cdot3\cdot10^{6}}{8{,}988\cdot10^{9}}\,\mathrm{C}\simeq0{,}83\,\mu\mathrm{C}$, con densidad
+$\sigma_{\max}=\eo\Erup\simeq2{,}7\cdot10^{-5}\,\mathrm{C/m^{2}}$ y presión electrostática $\Pel=\eo\Erup^{2}/2\simeq40\,\mathrm{Pa}$. La relación
+$\phi_{\max}=\Erup R$ explica por qué los conductores pequeños o con puntas se descargan antes (\figpanel{fig:sem-globo}{b}): a igual potencial, cuanto menor es
+$R$, mayor es el campo en la superficie. Una esfera de $1\,\mathrm{mm}$ no soporta más de $3\,\mathrm{kV}$; por eso los generadores de Van de Graaff tienen
+cúpulas grandes y lisas, y los pararrayos, puntas finas (\cref{obs:pararrayos}).
+\end{observacion}
+
+% =========================================================================
+\subsection{Problema 3.2. Cuatro esferas concéntricas con una batería}\label{sem:cuatro}
+% =========================================================================
+\begin{problema}[Cuatro superficies esféricas concéntricas]\label{prob:cuatro}
+Sean cuatro superficies conductoras esféricas concéntricas $S_1$, $S_2$, $S_3$ y $S_4$ de radios $R_1<R_2<R_3<R_4$. Suponiendo que son inicialmente neutras y
+aplicando una diferencia de potencial $V_0$ entre $S_1$ y $S_4$ ($V_0=\phi_1-\phi_4$), calcula los potenciales de las esferas $S_2$ y $S_3$ así como la carga
+que adquiere $S_1$.
+\end{problema}
+
+\begin{resolucion}
+\paso{Idea.} La batería, conectada entre $S_1$ y $S_4$ (a través de pequeños orificios en $S_2$ y $S_3$, cuyo efecto se desprecia), traslada carga de una a otra:
+como estaban neutras, $Q_4=-Q_1$. Las esferas $S_2$ y $S_3$ siguen aisladas y neutras. Lo resolvemos de dos formas: con coeficientes de potencial (M3, camino B)
+y con la cadena de Gauss (M2).
+
+\paso{Método 1: coeficientes de potencial.} Por la regla \eqref{eq:regla-concentricas}, $p_{ij}=\kc/\max(R_i,R_j)$. Si ponemos una carga $Q$ en la esfera $S_j$,
+para la esfera $S_i$ hay dos posibilidades: si está dentro ($R_i<R_j$), está en el interior de la capa cargada y su potencial es $\kc Q/R_j$; si está fuera
+($R_i>R_j$), ve la carga como puntual y su potencial es $\kc Q/R_i$. Con $Q_2=Q_3=0$ y $Q_4=-Q_1$:
+\[
+  \phi_4=p_{41}Q_1+p_{44}Q_4=\frac{\kc}{R_4}\bigl(Q_1+Q_4\bigr)=0 ,
+\]
+así que la esfera exterior queda al mismo potencial que el infinito (la carga total es nula). La condición de la batería da
+\[
+  V_0=\phi_1-\phi_4=\bigl(p_{11}-p_{14}\bigr)Q_1=\frac{Q_1}{4\pi\eo}\Bigl(\frac{1}{R_1}-\frac{1}{R_4}\Bigr)=\frac{Q_1}{4\pi\eo}\,\frac{R_4-R_1}{R_1R_4}
+  \quad\Longrightarrow\quad\resalta{Q_1=4\pi\eo V_0\,\frac{R_1R_4}{R_4-R_1}.}
+\]
+Para las esferas intermedias,
+\[
+  \phi_2=p_{21}Q_1+p_{24}Q_4=\bigl(p_{21}-p_{24}\bigr)Q_1=\frac{Q_1}{4\pi\eo}\Bigl(\frac{1}{R_2}-\frac{1}{R_4}\Bigr)=V_0\,\frac{R_1}{R_2}\,\frac{R_4-R_2}{R_4-R_1},
+\]
+\[
+  \phi_3=\bigl(p_{31}-p_{34}\bigr)Q_1=\frac{Q_1}{4\pi\eo}\Bigl(\frac{1}{R_3}-\frac{1}{R_4}\Bigr)=V_0\,\frac{R_1}{R_3}\,\frac{R_4-R_3}{R_4-R_1}.
+\]
+
+\paso{Método 2: cadena de Gauss.} Las esferas neutras $S_2$ y $S_3$ llevan $\mp Q_1$ en sus caras interior y exterior, ambas en el mismo radio, y no modifican el
+campo. Por Gauss con esferas concéntricas,
+\[
+  \vE(\vc{r})=\begin{cases}\vc{0}, & r>R_4\ (\Qenc=Q_1+Q_4=0),\\[3pt] \dfrac{Q_1}{4\pi\eo r^{2}}\,\ur, & R_1<r<R_4,\\[8pt] \vc{0}, & r<R_1 ,\end{cases}
+\]
+y, como $\phi(r)-\phi(R_4)=\int_r^{R_4}E\,\dif r'$ con $\phi(R_4)=0$,
+\[
+  \phi(r)=\begin{cases}0, & r\ge R_4,\\[3pt] \dfrac{Q_1}{4\pi\eo}\Bigl(\dfrac1r-\dfrac{1}{R_4}\Bigr), & R_1\le r\le R_4,\\[8pt]
+  \dfrac{Q_1}{4\pi\eo}\Bigl(\dfrac{1}{R_1}-\dfrac{1}{R_4}\Bigr)=V_0, & r\le R_1 .\end{cases}
+\]
+Evaluando en $R_2$ y $R_3$ se recuperan $\phi_2$ y $\phi_3$, y la última línea reproduce $Q_1$.
+\end{resolucion}
+
+\input{figuras/fig_sem_cuatro}
+
+\begin{observacion}[Interpretación]\label{obs:sem-cuatro}
+Las esferas $S_1$ y $S_4$ están en influencia total: forman un condensador esférico de capacidad $C=Q_1/V_0=4\pi\eo R_1R_4/(R_4-R_1)$, que no depende de
+la presencia de $S_2$ y $S_3$. Es un error frecuente pensar que estas modifican el campo: al ser neutras y delgadas, solo adoptan el potencial del radio en el que
+están, $V_0>\phi_2>\phi_3>0$ (\figpanel{fig:sem-cuatro}{b}).
+\end{observacion}
+
+% =========================================================================
+\subsection{Problema 3.3. Condensador esférico: coeficientes}\label{sem:esferico}
+% =========================================================================
+\begin{problema}[Coeficientes de un condensador esférico]\label{prob:esferico}
+Sea un condensador esférico formado por una esfera conductora de radio $a$ rodeada concéntricamente por otra esfera conductora de radio $b$. Calcula los
+coeficientes de capacidad e influencia y la capacidad del condensador.
+\end{problema}
+
+\begin{resolucion}
+\paso{Idea.} Hay dos caminos (método M3). Con conductores concéntricos y cargas fijas, el camino B (coeficientes de potencial y luego inversión) es muy
+rápido; el camino A (potenciales impuestos) sirve de comprobación.
+
+\paso{Camino B: coeficientes de potencial.} \emph{Estado $Q_1=1$, $Q_2=0$:} la esfera exterior queda neutra, con $-1$ y $+1$ en sus caras; fuera de la esfera
+interior el campo es el de una carga unidad en el centro, luego $\phi_1=\kc/a$ y $\phi_2=\kc/b$: $p_{11}=\kc/a$, $p_{21}=\kc/b$. \emph{Estado $Q_1=0$, $Q_2=1$:} el
+campo dentro de la esfera exterior es nulo, y $\phi_1=\phi_2=\kc/b$: $p_{12}=p_{22}=\kc/b$. Así,
+\[
+  \Pm=\kc\begin{pmatrix}1/a & 1/b\\ 1/b & 1/b\end{pmatrix},\qquad\det\Pm=\kc^{2}\Bigl(\frac{1}{ab}-\frac{1}{b^{2}}\Bigr)=\kc^{2}\,\frac{b-a}{ab^{2}},
+\]
+\[
+  \Cm=\Pm^{-1}=\frac{1}{\det\Pm}\begin{pmatrix}p_{22} & -p_{12}\\ -p_{12} & p_{11}\end{pmatrix}
+  =\frac{ab^{2}}{\kc(b-a)}\begin{pmatrix}1/b & -1/b\\ -1/b & 1/a\end{pmatrix}.
+\]
+
+\paso{Camino A: potenciales impuestos.} \emph{Estado $\phi_1=1$, $\phi_2=0$:} entre las esferas el campo es el de $Q_1$ en el centro, y
+$\phi_1-\phi_2=\kc Q_1\bigl(\frac1a-\frac1b\bigr)=1$, de donde $c_{11}=Q_1=4\pi\eo\frac{ab}{b-a}$. La exterior está a tierra, así que fuera el potencial es nulo y la
+carga total también: $c_{21}=Q_2=-Q_1=-c_{11}$. \emph{Estado $\phi_1=0$, $\phi_2=1$:} ahora $\phi_1-\phi_2=\kc Q_1\bigl(\frac1a-\frac1b\bigr)=-1$ da
+$c_{12}=Q_1=-4\pi\eo\frac{ab}{b-a}$; y $\phi_2=\kc(Q_1+Q_2)/b=1$ da $Q_1+Q_2=4\pi\eo b$, es decir, $c_{22}=4\pi\eo b-c_{12}$ (\cref{fig:sem-esferico}).
+Ambos caminos coinciden:
+\[
+  \resalta{c_{11}=4\pi\eo\,\frac{ab}{b-a},\qquad c_{12}=c_{21}=-4\pi\eo\,\frac{ab}{b-a},\qquad c_{22}=4\pi\eo\,\frac{b^{2}}{b-a},\qquad C=4\pi\eo\,\frac{ab}{b-a}.}
+\]
+La capacidad sale de \cref{eq:cap-coef}, $C=1/(p_{11}+p_{22}-2p_{12})=1/[\kc(1/a-1/b)]$, o del \cref{cor:encerrado}, $C=c_{11}$.
+\end{resolucion}
+
+\input{figuras/fig_sem_esferico}
+
+\begin{observacion}[Comprobaciones obligatorias]\label{obs:sem-esferico}
+(i) \emph{Simetría:} $c_{12}=c_{21}$. (ii) \emph{Signos:} $c_{11},c_{22}>0$ y $c_{12}<0$. (iii) \emph{Influencia:} $c_{11}=-c_{21}$, porque la esfera interior está
+en influencia total; y $c_{22}+c_{12}=4\pi\eo b>0$, porque parte de las líneas de la exterior van al infinito. (iv) \emph{Límites:} si $b=a+d$ con $d\ll a$,
+$C\simeq\eo\,4\pi a^{2}/d$ (condensador plano); si $b\to\infty$, $C\to4\pi\eo a$, la capacidad de la esfera aislada. (v) \emph{Unidades:} $\eo$ por una
+longitud, es decir, faradios.
+\end{observacion}
+
+% =========================================================================
+\subsection{Problema 3.4. Condensador cilíndrico}\label{sem:cilindrico}
+% =========================================================================
+\begin{problema}[Capacidad por unidad de longitud]\label{prob:cilindrico}
+Un condensador cilíndrico se compone de dos cilindros conductores coaxiales de radio interno $a$ y externo $b$. Calcula la capacidad por unidad de longitud
+del condensador.
+\end{problema}
+
+\begin{resolucion}
+\paso{Idea.} Trabajamos con cilindros de longitud $\ell\gg b$ y despreciamos los efectos de borde, de modo que hay simetría cilíndrica. Cargamos las
+armaduras con $\pm Q$, es decir, $\pm\lambda=\pm Q/\ell$ por unidad de longitud, y seguimos los cinco pasos del método directo (M2).
+
+\paso{Paso 1: campo entre armaduras.} Por la simetría, $\vE=E(r)\,\urho$. Con una superficie gaussiana cilíndrica coaxial de radio $a<r<b$ y longitud $\ell$, las
+tapas no aportan flujo y solo se encierra la carga de la armadura interior:
+\[
+  2\pi r\ell\,E=\frac{\lambda\ell}{\eo}\quad\Longrightarrow\quad\vE=\frac{\lambda}{2\pi\eo r}\,\urho\qquad(a<r<b),
+\]
+y el campo es nulo dentro del cilindro interior y fuera del exterior (la carga encerrada es $\lambda-\lambda=0$).
+
+\paso{Paso 2: diferencia de potencial.} Integrando de la armadura positiva a la negativa,
+\[
+  \DV=\phi_a-\phi_b=-\int_{b}^{a}\vE\cdot\dl=\int_{a}^{b}\frac{\lambda}{2\pi\eo r}\,\dif r=\frac{\lambda}{2\pi\eo}\,\ln\frac{b}{a}.
+\]
+\paso{Paso 3: capacidad.}
+\[
+  C=\frac{Q}{\DV}=\frac{\lambda\ell}{\frac{\lambda}{2\pi\eo}\ln(b/a)}\quad\Longrightarrow\quad\resalta{\frac{C}{\ell}=\frac{2\pi\eo}{\ln(b/a)} .}
+\]
+
+\paso{Con coeficientes de potencial.} Para un cilindro indefinido no se puede tomar $\phi(\infty)=0$: el potencial de un hilo cargado diverge
+logarítmicamente. Tomamos el origen de potenciales a una distancia arbitraria $r_0$ del eje. Un cilindro de radio $R$ con carga $Q$ en una longitud $\ell$
+crea entonces (\figpanel{fig:sem-cilindrico}{b})
+\[
+  \phi(r)=\begin{cases}\dfrac{Q}{2\pi\eo\ell}\,\ln\dfrac{r_0}{r}, & r\ge R,\\[8pt] \dfrac{Q}{2\pi\eo\ell}\,\ln\dfrac{r_0}{R}, & r\le R,\end{cases}
+\]
+y, razonando como en el caso esférico,
+\[
+  \Pm=\frac{1}{2\pi\eo\ell}\begin{pmatrix}\ln(r_0/a) & \ln(r_0/b)\\ \ln(r_0/b) & \ln(r_0/b)\end{pmatrix}.
+\]
+Como $p_{22}=p_{12}$, $p_{11}+p_{22}-2p_{12}=p_{11}-p_{12}$ y
+\[
+  C=\bigl(p_{11}-p_{12}\bigr)^{-1}=2\pi\eo\ell\Bigl[\ln\frac{r_0}{a}-\ln\frac{r_0}{b}\Bigr]^{-1}=\frac{2\pi\eo\ell}{\ln(b/a)} ,
+\]
+que no depende de $r_0$, como debe ser. Elegir $r_0=b$ simplifica mucho el problema, porque entonces $\ln(r_0/b)=\ln1=0$.
+\end{resolucion}
+
+\input{figuras/fig_sem_cilindrico}
+
+\begin{observacion}[Interpretación]\label{obs:sem-cilindrico}
+Con placas próximas, $b=a+d$ y $d\ll a$, $\ln(1+d/a)\simeq d/a$ y $C/\ell\simeq2\pi\eo a/d=\eo(A/\ell)/d$, con $A/\ell=2\pi a$: de nuevo el condensador plano. Los
+coeficientes de potencial respecto de $r_0$ ya no cumplen todas las propiedades del \cref{teo:pij-prop} (si $r_0<b$, $p_{22}<0$), porque estas usaban
+$\phi(\infty)=0$; las diferencias de potencial y la capacidad, en cambio, son independientes de la referencia.
+\end{observacion}
+
+% =========================================================================
+\subsection{Problema 3.5. Placas planas paralelas}\label{sem:plano}
+% =========================================================================
+\begin{problema}[Condensador plano y reparto de carga por caras]\label{prob:plano}
+Sean dos conductores planos paralelos de superficie $A$ y separados una distancia $d$. Despreciando el efecto de bordes, calcula la capacidad del
+condensador. Si la carga de cada conductor es $Q_1$ y $Q_2$, calcula las cargas en cada una de las caras de los conductores.
+\end{problema}
+
+\begin{resolucion}
+\paso{Idea.} Si las dimensiones de las placas son grandes frente a $d$, cada cara se comporta como un plano indefinido cargado, que crea un campo
+$\sigma/2\eo$ a cada lado, dirigido hacia fuera del plano si $\sigma>0$ (método M4). Con dos placas hay cuatro caras, con cargas $q_1,q_2,q_3,q_4$ de
+izquierda a derecha (\cref{fig:sem-plano}).
+
+\paso{Paso 1: condensador ($Q_1=Q$, $Q_2=-Q$).} Las cargas $\pm Q$ se sitúan en las caras enfrentadas, con densidades $\pm\sigma=\pm Q/A$. El campo entre las
+placas puede obtenerse de dos formas. \emph{Por superposición:} entre las placas los campos de ambas se suman, $\sigma/2\eo+\sigma/2\eo=\sigma/\eo$, y fuera se
+anulan. \emph{Por Gauss}, con una caja que tiene una tapa dentro del metal ($\vE=\vc{0}$) y otra entre las placas:
+\[
+  E\,A_{\mathrm{caja}}=\frac{\sigma A_{\mathrm{caja}}}{\eo}\quad\Longrightarrow\quad E=\frac{\sigma}{\eo}=\frac{Q}{\eo A}.
+\]
+El campo es uniforme, de modo que $\DV=E\,d=\frac{Qd}{\eo A}$ y
+\[
+  \resalta{C=\frac{Q}{\DV}=\eo\,\frac{A}{d} .}
+\]
+
+\paso{Paso 2: cargas cualesquiera $Q_1$ y $Q_2$.} Tomamos como positivo el sentido hacia la derecha. Un punto interior a la placa~1 está a la derecha de la cara
+$q_1$ y a la izquierda de $q_2$, $q_3$ y $q_4$; uno interior a la placa~2, a la derecha de $q_1,q_2,q_3$ y a la izquierda de $q_4$. Imponiendo $\vE=\vc{0}$ en
+ambos y la conservación de la carga en cada placa:
+\[
+  \begin{aligned}
+    q_1-q_2-q_3-q_4&=0 &&\text{(campo nulo en la placa 1)},\\
+    q_1+q_2+q_3-q_4&=0 &&\text{(campo nulo en la placa 2)},\\
+    q_1+q_2&=Q_1,\qquad q_3+q_4=Q_2 &&\text{(conservación de la carga)}.
+  \end{aligned}
+\]
+Restando las dos primeras, $2(q_2+q_3)=0$, es decir, $q_3=-q_2$; sumándolas, $2(q_1-q_4)=0$, es decir, $q_1=q_4$. Con la conservación,
+$q_1+q_2=Q_1$ y $q_1-q_2=Q_2$, de donde
+\[
+  \resalta{q_1=q_4=\frac{Q_1+Q_2}{2}\ \ \text{(caras exteriores)},\qquad q_2=-q_3=\frac{Q_1-Q_2}{2}\ \ \text{(caras interiores)}.}
+\]
+\end{resolucion}
+
+\input{figuras/fig_sem_plano}
+
+\begin{observacion}[Interpretación]\label{obs:sem-plano}
+Las caras exteriores comparten la carga total a partes iguales, y las enfrentadas llevan cargas opuestas: solo estas forman el condensador. El campo es
+$\frac{Q_1-Q_2}{2\eo A}$ entre las placas y $\frac{Q_1+Q_2}{2\eo A}$ fuera, hacia fuera a cada lado (\cref{tab:sem-plano}). Con $Q_1=Q$ y $Q_2=-Q$ se recupera el
+condensador ideal: caras exteriores descargadas y campo nulo fuera. Si, por ejemplo, $Q_2=0$, cada cara de la placa neutra lleva $\mp Q_1/2$: la placa neutra
+«parte» el campo pero no lo anula.
+\end{observacion}
+
+\begin{table}[ht]
+\centering
+\caption{Campo de cada placa del condensador plano ideal ($\pm\sigma$) en las tres regiones (positivo hacia la derecha).}
+\label{tab:sem-plano}
+\begin{tabular}{@{}lccc@{}}
+  \toprule
+  & Izquierda & Entre placas & Derecha\\
+  \midrule
+  Placa $+\sigma$ & $-\dfrac{\sigma}{2\eo}$ & $+\dfrac{\sigma}{2\eo}$ & $+\dfrac{\sigma}{2\eo}$\\[8pt]
+  Placa $-\sigma$ & $+\dfrac{\sigma}{2\eo}$ & $+\dfrac{\sigma}{2\eo}$ & $-\dfrac{\sigma}{2\eo}$\\[6pt]
+  \midrule
+  Total & $0$ & $\dfrac{\sigma}{\eo}$ & $0$\\[6pt]
+  \bottomrule
+\end{tabular}
+\end{table}
+
+% =========================================================================
+\subsection{Problema 3.6. Tres esferas alineadas}\label{sem:alineadas}
+% =========================================================================
+\begin{problema}[Tres esferas alineadas, laterales a tierra]\label{prob:alineadas}
+Tres esferas conductoras de radio $R$ se sitúan alineadas con sus centros separados entre sí $d$ ($d\gg R$). Las laterales se conectan a tierra y a la central
+se le suministra una carga $Q$. Halla el potencial de esta última.
+\end{problema}
+
+\begin{resolucion}
+\paso{Idea.} Como $d\gg R$, aplicamos el método M5: las esferas se ven entre sí como cargas puntuales y los coeficientes de potencial son los de la regla
+\eqref{eq:regla-lejanas}. Numeramos 1 (izquierda), 2 (central) y 3 (derecha), con $d_{12}=d_{23}=d$ y $d_{13}=2d$.
+
+\paso{Paso 1: matriz de coeficientes de potencial.}
+\[
+  \Pm=\kc\begin{pmatrix}1/R & 1/d & 1/(2d)\\ 1/d & 1/R & 1/d\\ 1/(2d) & 1/d & 1/R\end{pmatrix}.
+\]
+\paso{Paso 2: clasificación.} Las esferas 1 y 3 tienen como dato $\phi=0$ y como incógnita su carga; la 2 tiene como dato $Q_2=Q$ y como incógnita $\phi_2$. Por
+simetría, $Q_1=Q_3\equiv q$.
+
+\paso{Paso 3: esferas a tierra.}
+\[
+  0=\phi_1=\kc\Bigl(\frac{q}{R}+\frac{Q}{d}+\frac{q}{2d}\Bigr)\quad\Longrightarrow\quad q\,\frac{2d+R}{2dR}=-\frac{Q}{d}
+  \quad\Longrightarrow\quad q=-\frac{2QR}{2d+R}.
+\]
+\paso{Paso 4: potencial buscado.}
+\[
+  \phi_2=\kc\Bigl(\frac{Q}{R}+\frac{2q}{d}\Bigr)=\frac{Q}{4\pi\eo}\Bigl[\frac1R-\frac{4R}{d(2d+R)}\Bigr]
+  \quad\Longrightarrow\quad\resalta{\phi_2=\frac{Q}{4\pi\eo}\,\frac{2d^{2}+Rd-4R^{2}}{Rd\,(2d+R)} .}
+\]
+\end{resolucion}
+
+\input{figuras/fig_sem_alineadas}
+
+\begin{observacion}[Interpretación y orden de la aproximación]\label{obs:sem-alineadas}
+Las esferas a tierra adquieren carga negativa, $q\simeq-QR/d$, que rebaja el potencial de la central respecto del de una esfera aislada, $\kc Q/R$:
+\[
+  \phi_2=\frac{Q}{4\pi\eo R}\Bigl[1-\frac{4R^{2}}{d(2d+R)}\Bigr]\simeq\frac{Q}{4\pi\eo R}\Bigl(1-\frac{2R^{2}}{d^{2}}\Bigr).
+\]
+La corrección es pequeña, de orden $(R/d)^{2}$ (\figpanel{fig:sem-alineadas}{b}). El resultado solo tiene sentido al orden más bajo en $R/d$: los términos de orden
+superior (como el $R^{3}/d^{3}$ que aparece al desarrollar la expresión exacta) no son significativos dentro de la aproximación de esferas lejanas, porque se
+han despreciado efectos del mismo orden (la deformación de la carga de cada esfera por las vecinas).
+\end{observacion}
+
+% =========================================================================
+\subsection{Problema 3.7. Tres esferas en triángulo, a tierra por etapas}\label{sem:triangulo}
+% =========================================================================
+\begin{problema}[Tres esferas a tierra una a una]\label{prob:triangulo}
+Sean tres esferas conductoras de radio $a$ situadas en los vértices de un triángulo equilátero de lado $b$ ($b\gg a$). Las tres esferas tienen carga $q$.
+Sucesivamente, una a una se llevan a potencial de tierra mediante una conexión con un hilo conductor muy delgado hasta que se alcanza el equilibrio
+electrostático, desconectándolas posteriormente. Calcula las cargas $q_1$, $q_2$ y $q_3$ de las esferas al final del proceso.
+\end{problema}
+
+\begin{resolucion}
+\paso{Idea.} Método M5 por etapas (\cref{fig:sem-triangulo}). En cada etapa, solo la esfera conectada a tierra tiene su carga como incógnita; las demás están
+aisladas y conservan la carga que tenían, incluidas las ya desconectadas: \emph{lo que se congela es la carga, no el potencial}.
+
+\paso{Paso 1: matriz de coeficientes de potencial.} Como $b\gg a$, cada esfera se ve desde las otras como una carga puntual. El coeficiente propio es el
+potencial de una esfera aislada con carga unidad, $p_{ii}\simeq\kc/a$, y el mutuo, el que crea una carga unidad a distancia $b$, $p_{ij}\simeq\kc/b$; por la
+simetría del triángulo, los tres mutuos son iguales:
+\[
+  \Pm=\kc\begin{pmatrix}1/a & 1/b & 1/b\\ 1/b & 1/a & 1/b\\ 1/b & 1/b & 1/a\end{pmatrix},\qquad
+  \phi_i=\kc\Bigl(\frac{Q_i}{a}+\frac{Q_j+Q_l}{b}\Bigr),
+\]
+con $j$ y $l$ las otras dos esferas.
+
+\paso{Paso 2: clasificación, etapa por etapa.} En la etapa 1 la esfera 1 está a tierra y $Q_2=Q_3=q$; en la etapa 2, la esfera 2 está a tierra, $Q_1=q_1$
+(congelada) y $Q_3=q$; en la etapa 3, la esfera 3 está a tierra y $Q_1=q_1$, $Q_2=q_2$ (congeladas).
+
+\paso{Paso 3: una ecuación por etapa.} Solo se usa la ecuación de la esfera a tierra:
+\[
+  \text{Etapa 1:}\quad0=\phi_1=\kc\Bigl(\frac{q_1}{a}+\frac{q+q}{b}\Bigr)\quad\Longrightarrow\quad q_1=-\frac{2qa}{b},
+\]
+\[
+  \text{Etapa 2:}\quad0=\phi_2=\kc\Bigl(\frac{q_2}{a}+\frac{q_1+q}{b}\Bigr)\quad\Longrightarrow\quad
+  q_2=-\frac{a}{b}\bigl(q+q_1\bigr)=-\frac{qa}{b}\Bigl(1-\frac{2a}{b}\Bigr)=-\frac{qa\,(b-2a)}{b^{2}},
+\]
+\[
+  \text{Etapa 3:}\quad0=\phi_3=\kc\Bigl(\frac{q_3}{a}+\frac{q_1+q_2}{b}\Bigr)\quad\Longrightarrow\quad
+  q_3=-\frac{a}{b}\bigl(q_1+q_2\bigr)=\frac{a}{b}\,\frac{qa}{b^{2}}\bigl[2b+(b-2a)\bigr]=\frac{qa^{2}(3b-2a)}{b^{3}} .
+\]
+En resumen,
+\[
+  \resalta{q_1=-\frac{2qa}{b},\qquad q_2=-\frac{qa\,(b-2a)}{b^{2}},\qquad q_3=\frac{qa^{2}(3b-2a)}{b^{3}} .}
+\]
+\end{resolucion}
+
+\input{figuras/fig_sem_triangulo}
+
+\begin{observacion}[Comprobaciones e interpretación]\label{obs:sem-triangulo}
+\emph{Patrón común:} la esfera que se conecta a tierra adquiere $-a/b$ veces la suma de las cargas actuales de las otras dos, $Q_i^{\mathrm{final}}=-\frac{a}{b}(Q_j+Q_l)$.
+\emph{Signos:} $q_1<0$ porque las otras dos son positivas; $q_2<0$ porque $q+q_1=q(1-2a/b)>0$ al ser $b\gg a$; y $q_3>0$ porque las otras dos son ya negativas.
+\emph{Tamaños:} $\abs{q_1},\abs{q_2}\sim qa/b$ y $q_3\sim qa^{2}/b^{2}$: cada esfera conectada a tierra pierde casi toda su carga, y lo que le queda es lo que
+inducen las vecinas lejanas. \emph{Lo que se congela es la carga:} al terminar la etapa 2, la esfera 1 ya no está a potencial cero,
+\[
+  \phi_1=\kc\Bigl(\frac{q_1}{a}+\frac{q_2+q}{b}\Bigr)=\kc\,\frac{q_2-q}{b}\neq0 :
+\]
+al conectar la esfera 2 su carga cambia y eso modifica el potencial de la 1, pero como la 1 está aislada su carga no puede variar. Por último, los términos como
+$2a/b$ dentro de $q_2$ y $q_3$ provienen de propagar la aproximación de una etapa a la siguiente, y coinciden con la solución de la relación.
+\end{observacion}
+
+% =========================================================================
+\subsection{Ejemplo modelo: tres esferas concéntricas, la interior a tierra}\label{sem:modelo}
+% =========================================================================
+\begin{problema}[Método de los coeficientes de potencial]\label{prob:modelo}
+Tres esferas conductoras concéntricas de radios $a$, $b=2a$ y $c=3a$ tienen cargas $q_a=q$, $q_b=2q$ y $q_c=3q$. ¿Cuánto varía el potencial de la esfera
+externa cuando la interna se conecta a tierra?
+\end{problema}
+
+\begin{resolucion}
+\paso{Paso 1: matriz.} Con la regla \eqref{eq:regla-concentricas},
+\[
+  \Pm=\frac{\kc}{a}\begin{pmatrix}1 & 1/2 & 1/3\\ 1/2 & 1/2 & 1/3\\ 1/3 & 1/3 & 1/3\end{pmatrix}.
+\]
+\paso{Paso 2: estado inicial.} Todas aisladas, con cargas conocidas:
+$\phi_c=p_{ca}q_a+p_{cb}q_b+p_{cc}q_c=\frac{\kc}{3a}(q+2q+3q)=\frac{2\kc q}{a}$.
+
+\paso{Paso 3: clasificación tras conectar.} Para $a$, el dato es $\phi_a=0$ y la incógnita $q_a'$; las esferas $b$ y $c$ siguen aisladas, con $q_b=2q$ y
+$q_c=3q$.
+
+\paso{Paso 4: ecuación de la esfera a tierra.}
+\[
+  0=\phi_a=p_{aa}q_a'+p_{ab}q_b+p_{ac}q_c=\kc\Bigl(\frac{q_a'}{a}+\frac{2q}{2a}+\frac{3q}{3a}\Bigr)\quad\Longrightarrow\quad q_a'=-2q .
+\]
+Por el hilo pasa a tierra una carga $q_a-q_a'=3q$.
+
+\paso{Paso 5: variación del potencial.} Como $\Pm$ solo depende de la geometría, si en un proceso cambian algunas cargas,
+$\Delta\phi_i=\sum_jp_{ij}\,\Delta Q_j$, y solo hay que sumar sobre los conductores cuya carga cambia:
+\[
+  \Delta\phi_c=p_{ca}\bigl(q_a'-q_a\bigr)=\frac{\kc}{3a}(-2q-q)\quad\Longrightarrow\quad\resalta{\Delta\phi_c=-\frac{q}{4\pi\eo a}.}
+\]
+\end{resolucion}
+
+\begin{observacion}[Comprobación con Gauss]\label{obs:sem-modelo}
+Fuera de todo, la carga total pasa de $6q$ a $3q$, así que $\phi_c=\kc Q_{\mathrm{tot}}/c$ pasa de $\kc\,6q/3a=2\kc q/a$ a $\kc\,3q/3a=\kc q/a$: coincide. También se
+comprueba $\phi_a'=0$ con la cadena de Gauss (\figpanel{fig:sem-modelo}{b}):
+$\phi_a'=\phi_c'+\kc q_a'\bigl(\frac1a-\frac1b\bigr)+\kc(q_a'+q_b)\bigl(\frac1b-\frac1c\bigr)=\frac{\kc q}{a}-\frac{2\kc q}{a}\cdot\frac12+0=0$.
+\emph{Trampa habitual:} al conectar a tierra cambia la carga del conductor conectado, no la de los aislados; pero cambian \emph{todos} los potenciales.
+\end{observacion}
+
+\input{figuras/fig_sem_modelo}
+
+% -------------------------------------------------------------------------
+\subsection{Resumen de resultados y lista de control}\label{sem:resumen}
+% -------------------------------------------------------------------------
+\begin{table}[ht]
+\centering
+\caption{Resultados de los seminarios del Tema 3.}
+\label{tab:resultados}
+\small
+\begin{tabular}{@{}clc@{}}
+  \toprule
+  Problema & Resultado & Método\\
+  \midrule
+  3.1 & $\phi_{\max}=\Erup R=150\,\mathrm{kV}$ & M1\\[3pt]
+  3.2 & $Q_1=4\pi\eo V_0\dfrac{R_1R_4}{R_4-R_1}$,\quad $\phi_{2,3}=\dfrac{Q_1}{4\pi\eo}\Bigl(\dfrac{1}{R_{2,3}}-\dfrac{1}{R_4}\Bigr)$ & M2, M3\\[10pt]
+  3.3 & $c_{11}=-c_{12}=4\pi\eo\dfrac{ab}{b-a}$,\quad $c_{22}=4\pi\eo\dfrac{b^{2}}{b-a}$,\quad $C=4\pi\eo\dfrac{ab}{b-a}$ & M3\\[10pt]
+  3.4 & $C/\ell=2\pi\eo/\ln(b/a)$ & M2\\[3pt]
+  3.5 & $C=\eo A/d$;\quad caras: $q_1=q_4=\tfrac12(Q_1+Q_2)$,\ $q_2=-q_3=\tfrac12(Q_1-Q_2)$ & M4\\[4pt]
+  3.6 & $\phi_2=\dfrac{Q}{4\pi\eo}\,\dfrac{2d^{2}+Rd-4R^{2}}{Rd\,(2d+R)}$ & M5\\[10pt]
+  3.7 & $q_1=-\dfrac{2qa}{b}$,\quad $q_2=-\dfrac{qa(b-2a)}{b^{2}}$,\quad $q_3=\dfrac{qa^{2}(3b-2a)}{b^{3}}$ & M5\\[10pt]
+  Modelo & $\Delta\phi_c=-q/(4\pi\eo a)$ & M3\\
+  \bottomrule
+\end{tabular}
+\end{table}
+
+\needspace{20\baselineskip}
+\begin{receta}[Lista de control]
+\begin{itemize}
+  \item ¿He asignado la carga de cada cara con la regla de las caras?
+  \item ¿He distinguido \emph{a tierra} ($\phi=0$, pero $Q\neq0$ en general) de \emph{descargado} ($Q=0$, pero $\phi\neq0$ en general)?
+  \item En los $p_{ij}$, ¿los demás conductores están descargados? En los $c_{ij}$, ¿están a tierra?
+  \item ¿Son simétricas las matrices? ¿Tienen los signos correctos ($p_{ij}>0$, $c_{ii}>0$, $c_{ij}<0$)?
+  \item ¿Se cumple $c_{jj}\ge-\sum_{i\neq j}c_{ij}$, con igualdad en influencia total?
+  \item ¿Coincide la capacidad calculada directamente con $1/(p_{11}+p_{22}-2p_{12})$?
+  \item En procesos por etapas, ¿he congelado la carga de los conductores ya desconectados?
+  \item Un hilo fino solo iguala potenciales: ¿he despreciado su carga y su influencia?
+\end{itemize}
+\end{receta}

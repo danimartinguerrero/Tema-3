@@ -1,0 +1,49 @@
+% =========================================================================
+%  Figura (Problema 3.7): proceso por etapas y cargas en cada etapa para
+%  a/b = 0,1 (q = 1): inicial (1, 1, 1); etapa 1 (-0.2, 1, 1);
+%  etapa 2 (-0.2, -0.08, 1); etapa 3 (-0.2, -0.08, 0.028).
+% =========================================================================
+\newcommand{\triEtapa}[5]{% #1 título, #2 #3 #4 rótulos de carga, #5 esfera a tierra (0 = ninguna)
+  \coordinate (v1) at (-0.8,0.45); \coordinate (v2) at (0.8,0.45); \coordinate (v3) at (0,-0.94);
+  \draw[grismedio, line width=0.4pt, densely dashed] (v1) -- (v2) -- (v3) -- cycle;
+  \foreach \v/\n in {v1/1,v2/2,v3/3}{
+    \ifnum\n=#5 \shade[ball color=azulcielo] (\v) circle (0.2); \else \shade[ball color=azulvelo] (\v) circle (0.2); \fi
+    \draw[azulprof, line width=0.5pt] (\v) circle (0.2);
+    \node[font=\tiny] at (\v) {\n};}
+  \node[font=\scriptsize, anchor=south] at ($(v1)+(0,0.22)$) {#2};
+  \node[font=\scriptsize, anchor=south] at ($(v2)+(0,0.22)$) {#3};
+  \node[font=\scriptsize, anchor=west] at ($(v3)+(0.24,0)$) {#4};
+  \ifnum#5=1 \draw[azulprof, line width=0.5pt] (v1) ++(-0.2,0) -- ++(-0.3,0) -- ++(0,-0.25); \pic at ($(v1)+(-0.5,-0.25)$) {tierra};\fi
+  \ifnum#5=2 \draw[azulprof, line width=0.5pt] (v2) ++(0.2,0) -- ++(0.3,0) -- ++(0,-0.25); \pic at ($(v2)+(0.5,-0.25)$) {tierra};\fi
+  \ifnum#5=3 \draw[azulprof, line width=0.5pt] (v3) ++(-0.2,0) -- ++(-0.3,0) -- ++(0,-0.25); \pic at ($(v3)+(-0.5,-0.25)$) {tierra};\fi
+  \node[font=\footnotesize, anchor=north] at (0,-1.45) {#1};}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[font=\small]
+  \begin{scope}[xshift=0cm]\triEtapa{Inicial}{$q$}{$q$}{$q$}{0}\end{scope}
+  \begin{scope}[xshift=3.6cm]\triEtapa{Etapa 1: $\phi_1=0$}{$q_1$}{$q$}{$q$}{1}\end{scope}
+  \begin{scope}[xshift=7.2cm]\triEtapa{Etapa 2: $\phi_2=0$}{$q_1$}{$q_2$}{$q$}{2}\end{scope}
+  \begin{scope}[xshift=10.8cm]\triEtapa{Etapa 3: $\phi_3=0$}{$q_1$}{$q_2$}{$q_3$}{3}\end{scope}
+  \node[font=\scriptsize, text=grispizarra] at (5.4,1.45) {lado $b$, radio $a$};
+  \node at (5.4,-2.15) {(a)};
+  \begin{scope}[yshift=-6.4cm, xshift=1.7cm]
+    \begin{axis}[tema, ybar, bar width=7pt, width=11.8cm, height=4.6cm, ymin=-0.3, ymax=1.15,
+        symbolic x coords={Inicial,Etapa 1,Etapa 2,Etapa 3}, xtick=data, ylabel={$Q_i/q$},
+        enlarge x limits=0.15, axis x line*=bottom, axis y line*=left, ytick={-0.2,0,0.5,1},
+        legend style={at={(0.5,1.03)}, anchor=south, legend columns=3}]
+      \addplot[fill=azulprof, draw=azulprof] coordinates {(Inicial,1) (Etapa 1,-0.2) (Etapa 2,-0.2) (Etapa 3,-0.2)};
+      \addlegendentry{esfera 1}
+      \addplot[fill=azulacero, draw=azulacero] coordinates {(Inicial,1) (Etapa 1,1) (Etapa 2,-0.08) (Etapa 3,-0.08)};
+      \addlegendentry{esfera 2}
+      \addplot[fill=azulcielo, draw=azulcielo] coordinates {(Inicial,1) (Etapa 1,1) (Etapa 2,1) (Etapa 3,0.028)};
+      \addlegendentry{esfera 3}
+    \end{axis}
+    \node at (5.2,-1.2) {(b)};
+  \end{scope}
+\end{tikzpicture}
+\caption{Problema 3.7. (a) Esquema del proceso: en cada etapa se conecta a tierra una esfera (sombreada) y después se desconecta; las demás conservan su carga.
+(b) Cargas de las tres esferas tras cada etapa para $a/b=0{,}1$: cada esfera conectada a tierra pierde casi toda su carga, y la última acaba con una pequeña
+carga positiva porque sus vecinas ya son negativas.}
+\label{fig:sem-triangulo}
+\end{figure}

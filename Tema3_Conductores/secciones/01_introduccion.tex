@@ -1,0 +1,97 @@
+% =========================================================================
+\section{Introducción: el conductor perfecto}\label{sec:intro}
+% =========================================================================
+Hasta ahora todo nuestro estudio se ha desarrollado en el vacío: dadas las cargas, la ley de Coulomb, la ley de Gauss y el potencial
+permiten calcular el campo~\cite{TEMA1}, y el desarrollo multipolar permite aproximarlo a grandes distancias~\cite{TEMA2}. En este tema
+damos el primer paso hacia la materia. Los materiales se dividen, a efectos electrostáticos, en \emph{conductores} y \emph{dieléctricos};
+aquí estudiamos los primeros. La novedad es profunda: en un conductor la distribución de carga \emph{no es un dato}, sino una incógnita que
+se ajusta sola hasta alcanzar el equilibrio. Veremos que esa autorregulación impone condiciones tan fuertes que, paradójicamente, simplifica
+el problema: basta conocer la geometría y unas pocas cargas o potenciales para determinarlo todo.
+
+Seguimos la estructura de los apuntes manuscritos y de teoría de la asignatura~\cite{APUNTES-T3}, cuyas figuras~\cite{FIGURAS-T3} hemos
+recalculado y redibujado; para ampliar, pueden consultarse los textos clásicos~\cite{GRIFFITHS,WANGSNESS,VICTORIANO,PURCELL,FEYNMAN}.
+
+% -------------------------------------------------------------------------
+\subsection{Conductor perfecto y equilibrio electrostático}\label{sec:conductor-perfecto}
+% -------------------------------------------------------------------------
+De forma genérica, un material conductor es un cuerpo en el que las cargas eléctricas pueden moverse libremente bajo la acción de un campo
+eléctrico. El ejemplo más común son los metales (cobre, plata, oro, aluminio\ldots): en el cobre hay aproximadamente un electrón libre por
+átomo. Pero no son los únicos: en el agua salada, por ejemplo, lo que se desplaza son los iones.
+
+\begin{definicion}[Conductor perfecto]\label{def:conductor}
+Un \emph{conductor perfecto} es un cuerpo material, que ocupa una región cerrada y acotada $\Vc\subset\R^{3}$ de frontera $\Sc=\partial\Vc$,
+que cumple:
+\begin{enumerate}[label=(\roman*)]
+  \item las cargas libres se mueven por su interior sin oposición alguna (se desprecia la agitación térmica);
+  \item admite un número ilimitado de cargas libres: dispone de una reserva inagotable de carga de ambos signos.
+\end{enumerate}
+\end{definicion}
+
+\begin{observacion}[Una idealización excelente]\label{obs:idealizacion}
+Ningún conductor real es perfecto: los metales tienen una resistividad no nula y una densidad de electrones libres finita
+($n\simeq8{,}5\cdot10^{28}\,\mathrm{m^{-3}}$ en el cobre). Sin embargo, la aproximación funciona extraordinariamente bien en electrostática,
+donde solo interesa el estado final de equilibrio. Las cargas que hay que redistribuir para anular un campo externo típico son una fracción
+insignificante de las disponibles, y la redistribución es prácticamente instantánea: en un conductor óhmico de conductividad $\sigma_c$ cualquier
+exceso de carga en el interior decae como $\eul^{-t/\tau}$, con $\tau=\eo/\sigma_c$, que para el cobre ($\sigma_c\simeq5{,}96\cdot10^{7}\,\mathrm{S/m}$)
+vale $\tau\simeq1{,}5\cdot10^{-19}\,\mathrm{s}$~\cite{GRIFFITHS}.
+\end{observacion}
+
+\begin{definicion}[Equilibrio electrostático]\label{def:equilibrio}
+Un conductor está en \emph{equilibrio electrostático} cuando sus cargas libres están en reposo a escala macroscópica, es decir, elemento de
+volumen a elemento de volumen: no hay ningún flujo neto de carga en su interior ni sobre su superficie.
+\end{definicion}
+
+\begin{proposicion}[Campo nulo en el interior]\label{prop:campo-nulo}
+En un conductor perfecto en equilibrio electrostático el campo eléctrico es nulo en todo punto interior:
+\begin{equation}\label{eq:campo-nulo}
+  \resalta{\vE(\vc{r})=\vc{0}\qquad\forall\,\vc{r}\in\Vc\setminus\Sc .}
+\end{equation}
+\end{proposicion}
+\begin{proof}
+Supongamos que existe un punto interior $\vc{r}_0$ con $\vE(\vc{r}_0)\neq\vc{0}$. Las cargas libres situadas en un entorno de $\vc{r}_0$ (que existen
+por la hipótesis~(ii) de la \cref{def:conductor}) experimentan la fuerza $\dif\vF=\dif q\,\vE$, que por la hipótesis~(i) no encuentra
+oposición: se pondrían en movimiento, lo que contradice la \cref{def:equilibrio}. Luego $\vE=\vc{0}$ en todo el interior.
+\end{proof}
+
+La demostración dice \emph{qué} ocurre en el equilibrio, pero no \emph{cómo} se llega a él. Supongamos que introducimos un conductor
+descargado en un campo externo uniforme $\vE_0$ (\cref{fig:placa}). En los primeros instantes el campo penetra en el material y empuja a los
+electrones libres en sentido opuesto a $\vE_0$: se acumulan en la cara por la que entran las líneas, que queda con carga negativa, mientras
+que la cara opuesta, que pierde electrones, queda con carga positiva. Esta \emph{carga inducida} crea, en el interior, un campo $\vE_{\mathrm{ind}}$
+dirigido de la carga positiva a la negativa, es decir, \emph{opuesto} a $\vE_0$. La redistribución continúa mientras quede campo neto en el
+interior, y se detiene exactamente cuando
+\[
+  \vE=\vE_0+\vE_{\mathrm{ind}}=\vc{0}\qquad\text{en el interior.}
+\]
+La clave es, pues, que el campo creado por la redistribución de carga inducida por el campo externo se opone a dicho campo y acaba
+cancelándolo. Fuera del conductor, en cambio, el campo inducido \emph{no} cancela al externo: lo deforma, de modo que las líneas de campo
+terminan en las cargas negativas y vuelven a nacer en las positivas.
+
+\input{figuras/fig_placa}
+
+La \cref{fig:uniforme} muestra el resultado de ese proceso para dos conductores neutros: una esfera, cuya solución es analítica, y un
+conductor de forma irregular, que hemos resuelto numéricamente. En ambos casos el campo exterior se deforma para llegar
+\emph{perpendicularmente} a la superficie, la carga inducida se concentra en las zonas más curvadas y el interior queda libre de campo.
+Las secciones siguientes demuestran cada uno de estos rasgos.
+
+\input{figuras/fig_uniforme}
+
+% -------------------------------------------------------------------------
+\subsection{Notación y convenios}\label{sec:notacion}
+% -------------------------------------------------------------------------
+\begin{notacion}\label{not:tema3}
+A lo largo del tema usamos la notación de los temas anteriores~\cite{TEMA0,TEMA1,TEMA2}, y además:
+\begin{itemize}
+  \item $\Vc$ es la región (cerrada) ocupada por un conductor y $\Sc=\partial\Vc$ su superficie; $\un$ es la normal unitaria \emph{exterior} al
+        conductor, es decir, la que apunta del metal al vacío. Si el conductor tiene cavidades, $\Sc$ incluye sus caras interiores, y en ellas
+        $\un$ apunta hacia la cavidad.
+  \item $\sigma(\vc{r})$ es la densidad superficial de carga sobre $\Sc$, y $\Qint$, $\Qext$ las cargas de las caras interior y exterior de un
+        conductor hueco.
+  \item En un sistema de $N$ conductores, $Q_i$ y $\phi_i$ son la carga total y el potencial del conductor $i$; los agrupamos en los vectores
+        columna $\vQ=(Q_1,\dots,Q_N)\Tt$ y $\vphi=(\phi_1,\dots,\phi_N)\Tt$. Las matrices de coeficientes de potencial y de capacidad e influencia
+        son $\Pm=(p_{ij})$ y $\Cm=(c_{ij})$.
+  \item Mientras no se diga lo contrario, el origen de potenciales está en el infinito, $\phi(\infty)=0$, y escribimos
+        $\kc\equiv1/(4\pi\eo)\simeq8{,}988\cdot10^{9}\,\mathrm{N\,m^{2}\,C^{-2}}$~\cite{CODATA}.
+  \item «A tierra» significa $\phi=0$ (la Tierra es un conductor tan grande que su potencial no cambia al intercambiar carga con el sistema);
+        «aislado» significa que la carga del conductor se conserva.
+\end{itemize}
+\end{notacion}

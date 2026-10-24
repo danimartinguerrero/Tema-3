@@ -1,0 +1,38 @@
+% =========================================================================
+%  Figura (Problema 3.1): globo conductor en el umbral de ruptura.
+%  (a) E/E_rup y phi/phi_max frente a r/R: E = (R/r)^2, phi = R/r fuera.
+%  (b) phi_max = E_rup R frente a R (escala logarítmica), E_rup = 3e6 V/m.
+% =========================================================================
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[font=\small]
+  \begin{axis}[tema, name=a, width=7.0cm, height=5.0cm, xmin=0, xmax=4.2, ymin=0, ymax=1.25,
+      xlabel={$r/R$}, ylabel={magnitud normalizada}, xtick={0,1,2,3,4}, ytick={0,0.5,1},
+      legend style={at={(0.97,0.72)}, anchor=north east}]
+    \fill[azulvelo!60] (axis cs:0,0) rectangle (axis cs:1,1.25);
+    \node[font=\scriptsize, text=azulprof, rotate=90] at (axis cs:0.5,0.62) {globo};
+    \addplot[azulprof, line width=1.2pt, domain=1:4.2, samples=60] {1/x^2};
+    \addlegendentry{$E/\Erup$}
+    \addplot[azulacero, line width=1.2pt, densely dashed, domain=1:4.2, samples=60] {1/x};
+    \addlegendentry{$\phi/\phi_{\max}$}
+    \addplot[azulprof, line width=1.2pt, forget plot] coordinates {(0,0) (1,0)};
+    \addplot[azulacero, line width=1.2pt, densely dashed, forget plot] coordinates {(0,1) (1,1)};
+    \draw[cargapos, line width=0.7pt, dashdotted] (axis cs:0,1) -- (axis cs:4.2,1);
+    \node[font=\scriptsize, text=cargapos, anchor=south east] at (axis cs:4.15,1.01) {umbral de ruptura};
+  \end{axis}
+  \node[font=\small, anchor=north] at ($(a.outer south)+(0,-0.05)$) {(a)};
+  \begin{axis}[tema, name=b, at={($(a.east)+(1.6cm,0)$)}, anchor=west, width=7.0cm, height=5.0cm,
+      xmode=log, ymode=log, xmin=1e-4, xmax=1, ymin=1e2, ymax=1e7,
+      xlabel={$R$ (m)}, ylabel={$\phi_{\max}$ (V)}, log basis x=10, log basis y=10]
+    \addplot[azulprof, line width=1.2pt, domain=1e-4:1, samples=20] {3e6*x};
+    \fill[cargapos] (axis cs:0.05,1.5e5) circle (2pt);
+    \node[font=\scriptsize, anchor=north west, text=cargapos] at (axis cs:0.055,1.5e5) {$150\,\mathrm{kV}$};
+    \node[font=\scriptsize, anchor=north west, text=grispizarra] at (axis cs:1.3e-4,5e6) {$\phi_{\max}=\Erup R$};
+  \end{axis}
+  \node[font=\small, anchor=north] at ($(b.outer south)+(0,-0.05)$) {(b)};
+\end{tikzpicture}
+\caption{Problema 3.1. (a) Campo y potencial de una esfera conductora cargada justo en el umbral de ruptura: el campo es máximo en la superficie y decae como
+$1/r^{2}$, de modo que la ruptura empieza allí. (b) Potencial máximo frente al radio: cuanto más pequeño es el conductor, antes se descarga (efecto punta). El
+punto marca el globo del enunciado.}
+\label{fig:sem-globo}
+\end{figure}

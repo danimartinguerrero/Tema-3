@@ -1,0 +1,55 @@
+% =========================================================================
+%  Figura «tipo Mathematica»: corteza esférica conductora gruesa (radios
+%  R1 = 1 de la cavidad y R2 = 2 exterior), neutra, en el plano meridiano.
+%  Solución exacta por imágenes:
+%   - cavidad: q en s u_x  +  imagen -q R1/s en (R1^2/s) u_x;
+%   - exterior: Qe en -D u_x, imagen -Qe R2/D en -(R2^2/D) u_x y la carga
+%     q + Qe R2/D en el centro (la corteza aislada tiene Q_ext = q).
+%  Datos: figuras/datos/corteza_{a,b,c,d}_*.
+% =========================================================================
+\newcommand{\panelCorteza}[2]{% #1 = a, b, c, d ; #2 = título
+  \fill[azulfondo!60!white] (-5.4,-3.3) rectangle (3.4,3.3);
+  \begin{scope}
+    \clip (-5.4,-3.3) rectangle (3.4,3.3);
+    \input{figuras/datos/corteza_#1_lc}
+    \input{figuras/datos/corteza_#1_fl}
+  \end{scope}
+  \fill[metal!70!white, even odd rule] (0,0) circle (2) (0,0) circle (1);
+  \fill[top color=azulvelo!30, bottom color=metalosc!45, opacity=0.6, even odd rule] (0,0) circle (2) (0,0) circle (1);
+  \draw[azulprof, line width=0.55pt] (0,0) circle (2) (0,0) circle (1);
+  \input{figuras/datos/corteza_#1_q}
+  \draw[azulclaro, line width=0.5pt] (-5.4,-3.3) rectangle (3.4,3.3);
+  \node[anchor=north, font=\small] at (-1.0,-3.4) {#2};}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[x=0.74cm, y=0.74cm]
+  \tikzset{numLC/.style={azulmedio, line width=0.42pt},
+           numFL/.style={-{Stealth[length=3pt, width=2.5pt]}, azulmedio, line width=0.42pt}}
+  \begin{scope}
+    \panelCorteza{a}{(a) Carga $q$ en el centro}
+    \node[qpos, minimum size=7pt, font=\tiny\bfseries] at (0,0) {$+$};
+  \end{scope}
+  \begin{scope}[xshift=8.9cm]
+    \panelCorteza{b}{(b) Carga $q$ desplazada}
+    \node[qpos, minimum size=7pt, font=\tiny\bfseries] at (0.45,0) {$+$};
+  \end{scope}
+  \begin{scope}[yshift=-6.0cm]
+    \panelCorteza{c}{(c) Carga $q$ desplazada y carga exterior $Q_e$}
+    \node[qpos, minimum size=7pt, font=\tiny\bfseries] at (0.45,0) {$+$};
+    \node[qpos, minimum size=8pt, font=\tiny\bfseries] at (-4,0) {$+$};
+    \node[font=\scriptsize, text=cargapos] at (-4,0.42) {$Q_e$};
+  \end{scope}
+  \begin{scope}[xshift=8.9cm, yshift=-6.0cm]
+    \panelCorteza{d}{(d) Cavidad vacía y carga exterior $Q_e$}
+    \node[qpos, minimum size=8pt, font=\tiny\bfseries] at (-4,0) {$+$};
+    \node[font=\scriptsize, text=cargapos] at (-4,0.42) {$Q_e$};
+    \node[font=\scriptsize, text=azulprof, fill=white, inner sep=1pt, rounded corners=1pt] at (0,0) {$\Ecav=\vc{0}$};
+  \end{scope}
+\end{tikzpicture}
+\caption{Corteza esférica conductora neutra (radios interior $R_1$ y exterior $R_2=2R_1$), resuelta exactamente por el método de las imágenes.
+(a)~Carga $q$ en el centro: simetría esférica. (b)~Al desplazar $q$ cambia el campo de la cavidad, pero el exterior sigue siendo el de una carga
+$q$ en el centro. (c)~Una carga exterior $Q_e$ deforma el campo exterior, pero no altera el de la cavidad. (d)~Sin carga en la cavidad, el interior
+queda apantallado (jaula de Faraday). Se indican los signos de la carga inducida en cada cara.}
+\label{fig:corteza}
+\end{figure}

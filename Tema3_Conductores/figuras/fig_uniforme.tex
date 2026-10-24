@@ -1,0 +1,54 @@
+% =========================================================================
+%  Figura «tipo Mathematica»: conductores neutros en un campo uniforme.
+%  (a) esfera (solución analítica, plano meridiano): líneas de campo como
+%      curvas de nivel de la función de Stokes Psi = (E0/2) y^2 (1 + 2a^3/r^3);
+%  (b) conductor irregular (ecuación de Laplace 2D por diferencias finitas).
+%  Datos: figuras/datos/esfera_uniforme_* e irregular_uniforme_*.
+% =========================================================================
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[font=\small]
+  % ---------------------------------------------------------------- (a)
+  \begin{scope}[x=1.04cm, y=1.04cm]
+    \fill[azulfondo!60!white] (-2.6,-2.6) rectangle (2.6,2.6);
+    \begin{scope}
+      \clip (-2.6,-2.6) rectangle (2.6,2.6);
+      \tikzset{numEQ/.style={azulcielo, line width=0.35pt, densely dashed}}
+      \input{figuras/datos/esfera_uniforme_eq}
+      \input{figuras/datos/esfera_uniforme_lc}
+      \input{figuras/datos/esfera_uniforme_fl}
+    \end{scope}
+    \shade[ball color=azulvelo, draw=azulprof] (0,0) circle (1);
+    \draw[azulprof, line width=0.6pt] (0,0) circle (1);
+    \input{figuras/datos/esfera_uniforme_q}
+    \node[font=\footnotesize, text=azulprof] at (0,0) {$\vE=\vc{0}$};
+    \draw[azulclaro, line width=0.5pt] (-2.6,-2.6) rectangle (2.6,2.6);
+    \node[anchor=north] at (0,-2.75) {(a) Esfera conductora};
+  \end{scope}
+  % ---------------------------------------------------------------- (b)
+  \begin{scope}[xshift=6.45cm, yshift=-0.35cm, x=1.17cm, y=1.17cm]
+    \fill[azulfondo!60!white] (-2.3,-1.9) rectangle (2.3,1.9);
+    \begin{scope}
+      \clip (-2.3,-1.9) rectangle (2.3,1.9);
+      \tikzset{numEQ/.style={azulcielo, line width=0.35pt, densely dashed}}
+      \input{figuras/datos/irregular_uniforme_eq}
+      \input{figuras/datos/irregular_uniforme_lc}
+      \input{figuras/datos/irregular_uniforme_fl}
+    \end{scope}
+    \input{figuras/datos/irregular_forma}
+    \fill[top color=azulvelo!80!white, bottom color=metal, draw=azulprof, line width=0.6pt] \formairregular;
+    \input{figuras/datos/irregular_uniforme_q}
+    \node[font=\footnotesize, text=azulprof] at (-0.15,0.18) {$\vE=\vc{0}$};
+    \draw[azulclaro, line width=0.5pt] (-2.3,-1.9) rectangle (2.3,1.9);
+    \node[anchor=north] at (0,-2.0) {(b) Conductor irregular};
+  \end{scope}
+  % flecha del campo aplicado
+  \draw[-{Stealth[length=5pt]}, azulprof, line width=0.9pt] (4.95,2.95) -- (6.25,2.95)
+    node[midway, above, font=\small] {$\vE_0$};
+\end{tikzpicture}
+\caption{Conductores neutros en un campo uniforme $\vE_0$ (de izquierda a derecha). Líneas de campo (continuas) y equipotenciales (trazos).
+(a) Esfera: la solución exacta, $\phi=-E_0\bigl(r-a^{3}/r^{2}\bigr)\cos\theta$, induce $\sigma=3\eo E_0\cos\theta$. (b) Conductor de forma
+arbitraria, calculado numéricamente resolviendo $\Lap\phi=0$ con la condición de carga neta nula. En ambos casos las líneas llegan
+perpendiculares a la superficie y el campo interior es nulo.}
+\label{fig:uniforme}
+\end{figure}

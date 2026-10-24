@@ -1,0 +1,70 @@
+\documentclass[a4paper,11pt]{article}
+
+% =========================================================================
+%  Electromagnetismo I — Tema 3: Conductores en equilibrio electrostático
+%  Apuntes formalizados. Compilar con: pdflatex + biber + pdflatex ×2
+%  (o latexmk -pdf main.tex). Todo el preámbulo está en preambulo.tex.
+%  Los datos numéricos de las figuras «tipo Mathematica» se regeneran con
+%  python3 scripts/generar_datos.py (ya se incluyen en figuras/datos/).
+% =========================================================================
+\input{preambulo}
+
+% =========================================================================
+%                     VARIABLES PARA LA PORTADA
+% =========================================================================
+\newcommand{\Universidad}{Universidad de Salamanca}
+\newcommand{\Facultad}{Facultad de Ciencias}
+\newcommand{\Titulacion}{Grado en Física}
+\newcommand{\Asignatura}{Electromagnetismo I}
+\newcommand{\NumTema}{Tema 3}
+\newcommand{\TituloTema}{Conductores en equilibrio\\electrostático}
+\newcommand{\SubtituloTema}{Propiedades del conductor perfecto, efecto punta, presión electrostática,
+  cavidades y apantallamiento; coeficientes de potencial, de capacidad e influencia, y condensadores}
+\newcommand{\tipotrabajo}{Apuntes formalizados con seminarios prácticos}
+\newcommand{\miNombre}{Daniel Martín Guerrero}
+\newcommand{\miProfesor}{Luis López Díaz}
+\newcommand{\Afiliacion}{Grado en Física, Facultad de Ciencias, Universidad de Salamanca,
+  Plaza de la Merced s/n, 37008 Salamanca, España}
+\newcommand{\miUbicacion}{Salamanca, curso 2026/2027}
+\newcommand{\ResumenPortada}{%
+  Estudiamos la electrostática en presencia de conductores. A partir de la definición de conductor
+  perfecto y de la condición de equilibrio deducimos sus propiedades: campo nulo en el interior,
+  volumen equipotencial, carga confinada en la superficie y campo exterior normal de módulo
+  $\sigma/\eo$. De ellas se siguen el efecto punta, la presión electrostática $\sigma^{2}/2\eo$, el
+  apantallamiento de las cavidades y la capacidad de un conductor aislado. Para un sistema de $N$
+  conductores, la linealidad de las ecuaciones de Laplace y Poisson define los coeficientes de potencial
+  $p_{ij}$ y los de capacidad e influencia $c_{ij}$, cuya simetría, signo e inversión demostramos; la
+  influencia total conduce al condensador. Los seminarios resuelven los siete problemas del tema.}
+
+% =========================================================================
+%                                DOCUMENTO
+% =========================================================================
+\begin{document}
+% --- PORTADA ----------------------------------------------------------------
+\pagenumbering{alph}
+\input{portada}
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% --- ÍNDICE -----------------------------------------------------------------
+{\hypersetup{linkcolor=azulprof}\tableofcontents}
+\thispagestyle{plain}
+\clearpage
+
+\input{secciones/01_introduccion}
+\input{secciones/02_propiedades}
+\input{secciones/03_presion}
+\input{secciones/04_cavidades}
+\input{secciones/05_sistemas}
+\input{secciones/06_condensadores}
+\input{secciones/07_seminarios}
+\input{secciones/08_apendice}
+
+% =========================================================================
+%                              BIBLIOGRAFÍA
+% =========================================================================
+\FloatBarrier
+\printbibliography[title={Referencias}, heading=bibintoc]
+
+\end{document}

@@ -1,0 +1,42 @@
+% =========================================================================
+%  Figura (Problema 3.6): tres esferas alineadas, laterales a tierra.
+%  (b) phi2/(kQ/R) frente a d/R: 1 - 4/(x(2x+1)) y la aproximación 1 - 2/x^2.
+% =========================================================================
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[font=\small]
+  % ---------------------------------------------------------------- (a)
+  \begin{scope}
+    \foreach \x/\n in {-2.2/1,0/2,2.2/3}{
+      \shade[ball color=azulvelo] (\x,0) circle (0.38);
+      \draw[azulprof, line width=0.6pt] (\x,0) circle (0.38);
+      \node[font=\footnotesize] at (\x,0) {$\n$};}
+    \foreach \x in {-2.2,2.2}{\draw[azulprof, line width=0.6pt] (\x,-0.38) -- (\x,-0.8); \pic at (\x,-0.8) {tierra};
+                              \node[font=\footnotesize, text=carganeg] at (\x,0.65) {$q$};}
+    \node[font=\footnotesize, text=cargapos] at (0,0.65) {$Q$};
+    \draw[{Stealth[length=3pt]}-{Stealth[length=3pt]}, grispizarra] (-2.2,-1.45) -- (0,-1.45) node[midway, below, font=\footnotesize] {$d$};
+    \draw[{Stealth[length=3pt]}-{Stealth[length=3pt]}, grispizarra] (0,-1.45) -- (2.2,-1.45) node[midway, below, font=\footnotesize] {$d$};
+    \draw[-{Stealth[length=3pt]}, azulprof, line width=0.5pt] (0,0) ++(-130:0.02) -- ++(-130:0.36);
+    \node[font=\scriptsize] at (-0.5,-0.55) {$R$};
+    \node[font=\footnotesize, text=grispizarra] at (0,1.2) {$\phi_1=\phi_3=0$};
+    \node at (0,-2.45) {(a)};
+  \end{scope}
+  % ---------------------------------------------------------------- (b)
+  \begin{scope}[xshift=4.0cm, yshift=-2.0cm]
+    \begin{axis}[tema, width=7.6cm, height=4.6cm, xmin=3, xmax=20, ymin=0.8, ymax=1.03,
+        xlabel={$d/R$}, ylabel={$\phi_2\,/\,(\kc Q/R)$}, ytick={0.8,0.85,0.9,0.95,1},
+        legend style={at={(0.97,0.05)}, anchor=south east}]
+      \addplot[grismedio, line width=0.8pt, densely dashed, domain=3:20] {1};
+      \addlegendentry{esfera aislada}
+      \addplot[azulprof, line width=1.2pt, domain=3:20, samples=80] {1-4/(x*(2*x+1))};
+      \addlegendentry{resultado}
+      \addplot[azulcielo, line width=1.1pt, densely dotted, domain=3:20, samples=80] {1-2/x^2};
+      \addlegendentry{$1-2R^{2}/d^{2}$}
+    \end{axis}
+    \node at (2.95,-1.35) {(b)};
+  \end{scope}
+\end{tikzpicture}
+\caption{Problema 3.6. (a) Esfera central con carga $Q$ entre dos esferas a tierra. (b) Potencial de la esfera central normalizado al de una esfera aislada: las
+cargas negativas inducidas en las laterales lo rebajan en una cantidad de orden $(R/d)^{2}$.}
+\label{fig:sem-alineadas}
+\end{figure}

@@ -1,0 +1,119 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Portada con estructura de artículo científico: cabecera institucional,
+% título y autoría alineados a la izquierda, resumen, palabras clave y
+% clasificación, y un emblema calculado numéricamente (líneas de campo y
+% equipotenciales de un conductor cargado con punta, figuras/datos/punta_*).
+% Todos los bloques tienen coordenadas fijas en la página A4 (21 x 29,7 cm)
+% para que ningún elemento se superponga a otro.
+% Requiere en main.tex: \Universidad, \Facultad, \Titulacion, \Asignatura,
+% \NumTema, \TituloTema, \SubtituloTema, \tipotrabajo, \miNombre,
+% \miProfesor, \miUbicacion, \Afiliacion y el texto \ResumenPortada.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+\thispagestyle{empty}
+\tikzexternaldisable
+\begin{tikzpicture}[remember picture, overlay]
+  \coordinate (O) at (current page.south west);
+
+  % --- Bandas superior e inferior en degradado --------------------------
+  \shade[left color=azulprof, right color=azulcielo!70]
+    ($(O)+(0,29.25)$) rectangle ($(O)+(21,29.7)$);
+  \shade[left color=azulcielo!45, right color=white]
+    ($(O)+(0,29.15)$) rectangle ($(O)+(21,29.25)$);
+  \shade[left color=azulprof, right color=azulcielo!70]
+    ($(O)+(0,0)$) rectangle ($(O)+(21,0.3)$);
+  % velo muy tenue en la cabecera
+  \shade[top color=azulfondo, bottom color=white]
+    ($(O)+(0,24.9)$) rectangle ($(O)+(21,29.15)$);
+
+  % --- Cabecera institucional -------------------------------------------
+  \node[anchor=north west, inner sep=0] at ($(O)+(2.5,28.3)$)
+    {\includegraphics[height=1.2cm]{logo_usal.png}};
+  \node[anchor=north east, inner sep=0] at ($(O)+(18.5,28.3)$)
+    {\includegraphics[height=1.2cm]{logo_facultad.png}};
+  \node[anchor=north, align=center, inner sep=0, text width=7.2cm] at ($(O)+(10.5,27.95)$)
+    {{\color{azulprof}\scshape\textls[110]{\Universidad}}\\[3pt]
+     {\color{grispizarra}\footnotesize\scshape\textls[50]{\Facultad\enspace·\enspace\Titulacion}}};
+  \draw[azulclaro, line width=0.45pt] ($(O)+(2.5,26.55)$) -- ($(O)+(18.5,26.55)$);
+
+  % --- Asignatura, título y subtítulo -----------------------------------
+  \node[anchor=north west, align=left, inner sep=0, text width=16cm] at ($(O)+(2.5,25.95)$)
+    {{\color{azulmedio}\scshape\textls[140]{\Asignatura\enspace·\enspace\NumTema}}};
+  \node[anchor=north west, align=left, inner sep=0, text width=16cm,
+        font=\bfseries\fontsize{29}{35}\selectfont, text=azulprof] at ($(O)+(2.5,25.05)$)
+    {\TituloTema};
+  \shade[left color=azulmedio, right color=white]
+    ($(O)+(2.5,22.38)$) rectangle ($(O)+(10.5,22.44)$);
+  \node[anchor=north west, align=left, inner sep=0, text width=15.6cm,
+        font=\itshape\large, text=black!78] at ($(O)+(2.5,22.05)$)
+    {\SubtituloTema};
+
+  % --- Autoría y afiliación ----------------------------------------------
+  \node[anchor=north west, align=left, inner sep=0, text width=7.6cm, font=\large] at ($(O)+(2.5,20.75)$)
+    {{\scshape\small\color{azulmedio}\textls[80]{Autor}}\\[2pt]
+     {\color{black!88}\miNombre\textsuperscript{\,a}}};
+  \node[anchor=north west, align=left, inner sep=0, text width=7.6cm, font=\large] at ($(O)+(10.9,20.75)$)
+    {{\scshape\small\color{azulmedio}\textls[80]{Profesor}}\\[2pt]
+     {\color{black!88}\miProfesor\textsuperscript{\,a}}};
+  \node[anchor=north west, align=left, inner sep=0, text width=16cm, font=\footnotesize] at ($(O)+(2.5,19.55)$)
+    {\color{grispizarra}\textsuperscript{a}\,\Afiliacion};
+
+  % --- Resumen (izquierda) y emblema (derecha) ---------------------------
+  \node[anchor=north west, inner sep=0] at ($(O)+(2.5,18.6)$) {%
+    \begin{tcolorbox}[enhanced, width=10.1cm, sharp corners, frame hidden, boxrule=0pt,
+        interior style={left color=azulfondo, right color=white},
+        borderline west={2pt}{0pt}{azulmedio},
+        left=9pt, right=6pt, top=6pt, bottom=6pt]
+      {\small\scshape\color{azulprof}\textls[90]{Resumen}}\par\smallskip
+      {\footnotesize\ResumenPortada}
+    \end{tcolorbox}};
+
+  \begin{scope}[shift={($(O)+(15.7,15.4)$)}, x=1.06cm, y=1.06cm]
+    \begin{scope}
+      \clip[rounded corners=3pt] (-2.6,-2.0) rectangle (2.6,2.0);
+      \fill[inner color=white, outer color=azulfondo] (-2.6,-2.0) rectangle (2.6,2.0);
+      \tikzset{numLC/.style={azulacero!85, line width=0.42pt},
+               numEQ/.style={azulcielo!80, line width=0.3pt, densely dashed},
+               numFL/.style={-{Stealth[length=3pt, width=2.5pt]}, azulacero, line width=0.42pt}}
+      \input{figuras/datos/punta_eq}
+      \input{figuras/datos/punta_lc}
+      \input{figuras/datos/punta_fl}
+      \input{figuras/datos/punta_forma}
+      \fill[top color=azulvelo!70!white, bottom color=metal] \formagota;
+      \input{figuras/datos/punta_sigma}
+    \end{scope}
+    \draw[azulclaro, line width=0.45pt, rounded corners=3pt] (-2.6,-2.0) rectangle (2.6,2.0);
+    \node[anchor=north, align=center, text width=5.3cm, inner sep=0, font=\scriptsize,
+          text=grispizarra] at (0,-2.2)
+      {Líneas de campo y equipotenciales de un conductor cargado con punta;
+       el color del contorno indica la densidad superficial $\sigma$.};
+  \end{scope}
+
+  % --- Palabras clave y clasificación -----------------------------------
+  \node[anchor=north west, align=justify, inner sep=0, text width=16cm, font=\small] at ($(O)+(2.5,11.0)$)
+    {{\scshape\color{azulmedio}\textls[60]{Palabras clave}}\enspace
+     conductor perfecto · equilibrio electrostático · efecto punta · presión electrostática ·
+     jaula de Faraday · coeficientes de potencial · coeficientes de capacidad e influencia ·
+     influencia total · condensador\\[4pt]
+     {\scshape\color{azulmedio}\textls[60]{Clasificación PACS}}\enspace
+     41.20.Cv (Electrostática; ecuaciones de Poisson y Laplace, problemas de contorno)};
+
+  % --- Expresiones centrales del tema ---------------------------------------
+  \draw[azulclaro, line width=0.45pt] ($(O)+(2.5,8.55)$) -- ($(O)+(18.5,8.55)$);
+  \node[anchor=north, align=center, inner sep=0, text width=16cm] at ($(O)+(10.5,8.1)$)
+    {\color{azulprof}
+     $\displaystyle\vE\big|_{\Sc^{+}}=\frac{\sigma}{\eo}\,\un\qquad
+      \Pel=\frac{\sigma^{2}}{2\eo}\qquad
+      \phi_i=\sum_{j=1}^{N}p_{ij}\,Q_j\qquad
+      Q_i=\sum_{j=1}^{N}c_{ij}\,\phi_j\qquad
+      C=\frac{1}{p_{11}+p_{22}-2p_{12}}$};
+  \draw[azulclaro, line width=0.45pt] ($(O)+(2.5,6.25)$) -- ($(O)+(18.5,6.25)$);
+
+  % --- Tipo de documento, lugar y curso ------------------------------------
+  \node[anchor=south, align=center, inner sep=0, text width=16cm] at ($(O)+(10.5,2.2)$)
+    {{\color{azulprof}\scshape\large\textls[100]{\tipotrabajo}}\\[5pt]
+     {\color{grispizarra}\scshape\small\textls[80]{\miUbicacion}}};
+\end{tikzpicture}
+\tikzexternalenable
+\end{titlepage}

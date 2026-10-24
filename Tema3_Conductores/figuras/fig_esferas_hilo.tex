@@ -1,0 +1,59 @@
+% =========================================================================
+%  Figura: efecto punta. (a) Dos esferas lejanas unidas por un hilo;
+%  (b) y (c) descomposición de la repulsión de una carga vecina, situada a la
+%  misma distancia de arco s = 0,9 sobre superficies de radios R = 3 y R = 0,8.
+%  Con P en el origen y N en el arco, F ∝ (P - N)/|P - N|:
+%    R = 3:   N = (-0.887,-0.134),  F = (1.187, 0.179)
+%    R = 0,8: N = (-0.722,-0.456),  F = (1.014, 0.641)
+% =========================================================================
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[font=\small]
+  % ---------------------------------------------------------------- (a)
+  \begin{scope}
+    \shade[ball color=azulvelo] (0,0) circle (1.0);
+    \draw[azulprof, line width=0.6pt] (0,0) circle (1.0);
+    \shade[ball color=azulvelo] (4.1,0.0) circle (0.35);
+    \draw[azulprof, line width=0.6pt] (4.1,0) circle (0.35);
+    \draw[azulprof, line width=0.8pt] (0.97,0.25) .. controls (2.0,0.9) and (3.0,0.7) .. (3.77,0.12);
+    \draw[-{Stealth[length=4pt]}, azulprof, line width=0.5pt] (0,0) -- (-0.62,0.78) node[midway, right, font=\footnotesize] {$R_1$};
+    \draw[-{Stealth[length=3.5pt]}, azulprof, line width=0.5pt] (4.1,0) -- (4.36,0.23);
+    \node[font=\footnotesize] at (4.1,-0.6) {$R_2$};
+    \node[font=\footnotesize] at (2.3,1.05) {hilo};
+    \node[font=\footnotesize, text=azulprof] at (0,-1.3) {$Q_1,\ \sigma_1$};
+    \node[font=\footnotesize, text=azulprof] at (4.1,-1.0) {$Q_2,\ \sigma_2$};
+    \node[font=\footnotesize, align=center] at (2.05,-1.95)
+      {$\displaystyle\frac{Q_1}{4\pi\eo R_1}=\frac{Q_2}{4\pi\eo R_2}\;\Longrightarrow\;\sigma_1R_1=\sigma_2R_2$};
+    \node at (2.05,-2.75) {(a)};
+  \end{scope}
+  % ---------------------------------------------------------------- (b) R = 3
+  \begin{scope}[xshift=7.4cm, yshift=0.2cm]
+    \draw[azulprof, line width=0.8pt] (0,-3) ++(118:3) arc (118:62:3);
+    \fill[cargapos] (0,0) circle (1.6pt) node[below=2pt, font=\footnotesize] {$P$};
+    \fill[azulprof] (-0.887,-0.134) circle (1.6pt) node[below, font=\footnotesize] {$N$};
+    \draw[punteado] (-0.887,-0.134) -- (0,0);
+    \draw[-{Stealth[length=4pt]}, azulprof, line width=0.9pt] (0,0) -- (1.187,0.179) node[right, font=\footnotesize] {$\vF$};
+    \draw[-{Stealth[length=4pt]}, verdeazul, line width=0.8pt] (0,0) -- (1.187,0) node[below right=-1pt, font=\footnotesize] {$\vF_t$};
+    \draw[-{Stealth[length=4pt]}, cargapos, line width=0.8pt] (0,0) -- (0,0.179);
+    \node[font=\footnotesize, text=cargapos, anchor=south] at (0,0.2) {$\vF_n$};
+    \node[font=\footnotesize, text=grispizarra] at (0,-1.15) {radio $R$ grande};
+    \node at (0,-2.95) {(b)};
+  \end{scope}
+  % ---------------------------------------------------------------- (c) R = 0,8
+  \begin{scope}[xshift=11.4cm, yshift=0.2cm]
+    \draw[azulprof, line width=0.8pt] (0,-0.8) ++(175:0.8) arc (175:5:0.8);
+    \fill[cargapos] (0,0) circle (1.6pt) node[above left=-1pt, font=\footnotesize] {$P$};
+    \fill[azulprof] (-0.722,-0.456) circle (1.6pt) node[left, font=\footnotesize] {$N$};
+    \draw[punteado] (-0.722,-0.456) -- (0,0);
+    \draw[-{Stealth[length=4pt]}, azulprof, line width=0.9pt] (0,0) -- (1.014,0.641) node[right, font=\footnotesize] {$\vF$};
+    \draw[-{Stealth[length=4pt]}, verdeazul, line width=0.8pt] (0,0) -- (1.014,0) node[below, font=\footnotesize] {$\vF_t$};
+    \draw[-{Stealth[length=4pt]}, cargapos, line width=0.8pt] (0,0) -- (0,0.641) node[above, font=\footnotesize] {$\vF_n$};
+    \node[font=\footnotesize, text=grispizarra] at (0,-1.15) {radio $R$ pequeño};
+    \node at (0,-2.95) {(c)};
+  \end{scope}
+\end{tikzpicture}
+\caption{Efecto punta. (a) Dos esferas lejanas unidas por un hilo conductor están al mismo potencial, de modo que la pequeña tiene mayor
+densidad de carga. (b,\,c) Repulsión $\vF$ que una carga vecina $N$, situada a la misma distancia sobre la superficie, ejerce sobre una carga $P$:
+su componente tangencial $\vF_t$, que tiende a separar las cargas a lo largo de la superficie, pesa menos cuanto menor es el radio de curvatura.}
+\label{fig:esferas-hilo}
+\end{figure}

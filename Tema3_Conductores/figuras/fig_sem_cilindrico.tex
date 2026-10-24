@@ -1,0 +1,50 @@
+% =========================================================================
+%  Figura (Problema 3.4): condensador cilíndrico.
+%  (a) Sección transversal: +lambda en r = a, -lambda en r = b, gaussiana.
+%  (b) Potencial de un cilindro cargado respecto de una referencia r0:
+%      phi ∝ ln(r0/R) (r <= R), ln(r0/r) (r >= R), con R = 1 y r0 = 3.
+% =========================================================================
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[font=\small]
+  % ---------------------------------------------------------------- (a)
+  \begin{scope}[x=0.95cm, y=0.95cm]
+    \foreach \a in {0,30,...,330}{
+      \draw[azulacero, line width=0.55pt, -{Stealth[length=3.5pt]}] (\a:0.78) -- (\a:1.35);
+      \draw[azulacero, line width=0.55pt] (\a:1.35) -- (\a:1.85);}
+    \draw[azulprof, line width=1.1pt] (0,0) circle (1.95);
+    \shade[ball color=azulvelo] (0,0) circle (0.7);
+    \draw[azulprof, line width=0.6pt] (0,0) circle (0.7);
+    \draw[gauss] (0,0) circle (1.3);
+    \foreach \a in {0,45,...,315}{\node[signopos, font=\tiny\bfseries] at (\a:0.55) {$+$};
+                                 \node[signoneg, font=\tiny\bfseries] at (\a+22.5:1.82) {$-$};}
+    \node[font=\scriptsize, text=cargapos] at (0,0) {$+\lambda$};
+    \node[font=\scriptsize, text=carganeg] at (1.9,1.9) {$-\lambda$};
+    \draw[-{Stealth[length=3.5pt]}, azulprof, line width=0.5pt] (0,0) -- (-125:0.7);
+    \node[font=\scriptsize] at (-0.55,-0.25) {$a$};
+    \draw[-{Stealth[length=3.5pt]}, azulprof, line width=0.5pt] (0,0) -- (-55:1.95);
+    \node[font=\scriptsize] at (1.0,-1.25) {$b$};
+    \node[font=\scriptsize, text=cargapos!85] at (-1.05,1.15) {$r$};
+    \node at (0,-2.6) {(a)};
+  \end{scope}
+  % ---------------------------------------------------------------- (b)
+  \begin{scope}[xshift=3.95cm, yshift=-2.15cm]
+    \begin{axis}[tema, width=8.0cm, height=4.9cm, xmin=0, xmax=6.2, ymin=-0.75, ymax=1.35,
+        axis x line=middle, axis y line=left,
+        xlabel={$r$}, ylabel={$\phi\,/\,\frac{Q}{2\pi\eo\ell}$}, xtick={1,3}, xticklabels={$R$,$r_0$}, ytick={-0.5,0,0.5,1},
+        xlabel style={anchor=west}]
+      \addplot[azulprof, line width=1.2pt] coordinates {(0,1.0986) (1,1.0986)};
+      \addplot[azulprof, line width=1.2pt, domain=1:6.2, samples=60] {ln(3/x)};
+      \draw[punteado] (axis cs:1,-0.75) -- (axis cs:1,1.35);
+      \fill[cargapos] (axis cs:3,0) circle (1.8pt);
+      \node[font=\scriptsize, anchor=south west, text=grispizarra] at (axis cs:3.05,0.05) {referencia $\phi(r_0)=0$};
+      \node[font=\scriptsize, anchor=west, text=grispizarra] at (axis cs:1.15,1.12) {$\ln(r_0/R)$};
+    \end{axis}
+    \node at (3.2,-1.35) {(b)};
+  \end{scope}
+\end{tikzpicture}
+\caption{Problema 3.4. (a) Sección transversal del condensador cilíndrico (longitud $\ell$): la gaussiana coaxial de radio $a<r<b$ solo encierra la carga de la
+armadura interior. (b) Potencial de un cilindro cargado de radio $R$: como diverge en el infinito, se refiere a una distancia arbitraria $r_0$; las diferencias
+de potencial, y por tanto la capacidad, no dependen de esa elección.}
+\label{fig:sem-cilindrico}
+\end{figure}

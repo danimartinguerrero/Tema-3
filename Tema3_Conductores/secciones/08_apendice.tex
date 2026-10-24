@@ -1,0 +1,44 @@
+% =========================================================================
+\appendix
+\section{Formulario del Tema 3}\label{sec:apendice}
+% =========================================================================
+La \cref{tab:formulario} reúne las expresiones centrales del tema, con la referencia al enunciado en que se demuestran.
+
+\begingroup
+\centering
+\captionof{table}{Formulario del Tema 3. Conductores en equilibrio electrostático ($\kc=1/4\pi\eo$, $\phi(\infty)=0$).}
+\label{tab:formulario}
+\small
+\renewcommand{\arraystretch}{1.55}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{4.6cm}>{\centering\arraybackslash}X>{\raggedleft\arraybackslash}p{2.1cm}@{}}
+  \toprule
+  Magnitud o resultado & Expresión & Referencia\\
+  \midrule
+  \multicolumn{3}{@{}l}{\textsc{\color{azulmedio}Conductor en equilibrio}}\\
+  Interior & $\vE=\vc{0}$,\quad $\phi=\mathrm{cte}$,\quad $\rho=0$ & \cref{teo:propiedades}\\
+  Campo junto a la superficie & $\vE=\dfrac{\sigma}{\eo}\,\un$ & \cref{eq:campo-superficie}\\
+  Esferas unidas por un hilo & $\sigma_1R_1=\sigma_2R_2$ & \cref{prop:punta}\\
+  Campo del resto de la carga & $\Erest=\dfrac{\sigma}{2\eo}\,\un=\tfrac12(\vE_1+\vE_2)$ & \cref{lem:resto}\\
+  Presión electrostática & $\Pel=\dfrac{\sigma^{2}}{2\eo}=\dfrac{\eo}{2}E^{2}$ (hacia fuera) & \cref{teo:presion}\\
+  Ecuaciones de Poisson y Laplace & $\Lap\phi=-\rho/\eo$,\quad $\Lap\phi=0$ & \cref{prop:poisson}\\
+  Cavidad vacía & $\Ecav=\vc{0}$ & \cref{teo:faraday}\\
+  Regla de las caras & $\Qint=-q$,\quad $\Qext=Q+q$ & \cref{prop:caras}\\
+  Capacidad de un conductor aislado & $C=Q/\phi$,\quad $C_{\text{esfera}}=4\pi\eo R$ & \cref{teo:capacidad}\\
+  \midrule
+  \multicolumn{3}{@{}l}{\textsc{\color{azulmedio}Sistemas de conductores}}\\
+  Coeficientes de potencial & $\phi_i=\sum_jp_{ij}Q_j$,\quad $p_{ij}=\dfrac{\phi_i}{Q_j}\Big|_{Q_{k\neq j}=0}$ & \cref{teo:pij}\\
+  Propiedades & $p_{ij}=p_{ji}$,\quad $p_{jj}\ge p_{ij}\ge0$ & \cref{teo:pij-prop}\\
+  Esferas concéntricas delgadas & $p_{ij}=\kc/\max(R_i,R_j)$ & \cref{prop:reglas}\\
+  Esferas lejanas & $p_{ii}\simeq\kc/R_i$,\quad $p_{ij}\simeq\kc/d_{ij}$ & \cref{prop:reglas}\\
+  Coeficientes de capacidad e influencia & $Q_i=\sum_jc_{ij}\phi_j$,\quad $\Cm=\Pm^{-1}$,\quad $c_{ij}=\dfrac{Q_i}{\phi_j}\Big|_{\phi_{k\neq j}=0}$ & \cref{def:cij}\\
+  Propiedades & $c_{ij}=c_{ji}$,\quad $c_{jj}>0$,\quad $c_{ij}\le0$ & \cref{teo:cij-prop}\\
+  Desigualdad de influencia & $c_{jj}\ge-\sum_{i\neq j}c_{ij}$ (igualdad: influencia total) & \cref{teo:influencia}\\
+  Inversa $2\times2$ & $\Cm=\dfrac{1}{p_{11}p_{22}-p_{12}^{2}}\begin{pmatrix}p_{22}&-p_{12}\\-p_{12}&p_{11}\end{pmatrix}$ & \cref{ej:esferico}\\
+  \midrule
+  \multicolumn{3}{@{}l}{\textsc{\color{azulmedio}Condensadores}}\\
+  Capacidad & $C=\dfrac{Q}{\DV}=\dfrac{1}{p_{11}+p_{22}-2p_{12}}=\dfrac{c_{11}c_{22}-c_{12}^{2}}{c_{11}+c_{22}+2c_{12}}$ & \cref{teo:cap-coef}\\
+  Armadura encerrada & $C=c_{11}=-c_{12}$ & \cref{cor:encerrado}\\
+  Esférico, cilíndrico, plano & $4\pi\eo\dfrac{ab}{b-a}$,\quad $\dfrac{2\pi\eo\ell}{\ln(b/a)}$,\quad $\eo\dfrac{A}{d}$ & \cref{tab:canonicos}\\
+  \bottomrule
+\end{tabularx}
+\par\endgroup

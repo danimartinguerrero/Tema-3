@@ -1,0 +1,130 @@
+% =========================================================================
+%  Estilos y macros gráficas comunes del Tema 3
+%  - \mapcolor{t}: escala cromática azul (t en [0,1]); define el color mapc
+%  - Estilos TikZ heredados de los temas 0, 1 y 2 (ejes, vectores, versores…)
+%    con la paleta azul del documento
+%  - Macros que dibujan los datos numéricos de figuras/datos/*.tex
+%    (\LC, \EQ, \FL, \CP, \CN, \SG), generados por scripts/generar_datos.py
+% =========================================================================
+
+% --- Escala cromática azul (5 tramos: del velo a la tinta) -------------------
+\definecolor{cm0}{HTML}{DCE7F5}
+\definecolor{cm1}{HTML}{9DB9DD}
+\definecolor{cm2}{HTML}{3A6EA5}
+\definecolor{cm3}{HTML}{1F4E89}
+\definecolor{cm4}{HTML}{0B2545}
+\newcommand{\mapcolor}[1]{%
+  \pgfmathsetmacro{\mt}{min(max(#1,0),0.9999)*4}%
+  \pgfmathtruncatemacro{\mi}{floor(\mt)}%
+  \pgfmathtruncatemacro{\mj}{\mi+1}%
+  \pgfmathsetmacro{\mf}{100*(\mt-\mi)}%
+  \colorlet{mapc}{cm\mj!\mf!cm\mi}}
+
+% --- Estilos TikZ generales ------------------------------------------------
+\tikzset{
+  >=Stealth,
+  eje/.style={->, line width=0.55pt, grispizarra},
+  vect/.style={->, line width=1pt, azulprof},
+  vectrojo/.style={->, line width=1pt, cargapos},
+  vectverde/.style={->, line width=1pt, verdeazul},
+  fino/.style={line width=0.4pt, grispizarra},
+  punteado/.style={densely dotted, line width=0.5pt, grispizarra},
+  etiq/.style={font=\small, text=black!85},
+  cuadro/.style={draw=azulclaro, line width=0.4pt, fill=white, inner sep=2pt},
+  orienta/.style={decoration={markings, mark=at position 0.55 with {\arrow{Stealth[length=5pt]}}}, postaction={decorate}},
+  % conductores: relleno metálico en degradado y contorno en azul tinta
+  conductor/.style={draw=azulprof, line width=0.6pt, top color=azulvelo!80!white,
+                    bottom color=metal, shading angle=0},
+  conductorplano/.style={draw=azulprof, line width=0.6pt, fill=metal!70!white},
+  metalrayado/.style={draw=azulprof, line width=0.6pt, fill=azulvelo,
+                      postaction={pattern=north east lines, pattern color=azulcielo!70}},
+  % superficies gaussianas
+  gauss/.style={densely dashed, line width=0.75pt, cargapos!85},
+  gaussazul/.style={densely dashed, line width=0.7pt, azulacero},
+  % líneas de campo y equipotenciales
+  lcampo/.style={azulacero, line width=0.55pt, postaction={decorate},
+                 decoration={markings, mark=at position 0.5 with {\arrow{Stealth[length=3.6pt]}}}},
+  lcampo2/.style={azulacero, line width=0.55pt, postaction={decorate},
+                 decoration={markings, mark=at position 0.3 with {\arrow{Stealth[length=3.6pt]}},
+                             mark=at position 0.75 with {\arrow{Stealth[length=3.6pt]}}}},
+  lequi/.style={azulcielo, line width=0.45pt, densely dashed},
+  % tierra
+  tierra/.pic={\draw[line width=0.6pt, azulprof] (0,0) -- (0,-0.18)
+                 (-0.18,-0.18) -- (0.18,-0.18) (-0.11,-0.25) -- (0.11,-0.25)
+                 (-0.045,-0.32) -- (0.045,-0.32);},
+}
+
+% Cargas puntuales y signos de carga superficial
+\tikzset{
+  qpos/.style={circle, fill=cargapos, draw=cargapos!70!black, line width=0.4pt, inner sep=0pt,
+               minimum size=9pt, text=white, font=\scriptsize\bfseries},
+  qneg/.style={circle, fill=carganeg, draw=azulprof, line width=0.4pt, inner sep=0pt,
+               minimum size=9pt, text=white, font=\scriptsize\bfseries},
+  signopos/.style={text=cargapos, font=\scriptsize\bfseries, inner sep=0pt},
+  signoneg/.style={text=carganeg, font=\scriptsize\bfseries, inner sep=0pt},
+}
+\newcommand{\cargaP}[1]{\node[qpos] at (#1) {$+$};}
+\newcommand{\cargaN}[1]{\node[qneg] at (#1) {$-$};}
+
+% --- Estilo base de ejes pgfplots (como en los temas anteriores) -----------
+\pgfplotsset{
+  tema/.style={
+    tick label style={font=\scriptsize}, label style={font=\small},
+    axis lines=left, axis line style={grispizarra},
+    grid=major, grid style={grisclaro, line width=0.35pt},
+    every tick/.style={grispizarra},
+    legend style={font=\scriptsize, draw=none, fill=white, fill opacity=0.85,
+                  text opacity=1},
+    legend cell align=left,
+    /pgf/number format/use comma,
+  },
+  marco/.style={
+    tick label style={font=\scriptsize}, label style={font=\small},
+    axis line style={grispizarra!80, line width=0.5pt},
+    every tick/.style={grispizarra}, tick align=inside,
+    grid=major, grid style={grisclaro!70, line width=0.3pt},
+    /pgf/number format/use comma,
+    legend style={font=\scriptsize, draw=none, fill=white, fill opacity=0.85,
+                  text opacity=1},
+    legend cell align=left,
+  },
+}
+
+% =========================================================================
+%  Macros que interpretan los datos numéricos (figuras/datos/*.tex).
+%  Cada figura puede redefinirlas localmente antes de \input.
+% =========================================================================
+\tikzset{
+  numLC/.style={azulmedio, line width=0.45pt},
+  numEQ/.style={azulcielo, line width=0.35pt},
+  numFL/.style={-{Stealth[length=3.4pt, width=2.8pt]}, azulmedio, line width=0.45pt},
+}
+\newcommand{\LC}[1]{\draw[numLC] plot coordinates {#1};}
+\newcommand{\EQ}[1]{\draw[numEQ] plot coordinates {#1};}
+\newcommand{\FL}[3]{\draw[numFL] (#1,#2) -- ++(#3:0.012);}
+\newcommand{\CP}[2]{\node[signopos] at (#1,#2) {$+$};}
+\newcommand{\CN}[2]{\node[signoneg] at (#1,#2) {$-$};}
+\newcommand{\SG}[5]{\mapcolor{#5}\draw[mapc, line width=1.6pt, line cap=round] (#1,#2) -- (#3,#4);}
+
+% Marco fino con marcas (ventana [x0,x1] x [y0,y1]) para los paneles numéricos
+\newcommand{\marcopanel}[4]{%
+  \draw[azulclaro, line width=0.5pt] (#1,#3) rectangle (#2,#4);}
+
+% =========================================================================
+%  Primitivas 3D para tdplot (vista fija: \tdplotsetmaincoords{70}{125}),
+%  heredadas de los temas 1 y 2.
+% =========================================================================
+\def\VA{125}
+% \tdCirc[opciones]{radio}{z}   (mitad frontal continua, trasera a trazos)
+\newcommand{\tdCirc}[3][]{%
+  \draw[#1, domain=\VA-180:\VA, samples=36, variable=\tdt]
+    plot ({#2*cos(\tdt)},{#2*sin(\tdt)},{#3});
+  \draw[#1, densely dashed, domain=\VA:\VA+180, samples=36, variable=\tdt]
+    plot ({#2*cos(\tdt)},{#2*sin(\tdt)},{#3});}
+% \tdEsfera{radio}{color}  (esfera sombreada con ecuador)
+\newcommand{\tdEsfera}[2]{%
+  \begin{scope}[tdplot_screen_coords]
+    \shade[ball color=azulvelo, opacity=0.55] (0,0) circle (#1);
+    \draw[#2, line width=0.7pt] (0,0) circle (#1);
+  \end{scope}
+  \tdCirc[#2!60, line width=0.4pt]{#1}{0}}

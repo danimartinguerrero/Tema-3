@@ -1,0 +1,295 @@
+% =========================================================================
+\section{Sistemas de conductores}\label{sec:sistemas}
+% =========================================================================
+Si en lugar de un conductor tenemos un sistema de $N$ conductores finitos situados a distancias finitas, cada uno influye en todos los demás: la
+carga de uno induce cargas en los otros, que a su vez modifican su potencial. Lo que nos interesa es la relación entre los potenciales
+$\phi_i$ de los conductores y sus cargas $Q_i$. Veremos que es \emph{lineal} y que sus coeficientes, introducidos por Maxwell en su
+\emph{Tratado}~\cite{MAXWELL}, dependen solo de la geometría.
+
+\input{figuras/fig_sistema_geom}
+
+% -------------------------------------------------------------------------
+\subsection{Coeficientes de potencial}\label{sec:pij}
+% -------------------------------------------------------------------------
+\paso{La idea subyacente.} Supongamos que solo el conductor $j$ está cargado, $Q_j\neq0$ y $Q_k=0$ para $k\neq j$. Aparecen densidades de carga
+$\sigma(\rp)$ en todos los conductores (inducidas en los neutros, con carga neta nula), tales que $\vE=\vc{0}$ en el interior de cada uno, y con ellas un
+potencial $\phi(\vc{r})$ y un campo $\vE(\vc{r})$ en todo el espacio. Nos interesan los potenciales de los conductores, $\phi_i^{(j)}$, que son constantes.
+Si multiplicamos $Q_j$ por un factor, la densidad de carga en todos los conductores se multiplica por el mismo factor (la distribución \emph{es
+única}, \cref{teo:unicidad}, y es lineal en $Q_j$), y con ella el potencial y el campo. Por tanto $\phi_i^{(j)}=p_{ij}\,Q_j$, con un coeficiente de
+proporcionalidad $p_{ij}$ que tiene que ver solo con la geometría del conjunto. Si ahora todas las cargas son no nulas, las distribuciones
+inducidas por cada una son independientes y, por la linealidad de las ecuaciones, se superponen.
+
+\begin{teorema}[Coeficientes de potencial]\label{teo:pij}
+En un sistema de $N$ conductores, el potencial de cada uno depende linealmente de las cargas de todos, incluida la suya:
+\begin{equation}\label{eq:pij}
+  \resalta{\phi_i=\sum_{j=1}^{N}p_{ij}\,Q_j,\qquad i=1,\dots,N,}\qquad\text{es decir,}\qquad\vphi=\Pm\,\vQ ,
+\end{equation}
+donde los \emph{coeficientes de potencial} $p_{ij}$ dependen solo de la geometría del sistema (y del medio) y admiten la interpretación
+\begin{equation}\label{eq:pij-def}
+  p_{ij}=\left.\frac{\phi_i}{Q_j}\right|_{Q_k=0,\ k\neq j}:
+\end{equation}
+$p_{ij}$ es el potencial que adquiere el conductor $i$ por cada unidad de carga que ponemos en el conductor $j$, con todos los demás descargados.
+Su unidad es $[p_{ij}]=\mathrm{V/C}=\mathrm{F^{-1}}$.
+\end{teorema}
+\begin{proof}
+Para cada $j$, sea $u^{(j)}(\vc{r})$ el potencial del \emph{estado elemental} $j$: el conductor $j$ con carga unidad y los demás aislados y descargados,
+con $u^{(j)}\to0$ en el infinito. Existe y es único (\cref{teo:unicidad}\,(b)). Definimos $p_{ij}$ como el valor (constante) de $u^{(j)}$ sobre el
+conductor $i$. Dadas cargas arbitrarias $Q_1,\dots,Q_N$, consideremos
+\[
+  \phi(\vc{r})=\sum_{j=1}^{N}Q_j\,u^{(j)}(\vc{r}) .
+\]
+Esta función es armónica fuera de los conductores (combinación lineal de armónicas), se anula en el infinito, es constante sobre cada conductor
+$i$, con valor $\sum_jQ_j\,p_{ij}$, y la carga que determina sobre el conductor $i$ es, por linealidad del flujo,
+$\sum_jQ_j\,\delt{i}{j}=Q_i$. Cumple, por tanto, todas las condiciones del problema con cargas $Q_i$, y por el segundo teorema de unicidad es su
+solución. Evaluándola sobre el conductor $i$ se obtiene \cref{eq:pij}. Como cada $u^{(j)}$ solo depende de la forma y posición de los conductores,
+lo mismo ocurre con los $p_{ij}$; tomando $Q_k=0$ para $k\neq j$ en \cref{eq:pij} queda $\phi_i=p_{ij}Q_j$, que es \cref{eq:pij-def}.
+\end{proof}
+
+\begin{observacion}[Expresión integral]\label{obs:pij-integral}
+Es instructivo escribir explícitamente la dependencia en la geometría (\cref{fig:sistema-geom}). El potencial en un punto cualquiera, en
+particular sobre el conductor $i$, es la suma de las contribuciones de las cargas superficiales de todos los conductores,
+\[
+  \phi(\vc{r})=\frac{1}{4\pi\eo}\sum_{j=1}^{N}\oiint_{S_j'}\frac{\sigma_j(\rp_j)}{R_j}\,\dif S_j',\qquad
+  \phi_i=\frac{1}{4\pi\eo}\sum_{j=1}^{N}\oiint_{S_j'}\frac{\sigma_j(\rp_j)}{R_{ij}}\,\dif S_j' ,
+\]
+con $R_{ij}=\norm{\vc{r}_i-\rp_j}$. Multiplicando por $\sigma_i$ e integrando sobre $S_i'$, y usando que $\phi_i$ es constante sobre $S_i'$,
+$\oiint_{S_i'}\phi_i\,\sigma_i\,\dif S_i'=\phi_iQ_i$, de modo que
+\[
+  \phi_i=\sum_{j=1}^{N}\left[\frac{1}{4\pi\eo}\,\frac{1}{Q_iQ_j}\oiint_{S_i'}\oiint_{S_j'}\frac{\sigma_i\,\sigma_j}{R_{ij}}\,\dif S_j'\,\dif S_i'\right]Q_j ,
+\]
+y el corchete hace el papel de $p_{ij}$. Si $Q_i$ o $Q_j$ varían, $\sigma_i$ o $\sigma_j$ lo hacen en la misma proporción, y el corchete queda inalterado.
+Esta lectura es exacta cuando se aplica al estado elemental $j$ (con $\sigma_i,\sigma_j$ las densidades de ese estado); el \cref{teo:pij} le da
+forma rigurosa sin necesidad de conocer las densidades.
+\end{observacion}
+
+\begin{observacion}[Cómo se calculan en la práctica]\label{obs:pij-practica}
+En general, los $p_{ij}$ \emph{no} se calculan con su expresión integral, sino a través de su interpretación \cref{eq:pij-def}: se carga un conductor,
+se dejan los demás descargados y se calculan los potenciales de todos. Un sistema de $N$ conductores tiene $N^{2}$ coeficientes de potencial, aunque,
+como vamos a ver, solo $N(N+1)/2$ son independientes.
+\end{observacion}
+
+\paso{Propiedades.} Para demostrarlas necesitamos un resultado clásico de Green~\cite{GREEN}.
+
+\begin{lema}[Teorema de reciprocidad de Green]\label{lem:reciprocidad}
+Sean dos estados de equilibrio del mismo sistema de conductores, con cargas $Q_i$ y potenciales $\phi_i$ en el primero, y $Q_i'$ y $\phi_i'$ en el segundo.
+Entonces
+\begin{equation}\label{eq:reciprocidad}
+  \sum_{i=1}^{N}Q_i\,\phi_i'=\sum_{i=1}^{N}Q_i'\,\phi_i .
+\end{equation}
+\end{lema}
+\begin{proof}
+Sean $\sigma$ y $\sigma'$ las densidades superficiales de ambos estados. Como $\phi'$ es constante sobre cada conductor,
+\[
+  \sum_iQ_i\,\phi_i'=\sum_i\oiint_{\Sc_i}\sigma(\vc{r})\,\phi'(\vc{r})\,\dsc
+  =\frac{1}{4\pi\eo}\oiint_{\Sc}\oiint_{\Sc}\frac{\sigma(\vc{r})\,\sigma'(\rp)}{\norm{\vc{r}-\rp}}\,\dSp\,\dsc ,
+\]
+donde $\Sc=\bigcup_i\Sc_i$ y hemos sustituido $\phi'$ por su expresión de Coulomb. El integrando es simétrico al intercambiar $(\vc{r},\sigma)$ con
+$(\rp,\sigma')$, de modo que la integral doble es también igual a $\sum_iQ_i'\,\phi_i$.
+\end{proof}
+
+\begin{teorema}[Propiedades de los coeficientes de potencial]\label{teo:pij-prop}
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item Solo dependen de la geometría del conjunto de conductores y del medio.
+  \item Son simétricos: $p_{ij}=p_{ji}$. Si una carga $Q$ en el conductor $j$ lleva al conductor $i$ a un potencial $\phi$, la misma carga $Q$ colocada en $i$
+        lleva a $j$ al mismo potencial $\phi$.
+  \item Son no negativos y el diagonal domina en su columna: $p_{jj}\ge p_{ij}\ge0$, y $p_{jj}>0$.
+\end{enumerate}
+\end{teorema}
+\begin{proof}
+(a) Es parte del \cref{teo:pij}.
+
+(b) Aplicamos el \cref{lem:reciprocidad} al estado elemental $j$ ($Q_k=\delt{k}{j}$, $\phi_k=p_{kj}$) y al estado elemental $i$
+($Q_k'=\delt{k}{i}$, $\phi_k'=p_{ki}$): $\sum_k\delt{k}{j}\,p_{ki}=\sum_k\delt{k}{i}\,p_{kj}$, es decir, $p_{ji}=p_{ij}$.
+
+(c) En el estado elemental $j$, el conductor $j$ tiene carga positiva y los demás son neutros. Por el \cref{lem:maximo}, el máximo y el mínimo del
+potencial se alcanzan sobre algún conductor o en el infinito, donde $\phi=0$. Sea $m$ el conductor (o el infinito) con el potencial \emph{máximo}. Ninguna
+línea de campo puede llegar a él (vendría de un potencial mayor, \cref{cor:lineas}), luego $\sigma\ge0$ en toda su superficie. Si $m\neq j$ fuese un
+conductor neutro, la carga total nula con $\sigma\ge0$ obligaría a que $\sigma\equiv0$, es decir, a que $\partial\phi/\partial n=0$ en toda su
+superficie, lo que es imposible en el máximo de una función armónica no constante (lema de Hopf~\cite{KELLOGG}). Así, el máximo se alcanza en $j$
+(quizá compartido con algún otro conductor, si está encerrado por $j$) y $p_{jj}\ge p_{ij}$. Análogamente, en el conductor con el potencial
+\emph{mínimo} no puede nacer ninguna línea, luego $\sigma\le0$ en él, y no puede ser ni $j$, que tiene carga positiva, ni un conductor neutro, por
+el mismo argumento: el mínimo se alcanza en el infinito, y $p_{ij}\ge0$. Por
+último, de $j$ salen líneas, que acaban a menor potencial, luego $p_{jj}>0$.
+\end{proof}
+
+\begin{observacion}[Lectura física del signo]\label{obs:pij-signo}
+Si todas las cargas son positivas, todos los potenciales son positivos. Las líneas de campo que salen del conductor cargado llegan a los demás o al
+infinito; un conductor neutro que recibe líneas por una cara las reemite por la otra (\cref{fig:sistema-libre}), y como el potencial decrece a lo
+largo de las líneas, $\phi_j>\phi_{i\neq j}>\phi_{\infty}=0$. El potencial de un conductor no es solo «suyo»: depende de la carga de todo el sistema,
+incluida la propia.
+\end{observacion}
+
+\input{figuras/fig_sistema_libre}
+
+% -------------------------------------------------------------------------
+\subsection{Ejemplo: dos esferas concéntricas}\label{sec:ej-concentricas}
+% -------------------------------------------------------------------------
+\begin{ejemplo}[Esfera y cáscara esférica concéntricas]\label{ej:concentricas}
+Una esfera conductora de radio $R_1$ (conductor~1) está rodeada por una cáscara esférica conductora delgada y concéntrica de radio $R_2>R_1$
+(conductor~2). Calculemos sus coeficientes de potencial.
+
+\emph{Estado $Q_1\neq0$, $Q_2=0$.} La cáscara neutra adquiere $-Q_1$ en su cara interior y $+Q_1$ en la exterior, ambas en el mismo radio, de modo que
+no modifica el campo. Por Gauss, el campo es el de una carga $Q_1$ en el centro para $r>R_1$, y el potencial (\figpanel{fig:concentricas}{b})
+\[
+  \phi(r)=\begin{cases}\dfrac{Q_1}{4\pi\eo r}, & r\ge R_1,\\[8pt] \dfrac{Q_1}{4\pi\eo R_1}, & r\le R_1,\end{cases}
+  \qquad\Longrightarrow\qquad p_{11}=\left.\frac{\phi_1}{Q_1}\right|_{Q_2=0}=\frac{1}{4\pi\eo R_1},\quad
+  p_{21}=\left.\frac{\phi_2}{Q_1}\right|_{Q_2=0}=\frac{1}{4\pi\eo R_2}.
+\]
+\emph{Estado $Q_2\neq0$, $Q_1=0$.} La carga de la cáscara crea campo solo fuera de ella, y dentro el potencial es constante (\figpanel{fig:concentricas}{c}):
+\[
+  \phi(r)=\begin{cases}\dfrac{Q_2}{4\pi\eo r}, & r\ge R_2,\\[8pt] \dfrac{Q_2}{4\pi\eo R_2}, & r\le R_2,\end{cases}
+  \qquad\Longrightarrow\qquad p_{12}=\left.\frac{\phi_1}{Q_2}\right|_{Q_1=0}=\frac{1}{4\pi\eo R_2}=p_{22}.
+\]
+En resumen,
+\begin{equation}\label{eq:p-concentricas}
+  \Pm=\frac{1}{4\pi\eo}\begin{pmatrix}1/R_1 & 1/R_2\\ 1/R_2 & 1/R_2\end{pmatrix},
+\end{equation}
+que es simétrica ($p_{12}=p_{21}$), de elementos positivos, y con $p_{11}>p_{21}$ y $p_{22}=p_{12}$: la igualdad del \cref{teo:pij-prop}\,(c) se alcanza
+porque la esfera interior está encerrada por la cáscara y comparte su potencial cuando solo esta está cargada.
+\end{ejemplo}
+
+\input{figuras/fig_concentricas}
+
+El ejemplo se generaliza de inmediato, y da dos reglas muy útiles para los seminarios.
+
+\begin{proposicion}[Reglas prácticas para esferas]\label{prop:reglas}
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item \emph{Esferas concéntricas delgadas} de radios $R_1<R_2<\dots<R_N$:
+        \begin{equation}\label{eq:regla-concentricas}
+          \resalta{p_{ij}=\frac{1}{4\pi\eo}\,\frac{1}{\max(R_i,R_j)} .}
+        \end{equation}
+  \item \emph{Esferas lejanas} de radios $R_i$ con distancias entre centros $d_{ij}\gg R_i,R_j$: al orden más bajo en $R/d$,
+        \begin{equation}\label{eq:regla-lejanas}
+          \resalta{p_{ii}\simeq\frac{1}{4\pi\eo R_i},\qquad p_{ij}\simeq\frac{1}{4\pi\eo\,d_{ij}}\quad(i\neq j).}
+        \end{equation}
+\end{enumerate}
+\end{proposicion}
+\begin{proof}
+(a) En el estado elemental $j$, las cáscaras neutras llevan cargas opuestas en sus dos caras (en el mismo radio) y no modifican el campo; por Gauss,
+este vale $\kc/r^{2}$ fuera de $R_j$ y es nulo dentro. El potencial es $\kc/r$ para $r\ge R_j$ y constante, $\kc/R_j$, para $r\le R_j$. El conductor $i$,
+en el radio $R_i$, tiene potencial $\kc/R_i$ si $R_i\ge R_j$ y $\kc/R_j$ si $R_i\le R_j$, es decir, $\kc/\max(R_i,R_j)$.
+
+(b) En el estado elemental $j$, la carga de la esfera $j$ apenas se ve perturbada por las demás, que están muy lejos: se reparte casi uniformemente y
+su potencial es el de una esfera aislada, $\kc/R_j$. Vista desde la esfera $i$, a distancia $d_{ij}$, es una carga puntual que crea un potencial
+$\kc/d_{ij}$; la esfera $i$, neutra, solo adquiere una distribución inducida de carga neta nula (dipolar), cuya contribución a los potenciales es de
+orden superior en $R/d$.
+\end{proof}
+
+La regla (a) se recuerda así: cada carga «se ve» desde su propio radio hacia dentro con el potencial de su superficie, y desde fuera como una
+carga puntual. Con tres esferas,
+\[
+  \Pm=\kc\begin{pmatrix}1/R_1 & 1/R_2 & 1/R_3\\ 1/R_2 & 1/R_2 & 1/R_3\\ 1/R_3 & 1/R_3 & 1/R_3\end{pmatrix}:
+\]
+cada fila contiene el inverso del radio propio y los inversos de los radios mayores.
+
+% -------------------------------------------------------------------------
+\subsection{Coeficientes de capacidad e influencia}\label{sec:cij}
+% -------------------------------------------------------------------------
+Normalmente lo que se puede fijar es el potencial de un conductor (conectándolo a tierra o a una batería), y lo que se pregunta es qué carga adquiere.
+Este es el fundamento de los coeficientes de capacidad e influencia: hay que invertir \cref{eq:pij}.
+
+\begin{lema}[La matriz de coeficientes de potencial es definida positiva]\label{lem:definida}
+Para todo vector de cargas $\vQ\neq\vc{0}$,
+\begin{equation}\label{eq:definida}
+  \vQ\Tt\Pm\,\vQ=\sum_{i,j}Q_i\,p_{ij}\,Q_j=\sum_iQ_i\,\phi_i=\eo\iiint_{\Omega}\norm{\vE}^{2}\dV>0 .
+\end{equation}
+En consecuencia, $\Pm$ es invertible, $\det\Pm>0$, y su inversa es también simétrica y definida positiva.
+\end{lema}
+\begin{proof}
+Con las notaciones de la demostración del \cref{teo:unicidad}, aplicando el teorema de la divergencia a $\phi\nab\phi$ en la región exterior $\Omega$,
+en la que $\Lap\phi=0$,
+\[
+  \eo\iiint_{\Omega}\norm{\nab\phi}^{2}\dV=-\eo\sum_i\phi_i\oiint_{\Sc_i}\nab\phi\cdot\un\,\dsc=\sum_i\phi_i\,Q_i .
+\]
+El primer miembro es positivo salvo que $\vE=-\nab\phi$ sea idénticamente nulo, en cuyo caso todas las cargas (los flujos) son nulas. Una matriz simétrica
+y definida positiva tiene todos sus autovalores positivos: su determinante es positivo y su inversa es simétrica y definida positiva. (La cantidad
+$\tfrac12\sum_iQ_i\phi_i$ resultará ser la energía electrostática del sistema.)
+\end{proof}
+
+\begin{definicion}[Coeficientes de capacidad e influencia]\label{def:cij}
+Se llama matriz de \emph{coeficientes de capacidad e influencia} a $\Cm=(c_{ij})=\Pm^{-1}$, de modo que
+\begin{equation}\label{eq:cij}
+  \resalta{Q_i=\sum_{j=1}^{N}c_{ij}\,\phi_j,\qquad\vQ=\Cm\,\vphi,}\qquad
+  c_{ij}=\left.\frac{Q_i}{\phi_j}\right|_{\phi_k=0,\ k\neq j},\qquad[c_{ij}]=\mathrm{C/V}=\mathrm{F}.
+\end{equation}
+Los elementos diagonales $c_{ii}$ se llaman \emph{coeficientes de capacidad}, y los no diagonales $c_{ij}$ ($i\neq j$), \emph{coeficientes de influencia}
+(o de inducción).
+\end{definicion}
+
+La columna $j$ de $\Cm$ tiene una lectura inmediata: son las cargas de todos los conductores cuando el $j$ está a potencial unidad y todos los demás están
+a tierra. Así, $c_{jj}$ es la carga del propio conductor $j$ en ese estado, y $c_{ij}$ la carga que aparece en el conductor $i$ (a tierra) por influencia
+del $j$.
+
+\begin{teorema}[Propiedades de los coeficientes de capacidad e influencia]\label{teo:cij-prop}
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item Solo dependen de la geometría y del medio, y son simétricos: $c_{ij}=c_{ji}$.
+  \item Los coeficientes de capacidad son positivos, $c_{jj}>0$, y los de influencia negativos o nulos, $c_{ij}\le0$ para $i\neq j$.
+  \item $c_{jj}$ \emph{no} es la capacidad del conductor $j$ con los demás descargados, $1/p_{jj}$: es la carga de $j$ por unidad de potencial cuando
+        todos los demás están a tierra, y $c_{jj}\ge1/p_{jj}$.
+\end{enumerate}
+\end{teorema}
+\begin{proof}
+(a) $\Cm=\Pm^{-1}$, y la inversa de una matriz simétrica es simétrica. Que $\Cm$ solo depende de la geometría se hereda de $\Pm$.
+
+(b) Consideremos el estado $\phi_j=1$, $\phi_k=0$ ($k\neq j$), con $\phi=0$ también en el infinito. Por el principio del máximo, $0\le\phi\le1$ en todo
+el espacio. En la superficie de $j$, el potencial máximo, ninguna línea de campo puede llegar (vendría de un potencial mayor): $\sigma\ge0$ en todo $\Sc_j$,
+y no es idénticamente nula (si lo fuese, $\phi$ sería constante e igual a $1$ en todo el espacio, en contra de $\phi(\infty)=0$). Luego $c_{jj}=Q_j>0$.
+En la superficie de un conductor $i\neq j$, al potencial mínimo $0$, ninguna línea puede nacer (iría a un potencial menor que el mínimo): $\sigma\le0$,
+y $c_{ij}=Q_i\le0$.
+
+\emph{Argumento con los coeficientes de potencial.} Con solo dos conductores, $\phi_i=p_{ii}Q_i+p_{ij}Q_j=0$ da $Q_i=-(p_{ij}/p_{ii})\,Q_j$; como
+$p_{ij},p_{ii}>0$, si $\phi_j>0$ (y por tanto $Q_j>0$), $Q_i<0$: la carga inducida tiene signo contrario.
+
+(c) Con los demás descargados, $\phi_j=p_{jj}Q_j$, y el cociente $Q_j/\phi_j$ vale $1/p_{jj}$. Para la desigualdad, sea $\bm{e}_j$ el
+$j$-ésimo vector de la base canónica. Como $\Pm$ es simétrica y definida positiva (\cref{lem:definida}), tiene raíz cuadrada $\Pm^{1/2}$, y por la
+desigualdad de Cauchy--Schwarz
+\[
+  1=\bigl(\bm{e}_j\Tt\bm{e}_j\bigr)^{2}=\bigl[(\Pm^{1/2}\bm{e}_j)\Tt(\Pm^{-1/2}\bm{e}_j)\bigr]^{2}
+  \le\bigl(\bm{e}_j\Tt\Pm\,\bm{e}_j\bigr)\bigl(\bm{e}_j\Tt\Pm^{-1}\bm{e}_j\bigr)=p_{jj}\,c_{jj} .
+\]
+Físicamente: los conductores a tierra «tiran» de carga hacia el conductor $j$ más que los conductores aislados.
+\end{proof}
+
+\input{figuras/fig_tubo}
+
+% -------------------------------------------------------------------------
+\subsection{Influencia total}\label{sec:influencia}
+% -------------------------------------------------------------------------
+Pongamos el conductor $j$ a potencial $\phi_j=1$ y todos los demás a tierra. Las líneas de campo, que van siempre hacia potenciales menores, salen de
+$j$ ($Q_j>0$) y pueden acabar en los otros conductores o irse al infinito.
+
+\begin{teorema}[Desigualdad de influencia]\label{teo:influencia}
+En el estado $\phi_j>0$, $\phi_k=0$ ($k\neq j$), la carga inducida en los demás conductores no puede superar, en valor absoluto, a la del conductor $j$:
+\begin{equation}\label{eq:influencia}
+  Q_j\ge-\sum_{i\neq j}Q_i ,\qquad\text{equivalentemente}\qquad\resalta{c_{jj}\ge-\sum_{i\neq j}c_{ij}\quad\Longleftrightarrow\quad\sum_{i=1}^{N}c_{ij}\ge0 .}
+\end{equation}
+La igualdad se da si, y solo si, todas las líneas de campo que salen de $j$ terminan en los otros conductores y ninguna llega al infinito; se dice entonces
+que el sistema está en \emph{influencia total}. El caso típico es el de un conductor encerrado dentro de otro.
+\end{teorema}
+\begin{proof}
+Consideremos primero dos conductores con todas las líneas de $j$ terminando en $i$. Elegimos una superficie cerrada $S$ formada por el tubo de líneas de
+campo que sale de $j$ (su pared lateral, $S_{\mathrm{lat}}$) y cerrada por dos tapas $B_1$ y $B_2$ dentro de los conductores $i$ y $j$
+(\cref{fig:tubo}). Por la ley de Gauss,
+\[
+  \PhiE=\oiint_{S}\vE\cdot\dS=\underbrace{\iint_{S_{\mathrm{lat}}}\vE\cdot\dS}_{0\ (\vE\perp\dS)}+\underbrace{\iint_{B_1}\vE\cdot\dS}_{0\ (\vE=\vc{0})}
+  +\underbrace{\iint_{B_2}\vE\cdot\dS}_{0\ (\vE=\vc{0})}=0=\frac{\Qenc}{\eo},
+\]
+porque en la pared lateral el campo es tangente a la superficie y en las tapas, interiores a los conductores, es nulo. La carga encerrada es la que hay en
+los extremos del tubo, la de salida en $j$ y la de llegada en $i$, luego $Q_j=-Q_i$. Con $N$ conductores el argumento se aplica a cada tubo elemental: la
+carga positiva en el origen de cada tubo es igual y opuesta a la negativa en su extremo. Si todas las líneas que salen de $j$ terminan en los demás
+conductores, $Q_j=-\sum_{i\neq j}Q_i$; si alguna se va al infinito, la carga que llega a los demás es menor y $Q_j>-\sum_{i\neq j}Q_i$. Además, como los
+demás están al potencial mínimo, no emiten líneas (\cref{teo:cij-prop}), así que no hay otras contribuciones. Dividiendo por $\phi_j$ y usando
+$Q_i=c_{ij}\phi_j$ se obtiene la forma con los coeficientes.
+\end{proof}
+
+\begin{observacion}[Una comprobación numérica]\label{obs:numerico}
+La \cref{fig:sistema-cij} muestra los cuatro estados elementales de un sistema de cuatro conductores (una cuña, un rectángulo, un disco y una barra),
+calculados numéricamente en una caja a tierra, que hace el papel del infinito. Integrando el flujo alrededor de cada conductor se obtiene la matriz de
+la \cref{tab:sistema-coef}. Se comprueban, dentro de la precisión numérica, todas las propiedades demostradas: simetría, $c_{jj}>0$, $c_{ij}<0$ y
+$\sum_ic_{ij}>0$ (parte de las líneas termina en la caja), así como $p_{ij}>0$ y $p_{jj}\ge p_{ij}$ para la matriz inversa. Los coeficientes de influencia
+más intensos son los de los pares más próximos (cuña--disco y disco--barra), y los más débiles, los de los pares lejanos y apantallados (cuña--barra).
+\end{observacion}
+
+\input{figuras/fig_sistema_cij}
+
+\input{figuras/tab_sistema}

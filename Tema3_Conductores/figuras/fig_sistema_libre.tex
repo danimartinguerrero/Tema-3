@@ -1,0 +1,36 @@
+% =========================================================================
+%  Figura «tipo Mathematica»: estado «disco cargado, resto neutros» del
+%  sistema de cuatro conductores (combinación de los estados elementales con
+%  phi = P e_C). Líneas de campo con flujo fijo por línea, equipotenciales y
+%  signo de la carga inducida. Datos: figuras/datos/sistema_libre_*.
+% =========================================================================
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[x=0.66cm, y=0.66cm, font=\small]
+  \input{figuras/datos/sistema_formas}
+  \input{figuras/datos/sistema_libre_phi}
+  \fill[azulfondo!60!white] (-5,-4.5) rectangle (5,4.5);
+  \begin{scope}
+    \clip (-5,-4.5) rectangle (5,4.5);
+    \tikzset{numEQ/.style={azulcielo, line width=0.35pt, densely dashed}}
+    \input{figuras/datos/sistema_libre_eq}
+    \input{figuras/datos/sistema_libre_lc}
+    \input{figuras/datos/sistema_libre_fl}
+  \end{scope}
+  \foreach \f in {\formaA,\formaB,\formaD}{\fill[top color=azulvelo!80!white, bottom color=metal, draw=azulprof, line width=0.55pt] \f;}
+  \fill[top color=azulcielo, bottom color=azulmedio, draw=azulprof, line width=0.55pt] \formaC;
+  \input{figuras/datos/sistema_libre_q}
+  \draw[azulprof, line width=0.7pt] (-5,-4.5) rectangle (5,4.5);
+  % rótulos
+  \node[font=\footnotesize, fill=white, inner sep=1.5pt, rounded corners=1pt, align=center] at (-3.55,-1.55) {A\\[-1pt]\scriptsize$\phi=\csname philibreA\endcsname$};
+  \node[font=\footnotesize, inner sep=1pt, align=center] at (-1.7,2.05) {B\\[-1pt]\scriptsize$\phi=\csname philibreB\endcsname$};
+  \node[font=\footnotesize, fill=white, inner sep=1.5pt, rounded corners=1pt, align=center] at (2.05,-0.6) {C\ ($Q>0$)\\[-1pt]\scriptsize$\phi=\csname philibreC\endcsname$};
+  \node[font=\footnotesize, fill=white, inner sep=1.5pt, rounded corners=1pt, align=center] at (2.3,2.45) {D\\[-1pt]\scriptsize$\phi=\csname philibreD\endcsname$};
+  \node[font=\scriptsize, text=grispizarra, anchor=north east] at (4.9,-3.8) {caja a tierra, $\phi=0$};
+\end{tikzpicture}
+\caption{Estado «un conductor cargado, los demás neutros», que define la columna $\mathrm{C}$ de los coeficientes de potencial (sección de conductores
+cilíndricos, calculado numéricamente; potenciales normalizados a $\phi_{\mathrm{C}}=1$). Las líneas salen del disco cargado; los conductores neutros
+reciben líneas por la cara próxima, donde se induce carga negativa, y las reemiten por la opuesta. Todos los potenciales son positivos y el del
+conductor cargado es el mayor: $\phi_{\mathrm{C}}>\phi_{i}>0$.}
+\label{fig:sistema-libre}
+\end{figure}

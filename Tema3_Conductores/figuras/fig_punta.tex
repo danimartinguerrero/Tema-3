@@ -1,0 +1,52 @@
+% =========================================================================
+%  Figura «tipo Mathematica»: efecto punta en un conductor cargado con forma
+%  de pera (sección de un conductor cilíndrico; Laplace 2D, caja a tierra).
+%  (a) Líneas de campo con flujo constante entre dos consecutivas,
+%      equipotenciales y contorno coloreado según sigma (escala logarítmica).
+%  (b) sigma/sigma_min a lo largo del contorno superior frente a x.
+%  Datos: figuras/datos/punta_*.
+% =========================================================================
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[font=\small]
+  % ---------------------------------------------------------------- (a)
+  \begin{scope}[x=1.12cm, y=1.12cm]
+    \fill[azulfondo!60!white] (-2.6,-2.0) rectangle (2.6,2.0);
+    \begin{scope}
+      \clip (-2.6,-2.0) rectangle (2.6,2.0);
+      \tikzset{numEQ/.style={azulcielo, line width=0.35pt, densely dashed}}
+      \input{figuras/datos/punta_eq}
+      \input{figuras/datos/punta_lc}
+      \input{figuras/datos/punta_fl}
+    \end{scope}
+    \input{figuras/datos/punta_forma}
+    \fill[top color=azulvelo!80!white, bottom color=metal] \formagota;
+    \input{figuras/datos/punta_sigma}
+    \node[font=\footnotesize, text=azulprof] at (-0.6,0) {$\phi=\phi_0$};
+    \draw[azulclaro, line width=0.5pt] (-2.6,-2.0) rectangle (2.6,2.0);
+    % barra de color de sigma
+    \foreach \k in {0,...,19}{\mapcolor{\k/19}\fill[mapc] ({-2.0+0.2*\k},-2.35) rectangle ++(0.2,0.13);}
+    \node[font=\scriptsize, anchor=east] at (-2.05,-2.29) {$\sigma$ menor};
+    \node[font=\scriptsize, anchor=west] at (2.05,-2.29) {mayor};
+    \node at (0,-2.85) {(a)};
+  \end{scope}
+  % ---------------------------------------------------------------- (b)
+  \begin{scope}[xshift=7.15cm, yshift=-2.15cm]
+    \begin{axis}[tema, width=6.6cm, height=5.3cm,
+        xlabel={$x$}, ylabel={$\sigma/\sigma_{\min}$},
+        xmin=-1.6, xmax=1.85, ymin=0.8, ymax=3.7,
+        xtick={-1.5,-1,-0.5,0,0.5,1,1.5}, ytick={1,1.5,2,2.5,3,3.5}]
+      \addplot[azulprof, line width=1pt] table[x=x, y=sigma] {figuras/datos/punta_sigma.dat};
+      \draw[punteado] (axis cs:1.75,0.8) -- (axis cs:1.75,3.7);
+      \node[font=\scriptsize, anchor=east, text=grispizarra] at (axis cs:1.68,3.45) {punta $\rightarrow$};
+      \node[font=\scriptsize, anchor=west, text=grispizarra, fill=white, inner sep=1pt] at (axis cs:-1.5,2.2) {cuerpo redondeado};
+    \end{axis}
+    \node at (2.4,-1.15) {(b)};
+  \end{scope}
+\end{tikzpicture}
+\caption{Efecto punta en un conductor cargado con forma de pera (sección de un conductor cilíndrico indefinido, resuelta numéricamente con
+$\Lap\phi=0$). (a) Líneas de campo trazadas con el mismo flujo entre dos consecutivas, equipotenciales (trazos) y superficie coloreada según
+$\sigma$: el campo y la carga se concentran en la punta. (b) Densidad superficial a lo largo del contorno: es mínima en la zona cóncava de
+unión y crece bruscamente al acercarse a la punta.}
+\label{fig:punta}
+\end{figure}

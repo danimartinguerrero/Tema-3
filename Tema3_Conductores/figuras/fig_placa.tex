@@ -1,0 +1,49 @@
+% =========================================================================
+%  Figura: placa conductora en un campo externo uniforme.
+%  (a) instante inicial: el campo penetra y desplaza a los electrones;
+%  (b) equilibrio: la carga inducida crea E_ind = -E_0 en el interior.
+% =========================================================================
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[x=1cm, y=1cm, font=\small]
+  % ---------------------------------------------------------------- (a)
+  \begin{scope}
+    \fill[conductorplano, fill=metal!45!white, draw=azulprof] (-0.8,-1.7) rectangle (0.8,1.7);
+    \foreach \y in {-1.3,-0.65,0,0.65,1.3}{
+      \draw[azulacero, line width=0.6pt] (-2.5,\y) -- (-0.8,\y);
+      \draw[azulacero!55, line width=0.6pt, densely dashed] (-0.8,\y) -- (0.8,\y);
+      \draw[azulacero, line width=0.6pt, -{Stealth[length=4pt]}] (0.8,\y) -- (2.5,\y);
+      \draw[azulacero, line width=0.6pt, -{Stealth[length=4pt]}] (-2.5,\y) -- (-1.4,\y);}
+    \foreach \y in {-0.98,-0.33,0.33,0.98}{
+      \draw[-{Stealth[length=3.5pt]}, carganeg, line width=0.7pt] (0.3,\y) -- (-0.2,\y);
+      \node[font=\scriptsize, text=carganeg, anchor=west, inner sep=1pt] at (0.32,\y) {$e^{-}$};}
+    \node[above, text=azulprof] at (-1.6,1.75) {$\vE_0$};
+    \node[text=azulprof, font=\footnotesize] at (0,-2.05) {conductor};
+    \node[font=\small] at (0,-2.65) {(a) Instante inicial};
+  \end{scope}
+  % ---------------------------------------------------------------- (b)
+  \begin{scope}[xshift=6.6cm]
+    \fill[metal!45!white, draw=azulprof, line width=0.6pt] (-0.8,-1.7) rectangle (0.8,1.7);
+    \foreach \y in {-1.3,-0.65,0,0.65,1.3}{
+      \draw[azulacero, line width=0.6pt, -{Stealth[length=4pt]}] (-2.5,\y) -- (-1.4,\y);
+      \draw[azulacero, line width=0.6pt] (-1.4,\y) -- (-0.87,\y);
+      \draw[azulacero, line width=0.6pt, -{Stealth[length=4pt]}] (0.87,\y) -- (2.5,\y);}
+    \foreach \y in {-1.5,-1.1,...,1.55}{
+      \node[signoneg] at (-0.66,\y) {$-$};
+      \node[signopos] at (0.66,\y) {$+$};}
+    \draw[-{Stealth[length=3.5pt]}, cargapos, line width=0.8pt] (0.32,0.5) -- (-0.32,0.5);
+    \node[font=\scriptsize, text=cargapos] at (0,0.74) {$\vE_{\mathrm{ind}}$};
+    \draw[-{Stealth[length=3.5pt]}, azulacero, line width=0.8pt] (-0.32,-0.5) -- (0.32,-0.5);
+    \node[font=\scriptsize, text=azulacero] at (0,-0.74) {$\vE_{0}$};
+    \node[font=\footnotesize, text=azulprof, fill=white, inner sep=1.5pt, rounded corners=1pt] at (0,0.02) {$\vE=\vc{0}$};
+    \node[above, text=azulprof] at (-1.6,1.75) {$\vE_0$};
+    \node[text=carganeg, font=\footnotesize] at (-0.95,-2.05) {$\sigma<0$};
+    \node[text=cargapos, font=\footnotesize] at (0.95,-2.05) {$\sigma>0$};
+    \node[font=\small] at (0,-2.65) {(b) Equilibrio electrostático};
+  \end{scope}
+\end{tikzpicture}
+\caption{Conductor neutro en un campo externo uniforme $\vE_0$. (a) Al principio el campo penetra en el metal (trazos) y arrastra a los
+electrones libres en sentido opuesto a $\vE_0$. (b) En el equilibrio, la carga inducida en las caras crea en el interior un campo
+$\vE_{\mathrm{ind}}=-\vE_0$ que anula al externo: las líneas terminan en la cara negativa y renacen en la positiva.}
+\label{fig:placa}
+\end{figure}

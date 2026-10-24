@@ -1,0 +1,106 @@
+% =========================================================================
+\section{Presión electrostática}\label{sec:presion}
+% =========================================================================
+Si el conductor está cargado, su carga reside en la superficie y cada elemento de carga es repelido por todos los demás. Aparece así una
+fuerza por unidad de área que tiende a expulsar la carga hacia el exterior: la \emph{presión electrostática}. Calcularla exige un poco de
+cuidado, porque el campo en la superficie es discontinuo: vale $\sigma/\eo$ justo fuera y $0$ justo dentro. ¿Cuál de los dos actúa sobre la carga?
+
+% -------------------------------------------------------------------------
+\subsection{Un argumento ingenuo y su fallo}\label{sec:presion-ingenuo}
+% -------------------------------------------------------------------------
+Una primera idea sería multiplicar la carga de un elemento $\Delta S$ por el campo exterior:
+\[
+  \Pel\overset{?}{=}\frac{F}{\Delta S}=\frac{\Delta q\,E}{\Delta S}=\frac{\sigma\,\Delta S\,(\sigma/\eo)}{\Delta S}=\frac{\sigma^{2}}{\eo}.
+\]
+El razonamiento tiene un fallo: el campo $\sigma/\eo$ incluye el que crea la propia carga $\Delta q$, y \emph{una distribución de carga no ejerce
+fuerza neta sobre sí misma} (por la tercera ley de Newton, las fuerzas internas se cancelan dos a dos), igual que nadie puede levantarse a sí
+mismo tirando de sus propias manos hacia arriba. Hay que separar el campo en la contribución del elemento y la del resto de la carga.
+
+% -------------------------------------------------------------------------
+\subsection{El campo que actúa sobre la carga superficial}\label{sec:presion-campo}
+% -------------------------------------------------------------------------
+\input{figuras/fig_presion}
+
+\begin{lema}[Campo del resto de la carga]\label{lem:resto}
+Sea $\Delta S$ un elemento de la superficie de un conductor en equilibrio, tan pequeño que $\sigma$ es constante en él, y sea $\Erest$ el campo
+creado en $\Delta S$ por toda la carga del sistema \emph{excepto} la de $\Delta S$. Entonces
+\begin{equation}\label{eq:campo-resto}
+  \resalta{\Erest=\frac12\bigl(\vE_1+\vE_2\bigr)=\frac{\sigma}{2\eo}\,\un ,}
+\end{equation}
+donde $\vE_1$ y $\vE_2$ son los campos totales justo fuera y justo dentro del conductor, respectivamente.
+\end{lema}
+\begin{proof}
+Descomponemos el campo total en dos puntos muy próximos a $\Delta S$, uno fuera (1) y otro dentro (2), como suma del campo del disco $\Delta S$ y
+del campo del resto (\figpanel{fig:presion}{a}): $\vE=\Edisc+\Erest$.
+
+\emph{El campo del resto es continuo} en $\Delta S$: es el campo que crea en un punto del vacío una distribución de carga (la de $S'-\Delta S$) que
+no tiene carga en ese punto, de modo que no presenta ninguna discontinuidad allí; toma el mismo valor $\Erest$ en 1 y en 2.
+
+\emph{El campo del disco es discontinuo.} En puntos suficientemente próximos a $\Delta S$, el disco se ve como un plano indefinido con densidad
+$\sigma$, cuyo campo es $\sigma/(2\eo)$, perpendicular al plano y dirigido hacia fuera de él a ambos lados~\cite{TEMA1}:
+\[
+  \vE_{\mathrm{disco},1}=+\frac{\sigma}{2\eo}\,\un,\qquad\vE_{\mathrm{disco},2}=-\frac{\sigma}{2\eo}\,\un .
+\]
+Por tanto, usando \cref{eq:campo-superficie} y \cref{eq:campo-nulo},
+\[
+  \left.\begin{aligned}
+    \vE_1&=\Erest+\frac{\sigma}{2\eo}\,\un=\frac{\sigma}{\eo}\,\un\\[2pt]
+    \vE_2&=\Erest-\frac{\sigma}{2\eo}\,\un=\vc{0}
+  \end{aligned}\right\}
+  \quad\xRightarrow{\ \text{sumando}\ }\quad
+  \frac{\sigma}{\eo}\,\un+\vc{0}=2\,\Erest
+  \quad\Longrightarrow\quad\Erest=\frac{\sigma}{2\eo}\,\un=\frac12\bigl(\vE_1+\vE_2\bigr).
+\]
+\end{proof}
+
+\begin{observacion}[Lectura del resultado]\label{obs:resto}
+El campo del resto de la carga vale exactamente la mitad del campo exterior, y es el \emph{promedio} de los campos a ambos lados de la superficie.
+Su papel es doble (\figpanel{fig:presion}{b}): fuera, se suma al del disco y \emph{duplica} la intensidad hasta $\sigma/\eo$; dentro, se opone a él y lo
+\emph{cancela} por completo. El equilibrio del conductor es, desde este punto de vista, un ajuste fino entre la carga de cada elemento y la de todos
+los demás.
+\end{observacion}
+
+% -------------------------------------------------------------------------
+\subsection{La presión electrostática}\label{sec:presion-valor}
+% -------------------------------------------------------------------------
+\begin{teorema}[Presión electrostática]\label{teo:presion}
+Sobre la superficie de un conductor en equilibrio actúa una fuerza por unidad de área
+\begin{equation}\label{eq:presion}
+  \resalta{\Pel=\frac{\dif F}{\dif S}=\frac{\sigma^{2}}{2\eo}=\frac{\eo}{2}\,E^{2},}\qquad
+  \frac{\dif\vF}{\dif S}=\frac{\sigma^{2}}{2\eo}\,\un ,
+\end{equation}
+dirigida siempre hacia el exterior del conductor, cualquiera que sea el signo de $\sigma$; aquí $E=\abs{\sigma}/\eo$ es el campo justo fuera de la superficie.
+\end{teorema}
+\begin{proof}
+La fuerza sobre la carga $\Delta q=\sigma\,\Delta S$ del elemento la ejerce solo el resto de la carga, de modo que, por el \cref{lem:resto},
+\[
+  \Delta\vF=\Delta q\,\Erest=\sigma\,\Delta S\,\frac{\sigma}{2\eo}\,\un
+  \quad\Longrightarrow\quad\Pel=\frac{\Delta F}{\Delta S}=\frac{\sigma^{2}}{2\eo} .
+\]
+Como $\sigma^{2}\ge0$, la fuerza tiene siempre el sentido de $\un$, hacia fuera. Por último, $\sigma^{2}/(2\eo)=\tfrac{\eo}{2}(\sigma/\eo)^{2}=\tfrac{\eo}{2}E^{2}$.
+\end{proof}
+
+\begin{observacion}[Presión y densidad de energía]\label{obs:presion-energia}
+La expresión $\Pel=\tfrac{\eo}{2}E^{2}$ coincide con la densidad de energía del campo electrostático, $u=\tfrac{\eo}{2}E^{2}$, que estudiaremos más
+adelante. No es casual: si un elemento de superficie se desplaza hacia fuera una distancia $\dif\xi$, el volumen $\dif S\,\dif\xi$, en el que antes había
+un campo $E$, pasa a formar parte del metal y queda sin campo; el trabajo de la fuerza electrostática, $\Pel\,\dif S\,\dif\xi$, es igual a la energía
+$u\,\dif S\,\dif\xi$ que desaparece.
+\end{observacion}
+
+\begin{ejemplo}[Fuerza entre los dos hemisferios de una esfera cargada]\label{ej:hemisferios}
+Una esfera conductora de radio $R$ tiene carga $Q$. ¿Con qué fuerza se repelen sus dos hemisferios?
+
+\emph{Resolución.} La carga se reparte uniformemente, $\sigma=Q/(4\pi R^{2})$, y la presión $\Pel=\sigma^{2}/(2\eo)$ es la misma en toda la superficie. Por
+simetría, la fuerza sobre el hemisferio norte apunta según $\uz$, y solo contribuye la componente $\un\cdot\uz=\cos\theta$:
+\[
+  F_z=\iint_{\text{hemisferio}}\Pel\cos\theta\,\dsc=\frac{\sigma^{2}}{2\eo}\int_{0}^{2\pi}\!\!\int_{0}^{\pi/2}\cos\theta\,R^{2}\sen\theta\,\dif\theta\,\dif\varphi
+  =\frac{\sigma^{2}}{2\eo}\,2\pi R^{2}\,\frac12=\frac{\sigma^{2}\pi R^{2}}{2\eo}=\frac{Q^{2}}{32\pi\eo R^{2}} .
+\]
+El resultado tiene una lectura geométrica: es la presión por el área de la \emph{proyección} del hemisferio sobre el plano ecuatorial, $\pi R^{2}$.
+\end{ejemplo}
+
+\begin{observacion}[Órdenes de magnitud]\label{obs:presion-orden}
+El campo máximo que soporta el aire seco antes de ionizarse es $\Erup\simeq3\cdot10^{6}\,\mathrm{V/m}$ (\cref{sem:globo}); a ese campo,
+$\Pel=\tfrac{\eo}{2}\Erup^{2}\simeq40\,\mathrm{Pa}$, unas $2500$ veces menor que la presión atmosférica. La presión electrostática es pequeña,
+pero perceptible en membranas ligeras: una pompa de jabón cargada se hincha ligeramente.
+\end{observacion}

@@ -1,0 +1,15 @@
+# Auxiliares de LaTeX
+*.aux
+*.auxlock
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.dpth
+__pycache__/

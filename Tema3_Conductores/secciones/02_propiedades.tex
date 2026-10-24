@@ -1,0 +1,135 @@
+% =========================================================================
+\section{Propiedades del conductor en equilibrio}\label{sec:propiedades}
+% =========================================================================
+La \cref{prop:campo-nulo} es la semilla de todo el tema. Combinada con las leyes de la electrostática del vacío (la ley de Gauss en
+forma diferencial e integral, el carácter conservativo del campo y las condiciones de contorno~\cite{TEMA1}), da lugar a un conjunto de
+propiedades que caracterizan por completo al conductor en equilibrio.
+
+% -------------------------------------------------------------------------
+\subsection{Propiedades básicas}\label{sec:basicas}
+% -------------------------------------------------------------------------
+\begin{teorema}[Propiedades del conductor en equilibrio electrostático]\label{teo:propiedades}
+Sea un conductor perfecto $\Vc$, de superficie $\Sc$, en equilibrio electrostático. Entonces:
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item\label{it:p1} el campo eléctrico es nulo en su interior, $\vE=\vc{0}$;
+  \item\label{it:p2} el conductor es un \emph{volumen equipotencial}: $\phi(\vc{r})=\phi_{\Vc}=\mathrm{cte}$ para todo $\vc{r}\in\Vc$, y su
+        superficie $\Sc$ es una superficie equipotencial;
+  \item\label{it:p3} la densidad volúmica de carga es nula en el interior, $\rho(\vc{r})=0$;
+  \item\label{it:p4} si el conductor está cargado, toda su carga se sitúa en su superficie: $Q=\oiint_{\Sc}\sigma\,\dsc$;
+  \item\label{it:p5} el campo en el exterior e inmediatamente próximo a la superficie es normal a ella y vale
+        \begin{equation}\label{eq:campo-superficie}
+          \resalta{\vE\big|_{\Sc^{+}}=\frac{\sigma}{\eo}\,\un .}
+        \end{equation}
+\end{enumerate}
+\end{teorema}
+\begin{proof}
+\ref{it:p1} Es la \cref{prop:campo-nulo}.
+
+\ref{it:p2} Sean $A$ y $B$ dos puntos cualesquiera del conductor y $\Gamma$ una curva que los une \emph{por dentro} del material (que existe, pues
+$\Vc$ es conexo; véase la \cref{fig:propiedades}). Como el campo electrostático es conservativo, $\vE=-\nab\phi$, y la diferencia de potencial
+no depende del camino~\cite{TEMA0}:
+\[
+  \phi(B)-\phi(A)=-\int_{\Gamma}\vE\cdot\dl=-\int_{\Gamma}\vc{0}\cdot\dl=0 .
+\]
+Por continuidad del potencial, la igualdad se extiende a los puntos de $\Sc$.
+
+\ref{it:p3} Por la ley de Gauss en forma diferencial, en todo punto interior
+\[
+  \nab\cdot\vE=\frac{\rho}{\eo}\quad\text{y}\quad\vE=\vc{0}\quad\Longrightarrow\quad\rho(\vc{r})=\eo\,\nab\cdot\vc{0}=0 .
+\]
+Equivalentemente, en forma integral: para cualquier superficie gaussiana $S_G$ contenida en el interior del conductor,
+$\oiint_{S_G}\vE\cdot\dS=0=\Qenc/\eo$, luego $\Qenc=0$; como $S_G$ es arbitraria, no hay carga en ningún volumen interior.
+
+\ref{it:p4} Si la carga no puede estar en el interior, el único lugar que le queda es la superficie, donde $\vE$ puede ser discontinuo y la ley de
+Gauss diferencial deja de aplicarse.
+
+\ref{it:p5} Aplicamos las condiciones de contorno del campo electrostático~\cite[§6]{TEMA1} en un punto de $\Sc$, con el medio~1 el conductor, el
+medio~2 el vacío y $\un$ la normal del 1 al 2 (la exterior):
+\[
+  \vE_{2t}-\vE_{1t}=\vc{0},\qquad E_{2n}-E_{1n}=\frac{\sigma}{\eo} .
+\]
+Como dentro $\vE_1=\vc{0}$, queda $\vE_{2t}=\vc{0}$ y $E_{2n}=\sigma/\eo$: el campo exterior no tiene componente tangencial y su componente
+normal es $\sigma/\eo$, que es \cref{eq:campo-superficie}.
+\end{proof}
+
+\input{figuras/fig_propiedades}
+
+\begin{observacion}[Comprobación directa con un cilindro de Gauss]\label{obs:pastillero}
+El resultado \ref{it:p5} se obtiene también con un pequeño cilindro de bases $A$, una dentro y otra fuera del conductor, perpendicular a la
+superficie (\figpanel{fig:propiedades}{b}). Dentro $\vE=\vc{0}$; en la pared lateral, que puede hacerse tan corta como se quiera, el flujo es
+despreciable; y en la base exterior $\vE=E\,\un$ es normal. Así $\PhiE=E\,A=\Qenc/\eo=\sigma A/\eo$, es decir, $E=\sigma/\eo$.
+\end{observacion}
+
+\begin{corolario}[Líneas de campo y conductores]\label{cor:lineas}
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item Las líneas de campo nacen o mueren perpendicularmente en la superficie de los conductores: salen de las zonas con $\sigma>0$ y llegan a
+        las zonas con $\sigma<0$.
+  \item Ninguna línea de campo puede salir de un conductor y volver a él.
+  \item El potencial decrece estrictamente a lo largo de una línea de campo, en el sentido de $\vE$.
+\end{enumerate}
+\end{corolario}
+\begin{proof}
+(a) es consecuencia directa de \cref{eq:campo-superficie}. (c) Si $\Gamma$ es un arco de línea de campo recorrido en el sentido de $\vE$, el vector
+$\dl$ es paralelo a $\vE$ y $\phi(B)-\phi(A)=-\int_{\Gamma}\vE\cdot\dl=-\int_{\Gamma}\norm{\vE}\,\dif\ell<0$. (b) Si una línea saliese del conductor en
+$A$ y volviese a él en $B$, por (c) sería $\phi(B)<\phi(A)$, lo que contradice que el conductor es equipotencial.
+\end{proof}
+
+\begin{observacion}[Por qué la carga va a la superficie: el teorema de Thomson]\label{obs:thomson}
+Hay una forma intuitiva de entender \ref{it:p4}: las cargas libres del mismo signo se repelen con fuerzas que decaen como $1/R^{2}$, y cada
+una intenta alejarse lo más posible de las demás; el sitio más alejado al que pueden llegar sin abandonar el conductor es su superficie. El
+\emph{teorema de Thomson} (lord Kelvin) da a esta idea una forma precisa: entre todas las distribuciones de una carga dada sobre un conductor,
+la de equilibrio es la que hace mínima la energía electrostática del sistema~\cite{JACKSON}. Lo demostraremos cuando estudiemos la energía.
+\end{observacion}
+
+% -------------------------------------------------------------------------
+\subsection{Efecto punta}\label{sec:punta}
+% -------------------------------------------------------------------------
+La densidad superficial de carga de un conductor en equilibrio no tiene por qué ser constante: aunque todo el conductor está al mismo
+potencial, la carga se acumula de forma preferente en las zonas de la superficie con \emph{menor radio de curvatura}. Es el llamado
+\emph{efecto punta}. Podemos demostrarlo de manera sencilla en una geometría favorable.
+
+\begin{proposicion}[Esferas lejanas unidas por un hilo]\label{prop:punta}
+Sean dos esferas conductoras de radios $R_1$ y $R_2$, unidas por un hilo conductor muy fino y separadas una distancia mucho mayor que sus
+radios, con carga total $Q=Q_1+Q_2$. Entonces, en el equilibrio,
+\begin{equation}\label{eq:punta}
+  \frac{Q_1}{R_1}=\frac{Q_2}{R_2},\qquad\resalta{\sigma_1R_1=\sigma_2R_2,}\qquad E_1R_1=E_2R_2 ,
+\end{equation}
+donde $\sigma_i=Q_i/(4\pi R_i^{2})$ y $E_i=\sigma_i/\eo$ son la densidad de carga y el campo en la superficie de cada esfera. En particular, la
+esfera más pequeña tiene mayor densidad de carga y mayor campo en su superficie.
+\end{proposicion}
+\begin{proof}
+Al estar muy alejadas, la influencia de una esfera sobre la otra es despreciable: la carga de cada una se reparte uniformemente sobre su
+superficie y su potencial es el de una esfera aislada, $\phi_i=\kc Q_i/R_i$ (la carga del hilo también se desprecia). Como están unidas por un
+conductor, forman un único volumen equipotencial (\cref{teo:propiedades}\,\ref{it:p2}), luego
+\[
+  \frac{1}{4\pi\eo}\,\frac{Q_1}{R_1}=\frac{1}{4\pi\eo}\,\frac{Q_2}{R_2}
+  \;\Longrightarrow\;\frac{\sigma_1\,4\pi R_1^{2}}{R_1}=\frac{\sigma_2\,4\pi R_2^{2}}{R_2}
+  \;\Longrightarrow\;\sigma_1R_1=\sigma_2R_2 .
+\]
+Multiplicando por $1/\eo$ se obtiene la relación entre los campos. Si $R_1>R_2$, entonces $\sigma_2=\sigma_1R_1/R_2>\sigma_1$.
+\end{proof}
+
+\input{figuras/fig_esferas_hilo}
+
+\begin{observacion}[Interpretación: la componente tangencial de la repulsión]\label{obs:curvatura}
+La \cref{prop:punta} no es una mera curiosidad de dos esferas: una superficie arbitraria se comporta, localmente, como una esfera de radio igual
+a su radio de curvatura. Hay una forma mecánica de verlo (\figpanel{fig:esferas-hilo}{b,\,c}). Sobre una carga de la superficie, la repulsión
+$\vF$ del resto de cargas se descompone en una componente normal $\vF_n$, que la empuja a salir del conductor y que el material equilibra, y
+una componente tangencial $\vF_t$, que la desplaza a lo largo de la superficie. En una zona muy curvada (radio de curvatura pequeño) las cargas
+vecinas quedan «por debajo» de la tangente, y su repulsión es casi normal: $\vF_t$ disminuye con el radio de curvatura. Por eso las cargas pueden
+apiñarse en las puntas sin que la componente tangencial las disperse.
+\end{observacion}
+
+La \cref{fig:punta} muestra el efecto en un conductor con forma de pera, resuelto numéricamente. Las líneas de campo, trazadas de forma que
+entre dos consecutivas salga el mismo flujo, se agolpan en la punta; y la densidad de carga calculada sobre el contorno crece monótonamente al
+acercarse a ella.
+
+\input{figuras/fig_punta}
+
+\begin{observacion}[El pararrayos y las descargas en punta]\label{obs:pararrayos}
+El efecto punta es el fundamento del \emph{pararrayos} de Franklin. Como el campo en la superficie es $E=\sigma/\eo$, una punta afilada conectada a
+tierra alcanza campos enormes con potenciales moderados: el aire a su alrededor se ioniza (descarga en corona) y se crea un camino conductor
+que guía la descarga de la nube hacia tierra a través del pararrayos, y no a través del edificio. El mismo razonamiento explica por qué los
+conductores con aristas o puntas pierden carga antes, y por qué en los equipos de alta tensión todas las superficies se redondean
+(\cref{sem:globo}).
+\end{observacion}

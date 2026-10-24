@@ -1,0 +1,38 @@
+% =========================================================================
+%  Tabla: coeficientes de capacidad e influencia y de potencial del sistema
+%  de cuatro conductores (valores numéricos de figuras/datos/sistema_coef.tex,
+%  por unidad de longitud, en unidades de eps0 y de 1/eps0).
+% =========================================================================
+\input{figuras/datos/sistema_coef}
+\newcommand{\cc}[2]{\csname cij#1#2\endcsname}
+\newcommand{\pp}[2]{\csname pij#1#2\endcsname}
+\begin{table}[t]
+\centering
+\caption{Coeficientes del sistema de la \cref{fig:sistema-cij}, calculados numéricamente (por unidad de longitud):
+A~cuña, B~rectángulo, C~disco y D~barra. A la izquierda, $c_{ij}/\eo$ y la suma de cada columna; a la derecha, $\eo\,p_{ij}$, la matriz inversa.}
+\label{tab:sistema-coef}
+\small
+\begin{tabular}{@{}crrrr@{}}
+  \toprule
+  $c_{ij}/\eo$ & A & B & C & D\\
+  \midrule
+  A & \textbf{\cc AA} & \cc AB & \cc AC & \cc AD\\
+  B & \cc BA & \textbf{\cc BB} & \cc BC & \cc BD\\
+  C & \cc CA & \cc CB & \textbf{\cc CC} & \cc CD\\
+  D & \cc DA & \cc DB & \cc DC & \textbf{\cc DD}\\
+  \midrule
+  $\sum_i c_{ij}/\eo$ & \csname sumcA\endcsname & \csname sumcB\endcsname & \csname sumcC\endcsname & \csname sumcD\endcsname\\
+  \bottomrule
+\end{tabular}
+\qquad
+\begin{tabular}{@{}cllll@{}}
+  \toprule
+  $\eo\,p_{ij}$ & A & B & C & D\\
+  \midrule
+  A & \textbf{\pp AA} & \pp AB & \pp AC & \pp AD\\
+  B & \pp BA & \textbf{\pp BB} & \pp BC & \pp BD\\
+  C & \pp CA & \pp CB & \textbf{\pp CC} & \pp CD\\
+  D & \pp DA & \pp DB & \pp DC & \textbf{\pp DD}\\
+  \bottomrule
+\end{tabular}
+\end{table}

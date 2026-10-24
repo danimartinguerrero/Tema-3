@@ -1,0 +1,65 @@
+% =========================================================================
+%  Figura: presión electrostática. (a) Elemento DeltaS de la superficie, campo
+%  del disco y campo del resto en dos puntos 1 (fuera) y 2 (dentro).
+%  (b) Componente normal de cada contribución frente a la coordenada xi
+%  normal a la superficie: E_disco salta de -sigma/2eps0 a +sigma/2eps0,
+%  E_resto es continuo y la suma pasa de 0 a sigma/eps0.
+% =========================================================================
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[font=\small]
+  % ---------------------------------------------------------------- (a)
+  \begin{scope}
+    % superficie curvada del conductor (vista en perspectiva)
+    \fill[top color=azulvelo!70!white, bottom color=metal!80!white, draw=azulprof, line width=0.6pt]
+      (-3.0,-0.3) .. controls (-1.6,0.55) and (0.9,0.65) .. (3.0,0.05)
+      -- (2.25,-1.05) .. controls (0.3,-0.55) and (-1.9,-0.75) .. (-3.6,-1.2) -- cycle;
+    \node[font=\footnotesize, text=azulprof] at (-2.55,-0.95) {$S'$};
+    % disco DeltaS
+    \fill[cargapos!25] (0,-0.12) ellipse (0.62 and 0.17);
+    \draw[cargapos, line width=0.6pt] (0,-0.12) ellipse (0.62 and 0.17);
+    \node[font=\footnotesize] at (0.92,-0.32) {$\Delta S$};
+    % campo del disco (a ambos lados) y del resto
+    \draw[-{Stealth[length=4pt]}, verdeazul, line width=0.9pt] (0.12,-0.05) -- (0.12,1.15);
+    \draw[-{Stealth[length=4pt]}, verdeazul, line width=0.9pt, densely dashed] (0.12,-0.2) -- (0.12,-1.4);
+    \node[font=\footnotesize, text=verdeazul] at (0.72,0.95) {$\Edisc$};
+    \draw[-{Stealth[length=4pt]}, cargapos, line width=0.9pt] (-0.22,-0.9) -- (-0.22,1.55);
+    \node[font=\footnotesize, text=cargapos] at (-0.78,1.42) {$\Erest$};
+    \draw[-{Stealth[length=3.5pt]}, azulprof, line width=0.6pt] (1.75,0.35) -- (1.75,0.95) node[right, font=\footnotesize] {$\un$};
+    % puntos 1 y 2
+    \begin{scope}[shift={(2.85,-1.95)}]
+      \draw[azulacero, line width=1.3pt] (-0.55,0) -- (0.55,0);
+      \fill[azulprof] (0,0.22) circle (1.4pt) node[right=3pt, font=\footnotesize] {1 (fuera)};
+      \fill[azulprof] (0,-0.22) circle (1.4pt) node[right=3pt, font=\footnotesize] {2 (dentro)};
+      \node[font=\footnotesize, anchor=east] at (-0.6,0) {$\Delta S$};
+    \end{scope}
+    \draw[->, grismedio, line width=0.4pt] (0.65,-0.18) .. controls (1.6,-0.7) .. (2.25,-1.85);
+    \node at (0,-2.95) {(a)};
+  \end{scope}
+  % ---------------------------------------------------------------- (b)
+  \begin{scope}[xshift=6.3cm, yshift=-2.1cm]
+    \begin{axis}[tema, width=7.0cm, height=5.4cm, axis lines=left,
+        xlabel={$\xi$ (normal a la superficie)}, ylabel={$E_n$}, xmin=-2.1, xmax=2.1, ymin=-0.75, ymax=1.25,
+        xtick={0}, xticklabels={$0$}, ytick={-0.5,0,0.5,1},
+        yticklabels={$-\frac{\sigma}{2\eo}$,$0$,$\frac{\sigma}{2\eo}$,$\frac{\sigma}{\eo}$},
+        grid=none, legend columns=1,
+        legend style={at={(0.5,1.04)}, anchor=south, font=\scriptsize}]
+      \addplot[verdeazul, line width=1.1pt, densely dashed, const plot] coordinates {(-2,-0.5) (0,0.5) (2,0.5)};
+      \addlegendentry{campo del disco $E_{\mathrm{disco}}$}
+      \addplot[cargapos, line width=1.1pt] coordinates {(-2,0.52) (2,0.52)};
+      \addlegendentry{campo del resto $E_{\mathrm{resto}}$}
+      \addplot[azulprof, line width=1.4pt, const plot] coordinates {(-2,0.0) (0,1) (2,1)};
+      \addlegendentry{campo total $E=E_{\mathrm{disco}}+E_{\mathrm{resto}}$}
+      \draw[punteado] (axis cs:0,-0.75) -- (axis cs:0,1.25);
+      \node[font=\scriptsize, text=grispizarra] at (axis cs:-1.05,-0.63) {conductor};
+      \node[font=\scriptsize, text=grispizarra] at (axis cs:1.05,-0.63) {vacío};
+    \end{axis}
+    \node at (2.6,-1.25) {(b)};
+  \end{scope}
+\end{tikzpicture}
+\caption{Presión electrostática. (a) El campo en un elemento $\Delta S$ de la superficie es la suma del campo del propio disco, discontinuo
+($\pm\sigma/2\eo$ a cada lado), y del campo $\Erest$ del resto de la carga, continuo. (b) Componente normal de cada contribución frente a la
+coordenada $\xi$ perpendicular a la superficie: $\Erest$ duplica el campo fuera y lo anula dentro, y es el único que actúa sobre la carga de
+$\Delta S$.}
+\label{fig:presion}
+\end{figure}

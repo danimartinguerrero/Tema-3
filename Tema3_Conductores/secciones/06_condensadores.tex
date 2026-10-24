@@ -1,0 +1,196 @@
+% =========================================================================
+\section{Condensadores}\label{sec:condensadores}
+% =========================================================================
+El sistema de dos conductores en influencia total tiene un nombre propio y una importancia práctica enorme: es el condensador, el dispositivo que
+almacena carga (y, como veremos, energía) con una diferencia de potencial dada.
+
+% -------------------------------------------------------------------------
+\subsection{Definición y capacidad}\label{sec:condensador-def}
+% -------------------------------------------------------------------------
+\begin{definicion}[Condensador]\label{def:condensador}
+Un \emph{condensador} es un sistema de dos conductores en influencia total cargados con cargas de igual módulo y signo contrario, $Q_1=Q$ y
+$Q_2=-Q$ ($Q>0$). Cada uno de los conductores se llama \emph{placa} o \emph{armadura}. Su \emph{capacidad} es el cociente entre el valor absoluto de la carga
+común y la diferencia de potencial entre las armaduras:
+\begin{equation}\label{eq:cap-condensador}
+  \resalta{C=\frac{Q}{\phi_1-\phi_2}=\frac{Q}{\DV} .}
+\end{equation}
+\end{definicion}
+
+\begin{teorema}[Capacidad en función de los coeficientes]\label{teo:cap-coef}
+La capacidad de un condensador solo depende de la geometría de las armaduras y del medio, es positiva, y vale
+\begin{equation}\label{eq:cap-coef}
+  \resalta{C=\frac{1}{p_{11}+p_{22}-2p_{12}}=\frac{c_{11}c_{22}-c_{12}^{2}}{c_{11}+c_{22}+2c_{12}} .}
+\end{equation}
+\end{teorema}
+\begin{proof}
+Haciendo $Q_1=Q$ y $Q_2=-Q$ en las ecuaciones de los coeficientes de potencial \cref{eq:pij},
+\[
+  \left.\begin{aligned}
+    \phi_1&=p_{11}Q_1+p_{12}Q_2=(p_{11}-p_{12})\,Q\\
+    \phi_2&=p_{21}Q_1+p_{22}Q_2=(p_{21}-p_{22})\,Q
+  \end{aligned}\right\}
+  \;\Longrightarrow\;\phi_1-\phi_2=\bigl(p_{11}+p_{22}-2p_{12}\bigr)Q ,
+\]
+donde hemos usado $p_{21}=p_{12}$. Dividiendo, $C=Q/(\phi_1-\phi_2)=(p_{11}+p_{22}-2p_{12})^{-1}$, que solo depende de la geometría. Es positiva porque
+$p_{11}+p_{22}-2p_{12}=\bm{v}\Tt\Pm\,\bm{v}$ con $\bm{v}=(1,-1)\Tt$, y $\Pm$ es definida positiva (\cref{lem:definida}). Para la segunda forma basta sustituir
+los elementos de la inversa de $\Cm$: con $D=\det\Cm=c_{11}c_{22}-c_{12}^{2}$, $p_{11}=c_{22}/D$, $p_{22}=c_{11}/D$ y $p_{12}=-c_{12}/D$, de modo que
+$p_{11}+p_{22}-2p_{12}=(c_{11}+c_{22}+2c_{12})/D$.
+\end{proof}
+
+\begin{corolario}[Conductor encerrado]\label{cor:encerrado}
+Si la armadura~1 está encerrada por la armadura~2, entonces
+\begin{equation}\label{eq:cap-encerrado}
+  C=c_{11}=-c_{12}=-c_{21} .
+\end{equation}
+En particular, con la armadura exterior a tierra ($\phi_2=0$) y la interior a potencial $V$, se tiene $Q_1=c_{11}V$ y $Q_2=c_{21}V=-Q_1$: es exactamente un
+condensador cargado a $\DV=V$, y $C=\tfrac12(c_{11}-c_{21})$.
+\end{corolario}
+\begin{proof}
+Con $\phi_2=0$ y $\phi_1=V$, \cref{eq:cij} da $Q_1=c_{11}V$ y $Q_2=c_{21}V$. Al estar 1 encerrado por 2, todas sus líneas acaban en 2 (influencia total,
+\cref{teo:influencia}): $Q_2=-Q_1$, es decir, $c_{21}=-c_{11}$. Entonces $C=Q_1/(\phi_1-\phi_2)=c_{11}$. Restando las dos ecuaciones,
+$2Q=(c_{11}-c_{21})V$, que es la última forma. (Esta última expresión \emph{no} es general: solo vale cuando $\phi_2=0$ y hay influencia total.)
+\end{proof}
+
+\begin{observacion}[Condensador «generalizado»]\label{obs:generalizado}
+La fórmula~\eqref{eq:cap-coef} tiene sentido aunque los dos conductores no estén en influencia total (por ejemplo, dos esferas próximas): es la capacidad
+que se mide al transferir una carga $Q$ de un conductor al otro. En un condensador de verdad, en cambio, la influencia total garantiza que el campo
+fuera de las armaduras es nulo y que la capacidad no depende de los objetos del entorno.
+\end{observacion}
+
+% -------------------------------------------------------------------------
+\subsection{Ejemplo: condensador esférico}\label{sec:ej-esferico}
+% -------------------------------------------------------------------------
+\begin{ejemplo}[Condensador esférico de armaduras delgadas]\label{ej:esferico}
+Una esfera conductora de radio $a$ (armadura~1) está rodeada por una cáscara esférica delgada y concéntrica de radio $b>a$ (armadura~2). Calculemos sus
+coeficientes y su capacidad.
+
+\emph{Coeficientes de potencial.} Por el \cref{ej:concentricas} (o la regla~\eqref{eq:regla-concentricas}),
+\[
+  \Pm=\frac{1}{4\pi\eo}\begin{pmatrix}1/a & 1/b\\ 1/b & 1/b\end{pmatrix},\qquad
+  C=\frac{1}{p_{11}+p_{22}-2p_{12}}=4\pi\eo\Bigl(\frac1a+\frac1b-\frac2b\Bigr)^{-1}=4\pi\eo\Bigl(\frac1a-\frac1b\Bigr)^{-1},
+\]
+\begin{equation}\label{eq:cap-esferico}
+  \resalta{C=4\pi\eo\,\frac{ab}{b-a} .}
+\end{equation}
+
+\emph{Coeficientes de capacidad e influencia.} El determinante es
+\[
+  \det\Pm=\Bigl(\frac{1}{4\pi\eo}\Bigr)^{2}\Bigl(\frac1a\,\frac1b-\frac1b\,\frac1b\Bigr)=\Bigl(\frac{1}{4\pi\eo}\Bigr)^{2}\frac{b-a}{ab^{2}} ,
+\]
+y la inversa de una matriz $2\times2$ es $\Pm^{-1}=\frac{1}{\det\Pm}\bigl(\begin{smallmatrix}p_{22}&-p_{12}\\-p_{12}&p_{11}\end{smallmatrix}\bigr)$:
+\[
+  \Cm=(4\pi\eo)^{2}\,\frac{ab^{2}}{b-a}\,\frac{1}{4\pi\eo}\begin{pmatrix}1/b & -1/b\\ -1/b & 1/a\end{pmatrix}
+  =4\pi\eo\,\frac{ab}{b-a}\begin{pmatrix}1 & -1\\ -1 & b/a\end{pmatrix}.
+\]
+Se comprueban todas las propiedades: $\Cm$ es simétrica, $c_{11},c_{22}>0$ y $c_{12}<0$. Además, $c_{11}=-c_{21}=C$: la esfera interior está en influencia
+total (\cref{cor:encerrado}). En cambio, $c_{22}+c_{12}=4\pi\eo\,\frac{b^{2}-ab}{b-a}=4\pi\eo\,b>0$: parte de las líneas que salen de la cáscara se van al
+infinito, y lo que «sobra» es justamente la capacidad de una esfera aislada de radio $b$.
+
+\emph{Placas próximas.} Si $b=a+d$ con $d\ll a$,
+$C=4\pi\eo\,\frac{a(a+d)}{d}\simeq4\pi\eo\,\frac{a^{2}}{d}=\eo\,\frac{A}{d}$ con $A=4\pi a^{2}$: el condensador esférico se comporta como uno plano de
+área $A$ y separación $d$ (\cref{sem:plano}).
+\end{ejemplo}
+
+\input{figuras/fig_condensador_esferico}
+
+\begin{ejemplo}[El mismo sistema, en otras situaciones]\label{ej:esferico-situaciones}
+Los coeficientes resuelven cualquier situación del sistema, no solo la del condensador.
+
+\emph{Esfera interior a tierra.} Si $\phi_1=0$ y $\phi_2\neq0$, $Q_2=c_{22}\phi_2$ y $Q_1=c_{12}\phi_2$, de modo que
+\[
+  \frac{Q_1}{Q_2}=\frac{c_{12}}{c_{22}}=-\frac{a}{b} :
+\]
+el sistema \emph{no} está en influencia total respecto de la cáscara, y la esfera interior adquiere menos carga (en valor absoluto) que la exterior. Si
+$b=2a$, $Q_1=-Q_2/2$: la cara interior de la cáscara lleva $+Q_2/2$ y la exterior $+Q_2/2$.
+
+\emph{Cargas dadas.} Si conocemos $Q_1$ y $Q_2$, los potenciales salen directamente con los coeficientes de potencial,
+\[
+  \phi_1=p_{11}Q_1+p_{12}Q_2=\frac{1}{4\pi\eo}\Bigl(\frac{Q_1}{a}+\frac{Q_2}{b}\Bigr),\qquad
+  \phi_2=p_{21}Q_1+p_{22}Q_2=\frac{1}{4\pi\eo}\,\frac{Q_1+Q_2}{b} ,
+\]
+mientras que con los coeficientes de capacidad habría que resolver un sistema lineal. Es útil comprobarlo resolviendo el problema «como en el Tema~1»:
+por Gauss,
+\[
+  \vE(\vc{r})=\begin{cases}\dfrac{Q_1+Q_2}{4\pi\eo r^{2}}\,\ur, & r>b,\\[8pt] \dfrac{Q_1}{4\pi\eo r^{2}}\,\ur, & a<r<b,\\[8pt] \vc{0}, & r<a,\end{cases}
+\]
+con un salto de $\vE$ en $r=b$ debido a la carga de la cáscara. El potencial es continuo, con $\phi(\infty)=0$: para $r\ge b$,
+$\phi=\frac{Q_1+Q_2}{4\pi\eo r}$; para $a\le r\le b$,
+\[
+  \phi(r)-\phi(b)=-\int_{b}^{r}\vE\cdot\dif\vc{r}'=\int_{r}^{b}\frac{Q_1}{4\pi\eo r'^{2}}\,\dif r'=\frac{Q_1}{4\pi\eo}\Bigl(\frac1r-\frac1b\Bigr)
+  \;\Longrightarrow\;\phi(r)=\frac{1}{4\pi\eo}\Bigl(\frac{Q_1}{r}+\frac{Q_2}{b}\Bigr),
+\]
+y para $r\le a$, $\phi=\frac{1}{4\pi\eo}\bigl(\frac{Q_1}{a}+\frac{Q_2}{b}\bigr)$, que coincide con $\phi_1$. Con los coeficientes de potencial el cálculo es inmediato; con los de
+capacidad, para pasar de cargas a potenciales, habría que invertir la matriz.
+\end{ejemplo}
+
+% -------------------------------------------------------------------------
+\subsection{Ejemplo: condensador esférico con armadura exterior gruesa}\label{sec:ej-grueso}
+% -------------------------------------------------------------------------
+\begin{ejemplo}[Esfera y corteza esférica gruesa]\label{ej:grueso}
+El conductor~1 es una esfera de radio $a$; el conductor~2, una corteza esférica concéntrica de radio interior $b$ y exterior $c$. Escribimos
+$\kc=1/(4\pi\eo)$.
+
+\emph{Caso A: $Q_1=Q$, $Q_2=0$.} Por influencia total, la cara interior de la corteza adquiere $-Q$ (Gauss con una superficie dentro del metal) y, por
+conservación de la carga, la exterior $+Q$. Fuera de la corteza el campo es el de una carga $Q$ en el centro, y $\phi(\vc{r})=-\int_{\infty}^{\vc{r}}\vE\cdot\dl$
+da, sobre la corteza y sobre la esfera,
+\[
+  \phi_2=\int_{c}^{\infty}\frac{\kc Q}{r^{2}}\,\dif r=\frac{\kc Q}{c},\qquad
+  \phi_1=\phi_2+\int_{a}^{b}\frac{\kc Q}{r^{2}}\,\dif r=\frac{\kc Q}{c}+\kc Q\Bigl(\frac1a-\frac1b\Bigr),
+\]
+luego $p_{11}=\kc\bigl(\frac1a-\frac1b+\frac1c\bigr)$ y $p_{21}=\kc/c$.
+
+\emph{Caso B: $Q_1=0$, $Q_2=Q$.} La carga se reparte en la cara exterior de la corteza; dentro el campo es nulo y la esfera interior queda al mismo potencial
+que la corteza, $\phi_1=\phi_2=\kc Q/c$. Así $p_{12}=p_{22}=\kc/c$, y
+\[
+  \Pm=\frac{1}{4\pi\eo}\begin{pmatrix}\dfrac1a-\dfrac1b+\dfrac1c & \dfrac1c\\[8pt] \dfrac1c & \dfrac1c\end{pmatrix}.
+\]
+
+\emph{Capacidad del condensador.}
+\[
+  C=\frac{Q}{\phi_1-\phi_2}=\frac{1}{p_{11}+p_{22}-2p_{12}}=\frac{4\pi\eo}{\frac1a-\frac1b+\frac1c+\frac1c-\frac2c}=4\pi\eo\,\frac{ab}{b-a} ,
+\]
+la misma que con armaduras delgadas: el espesor de la armadura exterior no influye, porque entre las armaduras el campo solo depende de $Q$. Con $d=b-a$,
+$C=\eo\,A_{\mathrm{ef}}/d$ con $A_{\mathrm{ef}}=4\pi ab=\sqrt{4\pi a^{2}\cdot4\pi b^{2}}$, la media geométrica de las áreas de las armaduras.
+
+\emph{Inversión de la matriz.} Con $\det\Pm=p_{11}p_{22}-p_{12}^{2}=\kc^{2}\,\frac{b-a}{abc}$ y la matriz adjunta,
+$\Pm^{-1}=\frac{1}{\det\Pm}\,[\adj\Pm]\Tt=\frac{1}{\det\Pm}\bigl(\begin{smallmatrix}p_{22}&-p_{12}\\-p_{21}&p_{11}\end{smallmatrix}\bigr)$. Como $\Pm$ es simétrica, la
+matriz de cofactores también lo es, y trasponer no cambia nada: por eso $\Cm$ sale simétrica automáticamente. Resulta
+\[
+  c_{11}=\frac{p_{22}}{\det\Pm}=4\pi\eo\,\frac{ab}{b-a},\qquad c_{12}=c_{21}=-\frac{p_{12}}{\det\Pm}=-4\pi\eo\,\frac{ab}{b-a},\qquad
+  c_{22}=\frac{p_{11}}{\det\Pm}=4\pi\eo\Bigl(c+\frac{ab}{b-a}\Bigr).
+\]
+\emph{Interpretación.} $c_{11}>0$ y $c_{12}<0$; $c_{11}=-c_{21}$ es la igualdad de la influencia total, pues todas las líneas de la esfera interior acaban en la
+corteza; en cambio $c_{22}>-c_{12}$, porque parte de las líneas de la corteza van al infinito: $c_{22}=C+4\pi\eo c$, la capacidad del condensador más la de
+una esfera aislada de radio $c$.
+\end{ejemplo}
+
+\input{figuras/fig_corteza_gruesa}
+
+% -------------------------------------------------------------------------
+\subsection{Los tres condensadores canónicos}\label{sec:canonicos}
+% -------------------------------------------------------------------------
+Para geometrías indefinidas (cilindros o planos infinitos) no se puede tomar $\phi(\infty)=0$, porque el potencial de una distribución infinita de carga
+diverge; los coeficientes de potencial solo pueden definirse respecto de una referencia arbitraria (\cref{sem:cilindrico}). En un condensador, sin
+embargo, esto no supone ningún problema: el campo fuera de las armaduras es nulo y solo interesa la diferencia de potencial, que es finita. La
+\cref{tab:canonicos} reúne los tres casos clásicos, que se deducen en detalle en los seminarios (\cref{sem:esferico,sem:cilindrico,sem:plano}).
+
+\begin{table}[ht]
+\centering
+\caption{Los tres condensadores canónicos. El campo entre las armaduras se obtiene con la ley de Gauss, la diferencia de potencial integrándolo de la
+armadura positiva a la negativa, y la capacidad como $C=Q/\DV$.}
+\label{tab:canonicos}
+\begin{tabular}{@{}lccc@{}}
+  \toprule
+  Condensador & Campo entre armaduras & $\DV$ & Capacidad\\
+  \midrule
+  Esférico (radios $a<b$) & $\dfrac{Q}{4\pi\eo r^{2}}$ & $\dfrac{Q}{4\pi\eo}\Bigl(\dfrac1a-\dfrac1b\Bigr)$ & $4\pi\eo\,\dfrac{ab}{b-a}$\\[12pt]
+  Cilíndrico (radios $a<b$, longitud $\ell$) & $\dfrac{\lambda}{2\pi\eo r}$ & $\dfrac{\lambda}{2\pi\eo}\ln\dfrac{b}{a}$ & $\dfrac{2\pi\eo\,\ell}{\ln(b/a)}$\\[12pt]
+  Plano (área $A$, separación $d$) & $\dfrac{Q}{\eo A}$ & $\dfrac{Qd}{\eo A}$ & $\eo\,\dfrac{A}{d}$\\[8pt]
+  \bottomrule
+\end{tabular}
+\end{table}
+
+\begin{observacion}[Un límite común]\label{obs:limite-plano}
+Cuando la separación entre armaduras es pequeña frente a sus radios de curvatura, los tres casos tienden a la misma expresión $C\simeq\eo A/d$: localmente,
+dos superficies muy próximas se ven planas. Para el cilíndrico, con $b=a+d$, $\ln(1+d/a)\simeq d/a$ y $C/\ell\simeq2\pi\eo a/d=\eo(A/\ell)/d$.
+\end{observacion}

@@ -1,0 +1,48 @@
+% =========================================================================
+%  Figura (Problema 3.2): cuatro esferas concéntricas con una batería entre
+%  S1 y S4. (b) phi(r)/V0 con R_i = i: phi/V0 = (4/r - 1)/3 en [1, 4].
+% =========================================================================
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[font=\small]
+  % ---------------------------------------------------------------- (a)
+  \begin{scope}[x=1cm, y=1cm]
+    \foreach \r/\n in {1.75/4,1.3/3,0.85/2}{\draw[azulprof, line width=0.7pt] (0,0) circle (\r);}
+    \shade[ball color=azulvelo] (0,0) circle (0.4);
+    \draw[azulprof, line width=0.6pt] (0,0) circle (0.4);
+    \foreach \r/\n in {0.4/1,0.85/2,1.3/3,1.75/4}{
+      \node[font=\scriptsize, inner sep=0.5pt] at (125:{\r+0.22}) {$S_{\n}$};}
+    % hilo por los orificios hasta la batería
+    \draw[azulprof, line width=0.6pt] (0.4,0) -- (2.35,0) -- (2.35,-0.35);
+    \draw[azulprof, line width=1.1pt] (2.15,-0.35) -- (2.55,-0.35);
+    \draw[azulprof, line width=0.6pt] (2.25,-0.47) -- (2.45,-0.47);
+    \draw[azulprof, line width=0.6pt] (2.35,-0.47) -- (2.35,-1.0) -- (1.42,-1.0);
+    \node[font=\footnotesize, anchor=west] at (2.6,-0.42) {$V_0$};
+    \node[font=\scriptsize, anchor=west, text=cargapos] at (2.6,0.0) {$+$};
+    \foreach \a in {60,180,240,300}{\node[signopos, font=\tiny\bfseries] at (\a:0.3) {$+$};}
+    \foreach \a in {70,200,250}{\node[signoneg, font=\tiny\bfseries] at (\a:1.65) {$-$};}
+    \node[font=\footnotesize, text=cargapos] at (0,0.0) {$Q_1$};
+    \node[font=\footnotesize, text=carganeg] at (-1.62,-1.62) {$-Q_1$};
+    \node at (0,-2.5) {(a)};
+  \end{scope}
+  % ---------------------------------------------------------------- (b)
+  \begin{scope}[xshift=4.4cm, yshift=-2.1cm]
+    \begin{axis}[tema, width=8.4cm, height=4.9cm, xmin=0, xmax=5.2, ymin=0, ymax=1.15,
+        xlabel={$r$ (con $R_i=i$)}, ylabel={$\phi/V_0$}, xtick={0,1,2,3,4,5},
+        xticklabels={$0$,$R_1$,$R_2$,$R_3$,$R_4$,}, ytick={0,0.111,0.333,1}, yticklabels={$0$,$\frac19$,$\frac13$,$1$}]
+      \addplot[azulprof, line width=1.2pt] coordinates {(0,1) (1,1)};
+      \addplot[azulprof, line width=1.2pt, domain=1:4, samples=60] {(4/x-1)/3};
+      \addplot[azulprof, line width=1.2pt] coordinates {(4,0) (5.2,0)};
+      \foreach \x in {1,2,3,4}{\edef\tmp{\noexpand\draw[punteado] (axis cs:\x,0) -- (axis cs:\x,1.15);}\tmp}
+      \fill[cargapos] (axis cs:2,0.3333) circle (1.8pt) node[above right=-1pt, font=\scriptsize] {$\phi_2$};
+      \fill[cargapos] (axis cs:3,0.1111) circle (1.8pt) node[above right=-1pt, font=\scriptsize] {$\phi_3$};
+      \fill[cargapos] (axis cs:1,1) circle (1.8pt) node[above right=-1pt, font=\scriptsize] {$\phi_1=V_0$};
+      \fill[cargapos] (axis cs:4,0) circle (1.8pt) node[above right=-1pt, font=\scriptsize] {$\phi_4=0$};
+    \end{axis}
+    \node at (3.4,-1.35) {(b)};
+  \end{scope}
+\end{tikzpicture}
+\caption{Problema 3.2. (a) Cuatro esferas concéntricas; la batería conecta $S_1$ y $S_4$ a través de pequeños orificios en $S_2$ y $S_3$. (b) Potencial con
+$R_i=i$: entre $R_1$ y $R_4$ es el de la carga $Q_1$ y fuera de $S_4$ es nulo; las esferas neutras $S_2$ y $S_3$ solo toman el valor del potencial en su radio.}
+\label{fig:sem-cuatro}
+\end{figure}
